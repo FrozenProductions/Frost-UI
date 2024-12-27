@@ -1,4 +1,5 @@
 import { CategoryData } from './components/Category';
+import { ToggleElement } from './components/Toggle';
 import FrostUI from './Menu';
 
 class FrostManager {
@@ -11,14 +12,15 @@ class FrostManager {
         this.keybinds = new Map();
         this.globalKeybinds = new Map();
         
-        document.addEventListener('keydown', (e: KeyboardEvent) => {
+        window.addEventListener('keydown', (e: KeyboardEvent) => {
             if (document.activeElement?.tagName === 'INPUT') return;
             const action: (() => void) | undefined = this.globalKeybinds.get(e.code);
             if (action) {
                 e.preventDefault();
+                e.stopPropagation();
                 action();
             }
-        });
+        }, true);
     }
     
     public addMenu(
@@ -46,14 +48,12 @@ class FrostManager {
         const categoryData: CategoryData | undefined = menu.getCategories().get(category);
         if (!categoryData) return;
 
-        const toggle: HTMLElement | undefined = categoryData.items.get(name);
+        const toggle: ToggleElement | undefined = categoryData.items.get(name) as ToggleElement;
         if (!toggle || !('toggleState' in toggle)) return;
 
         const bindId = `${menuId}-${category}-${name}`;
         const oldKey: string | undefined = this.keybinds.get(bindId);
         
-        if (oldKey === key) return;
-
         if (oldKey) {
             this.globalKeybinds.delete(oldKey);
             this.keybinds.delete(bindId);
@@ -61,9 +61,7 @@ class FrostManager {
 
         if (key && key !== 'None') {
             this.keybinds.set(bindId, key);
-            this.globalKeybinds.set(key, () => {
-                (toggle as { toggleState: () => void }).toggleState();
-            });
+            this.globalKeybinds.set(key, (toggle as { toggleState: () => void }).toggleState.bind(toggle));
         }
     }
 }

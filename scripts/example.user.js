@@ -86,7 +86,6 @@
                 config.combat.killAura = enabled;
                 saveConfig();
                 // callback
-                window.frostManager.updateKeybind('combat', 'Combat', 'KillAura', key);
             }, 'KeyK')
             .addSlider('Combat', 'Reach', 3, 6, config.combat.reach, (value) => {
                 config.combat.reach = value;

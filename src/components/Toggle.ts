@@ -10,6 +10,8 @@ type ToggleCallback = (enabled: boolean, key: string) => void;
 
 function createToggle(
     name: string, 
+    menuId: string,
+    category: string,
     callback?: ToggleCallback,
     keybind?: string
 ): ToggleElement {
@@ -28,12 +30,23 @@ function createToggle(
     const rightSide: HTMLDivElement = document.createElement('div');
     rightSide.className = 'fcp-toggle-right';
     
+    toggle.toggleState = () => {
+        isActive = !isActive;
+        toggle.classList.toggle('active', isActive);
+        const currentKey = keybindInput.querySelector('.fcp-keybind-display')?.textContent || '';
+        if (callback) callback(isActive, currentKey);
+    };
+    
     const keybindInput: HTMLDivElement = createKeybindInput(keybind, (newKey: string | null) => {
-        if (callback && newKey !== keybind) {
-            const currentState = toggle.classList.contains('active');
-            callback(currentState, newKey || '');
-        }
+        window.frostManager.updateKeybind(menuId, category, name, newKey || '');
+        if (callback) callback(isActive, newKey || '');
     });
+    
+    setTimeout(() => {
+        if (keybind) {
+            window.frostManager.updateKeybind(menuId, category, name, keybind);
+        }
+    }, 0);
     
     rightSide.appendChild(keybindInput);
     
@@ -50,13 +63,6 @@ function createToggle(
         }
     });
     
-    toggle.toggleState = () => {
-        isActive = !isActive;
-        toggle.classList.toggle('active', isActive);
-        const currentKey = keybindInput.querySelector('.fcp-keybind-display')?.textContent || '';
-        if (callback) callback(isActive, currentKey);
-    };
-    
     toggle.getValue = () => isActive;
     
     toggle.setValue = (value: boolean) => {
@@ -67,4 +73,4 @@ function createToggle(
     return toggle;
 } 
 
-export { createToggle, ToggleElement };
+export { createToggle, ToggleElement, ToggleCallback };

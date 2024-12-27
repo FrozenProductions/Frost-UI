@@ -1,12 +1,11 @@
 import { createCategory, CategoryData } from './components/Category';
 import { createSlider, SliderElement } from './components/Slider';
-import { createToggle, ToggleElement } from './components/Toggle';
+import { createToggle, ToggleCallback } from './components/Toggle';
 import { createRadioGroup, RadioGroupElement } from './components/RadioGroup';
 import { createSelect, SelectElement } from './components/Select';
 import { ColorInputElement, createColorInput } from './components/ColorInput';
 import { createMultiSelect, MultiSelectElement } from './components/MultiSelect';
 import { createPageSelector, PageSelectorElement } from './components/PageSelector';
-import { KeybindInputElement } from './components/KeybindInput';
 import './core.css';
 
 interface Position {
@@ -139,25 +138,17 @@ class FrostUI {
     public addToggle(
         category: string, 
         name: string, 
-        callback?: (state: boolean, key: string | null) => void, 
-        defaultKey: string | null = null
+        callback?: ToggleCallback, 
+        keybind?: string
     ): this {
-        const categoryData: CategoryData | undefined = this.categories.get(category);
+        const categoryData = this.categories.get(category);
         if (!categoryData) return this;
 
-        const toggle: ToggleElement = createToggle(name, callback, defaultKey || undefined);
-        const content: HTMLDivElement | null = categoryData.element.querySelector('.fcp-category-content');
+        const toggle = createToggle(name, this.id, category, callback, keybind);
+        const content = categoryData.element.querySelector('.fcp-category-content');
         if (content) {
             content.appendChild(toggle);
             categoryData.items.set(name, toggle);
-            
-            if (defaultKey) {
-                window.frostManager.updateKeybind(this.id, category, name, defaultKey);
-                const keybindInput = toggle.querySelector('.fcp-keybind') as KeybindInputElement;
-                if (keybindInput && keybindInput.setValue) {
-                    keybindInput.setValue(defaultKey);
-                }
-            }
         }
         
         return this;

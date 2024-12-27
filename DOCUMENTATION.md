@@ -39,7 +39,6 @@ The MenuManager class provides methods for creating and managing menus:
 ### Methods
 
 - `addMenu(id: string, title: string, position?: { x: number, y: number }, toggleKey?: string): FCPMenu`
-- `updateKeybind(menuId: string, category: string, name: string, key: string): void`
 
 ## Examples
 
