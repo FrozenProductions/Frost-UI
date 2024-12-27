@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Frost-UI Menu Example
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      1.0.0
 // @description  Example usage of Frost-UI
 // @author       FrozenProductions
 // @match        https://*/*
