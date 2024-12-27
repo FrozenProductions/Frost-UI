@@ -1,8 +1,8 @@
 import { CategoryData } from './components/Category';
-import { FCPMenu } from './Menu';
+import FrostUI from './Menu';
 
-export class MenuManager {
-    private menus: Map<string, FCPMenu>;
+class FrostManager {
+    private menus: Map<string, FrostUI>;
     private keybinds: Map<string, string>;
     private globalKeybinds: Map<string, () => void>;
 
@@ -26,21 +26,21 @@ export class MenuManager {
         title: string, 
         position?: { x: number; y: number }, 
         toggleKey: string = 'ShiftRight'
-    ): FCPMenu {
-        const menu = new FCPMenu(id, title, position, toggleKey);
+    ): FrostUI {
+        const menu = new FrostUI(id, title, position, toggleKey);
         this.menus.set(id, menu);
         return menu;
     }
     
     public updateMenuToggleKey(menuId: string, key: string): void {
-        const menu: FCPMenu | undefined = this.menus.get(menuId);
+        const menu: FrostUI | undefined = this.menus.get(menuId);
         if (menu) {
             menu.setToggleKey(key);
         }
     }
 
     public updateKeybind(menuId: string, category: string, name: string, key: string): void {
-        const menu: FCPMenu | undefined = this.menus.get(menuId);
+        const menu: FrostUI | undefined = this.menus.get(menuId);
         if (!menu) return;
 
         const categoryData: CategoryData | undefined = menu.getCategories().get(category);
@@ -68,4 +68,5 @@ export class MenuManager {
     }
 }
 
-export const fcpManager = new MenuManager(); 
+export default FrostManager;
+export const frostManager = new FrostManager(); 

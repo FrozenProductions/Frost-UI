@@ -71,10 +71,10 @@
          *  Menu Initialization
          *━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━*/
     
-        const combatMenu = window.fcpManager.addMenu('combat', 'Combat Menu', { x: 100, y: 100 }, 'ShiftRight');
-        const movementMenu = window.fcpManager.addMenu('movement', 'Movement Menu', { x: 420, y: 100 }, 'ShiftRight');
-        const renderMenu = window.fcpManager.addMenu('render', 'Render Menu', { x: 740, y: 100 }, 'ShiftRight');
-        const worldMenu = window.fcpManager.addMenu('world', 'World Menu', { x: 740, y: 400 }, 'ShiftRight');
+        const combatMenu = window.frostManager.addMenu('combat', 'Combat Menu', { x: 100, y: 100 }, 'ShiftRight');
+        const movementMenu = window.frostManager.addMenu('movement', 'Movement Menu', { x: 420, y: 100 }, 'ShiftRight');
+        const renderMenu = window.frostManager.addMenu('render', 'Render Menu', { x: 740, y: 100 }, 'ShiftRight');
+        const worldMenu = window.frostManager.addMenu('world', 'World Menu', { x: 740, y: 400 }, 'ShiftRight');
     
         /*━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
          *  Combat Menu Setup
@@ -86,7 +86,7 @@
                 config.combat.killAura = enabled;
                 saveConfig();
                 // callback
-                window.fcpManager.updateKeybind('combat', 'Combat', 'KillAura', key);
+                window.frostManager.updateKeybind('combat', 'Combat', 'KillAura', key);
             }, 'KeyK')
             .addSlider('Combat', 'Reach', 3, 6, config.combat.reach, (value) => {
                 config.combat.reach = value;

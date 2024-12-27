@@ -1,5 +1,5 @@
-import { FCPMenu } from './Menu';
-import { fcpManager } from './MenuManager';
+import FrostUI from './Menu';
+import { frostManager } from './MenuManager';
 import { createCategory } from './components/Category';
 import { createToggle } from './components/Toggle';
 import { createSlider } from './components/Slider';
@@ -9,17 +9,17 @@ import { createPageSelector } from './components/PageSelector';
 
 declare global {
     interface Window {
-        FCPMenu: typeof FCPMenu;
-        fcpManager: typeof fcpManager;
+        FrostUI: typeof FrostUI;
+        frostManager: typeof frostManager;
     }
 }
 
-window.FCPMenu = FCPMenu;
-window.fcpManager = fcpManager;
+window.FrostUI = FrostUI;
+window.frostManager = frostManager;
 
 export { 
-    FCPMenu, 
-    fcpManager,
+    FrostUI, 
+    frostManager,
     createCategory,
     createToggle,
     createSlider,
@@ -28,4 +28,4 @@ export {
     createPageSelector
 };
 
-export default FCPMenu; 
+export default FrostUI; 

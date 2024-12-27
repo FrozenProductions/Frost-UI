@@ -19,7 +19,7 @@ interface DragOffset {
     y: number;
 }
 
-export class FCPMenu {
+class FrostUI {
     private id: string;
     private title: string;
     private position: Position;
@@ -152,7 +152,7 @@ export class FCPMenu {
             categoryData.items.set(name, toggle);
             
             if (defaultKey) {
-                window.fcpManager.updateKeybind(this.id, category, name, defaultKey);
+                window.frostManager.updateKeybind(this.id, category, name, defaultKey);
                 const keybindInput = toggle.querySelector('.fcp-keybind') as KeybindInputElement;
                 if (keybindInput && keybindInput.setValue) {
                     keybindInput.setValue(defaultKey);
@@ -287,3 +287,5 @@ export class FCPMenu {
         return this.categories;
     }
 } 
+
+export default FrostUI;
