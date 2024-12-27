@@ -1,0 +1,100 @@
+.fcp-multi-select-container {
+    background: rgba(40, 40, 50, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 12px;
+    margin: 4px 0;
+}
+
+.fcp-multi-select-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    color: rgba(255, 255, 255, 0.9);
+    text-transform: uppercase;
+    letter-spacing: 0.02em !important;
+}
+
+.fcp-multi-select {
+    position: relative;
+}
+
+.fcp-multi-select-value {
+    background: rgba(30, 30, 40, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 12px;
+}
+
+.fcp-multi-select-value:hover {
+    background: rgba(50, 50, 60, 0.6);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.fcp-multi-select-dropdown {
+    position: fixed;
+    min-width: 200px;
+    background: rgba(20, 20, 30, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    margin-top: 4px;
+    display: none;
+    z-index: 1000000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.fcp-multi-select-dropdown.show {
+    display: block;
+}
+
+.fcp-multi-select-item {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    color: white;
+}
+
+.fcp-multi-select-item:hover {
+    background: rgba(114, 137, 218, 0.1);
+}
+
+.fcp-multi-select-checkbox {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    margin-right: 8px;
+    position: relative;
+}
+
+.fcp-multi-select-item.selected .fcp-multi-select-checkbox {
+    background: #7289da;
+    border-color: #7289da;
+}
+
+.fcp-multi-select-item.selected .fcp-multi-select-checkbox:after {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 1px;
+    width: 4px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.fcp-multi-select-item span {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 450 !important;
+    font-size: 12px !important;
+} 

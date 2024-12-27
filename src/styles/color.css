@@ -1,0 +1,89 @@
+.fcp-color-input {
+    display: flex;
+    align-items: center;
+    margin: 4px 0;
+    padding: 8px 10px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    background: rgba(40, 40, 50, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+    justify-content: space-between;
+}
+
+.fcp-color-input:hover {
+    background: rgba(45, 45, 55, 0.4);
+    transform: translateX(4px);
+    border-color: rgba(114, 137, 218, 0.2);
+}
+
+.fcp-color-left {
+    display: flex;
+    align-items: center;
+}
+
+.fcp-color-left span {
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    opacity: 0.9;
+    text-transform: uppercase;
+    letter-spacing: 0.01em !important;
+}
+
+.fcp-color-preview {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.fcp-color-preview:hover {
+    transform: scale(1.05);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.fcp-color-preview:active {
+    transform: scale(0.95);
+}
+
+.fcp-color-picker {
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+}
+
+.fcp-color-formats {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.fcp-color-format {
+    background: rgba(30, 30, 40, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.fcp-color-format:hover {
+    background: rgba(40, 40, 50, 0.6);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.fcp-color-format.active {
+    background: rgba(114, 137, 218, 0.2);
+    border-color: rgba(114, 137, 218, 0.5);
+    color: rgba(255, 255, 255, 0.9);
+} 

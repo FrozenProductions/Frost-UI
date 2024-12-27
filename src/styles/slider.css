@@ -1,0 +1,74 @@
+.fcp-slider {
+    background: rgba(40, 40, 50, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    padding: 8px 10px;
+    margin: 4px 0;
+    transition: all 0.2s ease;
+}
+
+.fcp-slider:hover {
+    background: rgba(45, 45, 55, 0.4);
+    transform: translateX(4px);
+    border-color: rgba(114, 137, 218, 0.2);
+}
+
+.fcp-slider span {
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    opacity: 0.9;
+    margin-bottom: 8px;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.01em !important;
+}
+
+.fcp-slider-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.fcp-slider input[type="range"] {
+    -webkit-appearance: none;
+    height: 6px;
+    flex: 1;
+    background: rgba(60, 60, 80, 0.6);
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+}
+
+.fcp-slider input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 14px;
+    width: 14px;
+    background: #7289da;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    transform: scale(0.8);
+}
+
+.fcp-slider input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1);
+}
+
+.fcp-slider-value {
+    background: rgba(30, 30, 40, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    min-width: 40px;
+    text-align: center;
+}
+
+.fcp-slider-value:focus {
+    background: rgba(40, 40, 50, 0.6);
+    border-color: #7289da;
+    outline: none;
+} 
