@@ -1,40 +1,90 @@
-
+<div align="center">
 
 # Frost-UI
 
-- [Documentation](DOCUMENTATION.md)
+A modern, lightweight UI library crafted for userscripts
 
-[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/FrozenProductions/Frost-UI)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Size](https://img.shields.io/badge/size-12.4kb-blue.svg)](https://github.com/FrozenProductions/Frost-UI)
-[![Dependencies](https://img.shields.io/badge/dependencies-none-blue.svg)](https://github.com/FrozenProductions/Frost-UI)
+[![GitHub package.json version](https://img.shields.io/github/package-json/v/FrozenProductions/Frost-UI?style=flat-square&labelColor=%231c1c25&color=7289da)](https://github.com/FrozenProductions/Frost-UI/releases)
+[![GitHub License](https://img.shields.io/github/license/FrozenProductions/Frost-UI?style=flat-square&logoColor=%237289da&labelColor=%231c1c25&color=7289da)](LICENSE)
+[![GitHub code size in bytes](https://img.shields.io/github/size/FrozenProductions/Frost-UI/scripts%2FLibrary.js?style=flat-square&labelColor=%231c1c25&color=%237289da)](https://github.com/FrozenProductions/Frost-UI)
+[![Documentation](https://img.shields.io/badge/docs-view%20here-7289da?style=flat-square&labelColor=%231c1c25)](DOCUMENTATION.md)
 
-## Overview
-Frost-UI is a lightweight, customizable menu library for creating interactive user interfaces in userscripts. It provides a clean, modern design with support for various input types and keybinds.
+</div>
 
-![Menu Preview](https://raw.githubusercontent.com/FrozenProductions/Frost-UI/main/assets/preview.png)
-![Toast Preview](https://raw.githubusercontent.com/FrozenProductions/Frost-UI/main/assets/toast.png)
+## 🌟 Overview
 
-## Features
-- Draggable menus
-- Toasts
-- Toggle switches
-- Sliders
-- Keybind inputs
-- Buttons
-- Radio groups
-- Select dropdowns
-- Multi-select
-- Color pickers
-- Page selectors
-- Categories for organization
-- Configuration saving
-- Keyboard shortcuts
+Frost-UI is an elegant and lightweight UI library designed specifically for userscripts. It provides a comprehensive suite of customizable components that help you create beautiful, interactive interfaces with minimal effort.
 
-## Notes
-- Keybinds are automatically managed
-- Menus can be toggled with assigned keys (default: ShiftRight)
-- All input components support callbacks
-- DOM cleanup is handled automatically
+<div align="center">
+<img src="assets/preview.png" alt="Menu Preview" width="600"/>
+</div>
 
-For a complete implementation example, see [example.user.js](https://raw.githubusercontent.com/FrozenProductions/Frost-UI/main/scripts/example.user.js) in the repository.
+## ✨ Features
+
+### Interactive Components
+
+-   **Core Elements**
+
+    -   Draggable Menus
+    -   Toast Notifications
+    -   Toggle Switches
+    -   Sliders
+    -   Buttons
+    -   Radio Groups
+
+-   **Advanced Inputs**
+    -   Keybind Controls
+    -   Dropdown Selectors
+    -   Multi-select Menus
+    -   Color Pickers
+    -   Page Navigation
+
+### Smart Management
+
+-   Organized Category System
+-   Automatic Configuration Saving
+-   Keyboard Shortcut Support
+-   Intelligent DOM Cleanup
+
+## 🚀 Getting Started
+
+### Installation
+
+```js
+// @require https://raw.githubusercontent.com/FrozenProductions/Frost-UI/main/scripts/Library.js
+```
+
+### Quick Start
+
+```javascript
+const menu = window.frostManager.addMenu(
+    "uniqueId", // Unique identifier for the menu
+    "Menu Title", // Display title
+    { x: 100, y: 100 }, // Initial position (optional)
+    "ShiftRight" // Toggle key (optional, defaults to 'ShiftRight')
+);
+```
+
+## 💡 Key Features
+
+-   **Intuitive Controls**: Toggle menus with ShiftRight (customizable)
+-   **Smart Keybinds**: Automatic keybind conflict resolution
+-   **Event System**: Comprehensive callback support
+-   **Clean Design**: Automatic resource management
+
+## 📚 Resources
+
+-   [Full Documentation](DOCUMENTATION.md)
+-   [Example Script](https://raw.githubusercontent.com/FrozenProductions/Frost-UI/main/scripts/example.user.js)
+
+<div align="center">
+
+## 💖 Support
+
+If you find Frost-UI helpful, consider giving it a ⭐️
+
+<br/>
+
+Made with ❄️ by [FrozenProductions](https://github.com/FrozenProductions)
+
+</div>
