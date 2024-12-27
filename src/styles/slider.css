@@ -42,17 +42,17 @@
 
 .frost-slider input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
-    height: 14px;
-    width: 14px;
+    height: 12px;
+    width: 12px;
     background: #7289da;
     border-radius: 50%;
     cursor: pointer;
     transition: transform 0.2s ease;
-    transform: scale(0.8);
+    transform: scale(1);
 }
 
 .frost-slider input[type="range"]::-webkit-slider-thumb:hover {
-    transform: scale(1);
+    transform: scale(1.2);
 }
 
 .frost-slider-value {
