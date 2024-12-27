@@ -18,10 +18,10 @@ Add the following to your userscript header:
 
 ## Basic-Usage
 
-The library exposes a global `fcpManager` object that you can use to create and manage menus:
+The library exposes a global `frostManager` object that you can use to create and manage menus:
 
 ```js
-const menu = window.fcpManager.addMenu('myMenu', 'My Menu', { x: 100, y: 100 }, 'ShiftRight');
+const menu = window.frostManager.addMenu('myMenu', 'My Menu', { x: 100, y: 100 }, 'ShiftRight');
 
 menu.addCategory('Settings')
     .addToggle('Settings', 'Enable Feature', (enabled) => {
@@ -38,13 +38,13 @@ The MenuManager class provides methods for creating and managing menus:
 
 ### Methods
 
-- `addMenu(id: string, title: string, position?: { x: number, y: number }, toggleKey?: string): FCPMenu`
+- `addMenu(id: string, title: string, position?: { x: number, y: number }, toggleKey?: string): FrostUI`
 
 ## Examples
 
 ### Basic Menu
 ```js
-const menu = window.fcpManager.addMenu('basic', 'Basic Menu', { x: 100, y: 100 });
+const menu = window.frostManager.addMenu('basic', 'Basic Menu', { x: 100, y: 100 });
 
 menu.addCategory('General')
     .addToggle('General', 'Enable Feature')
@@ -53,7 +53,7 @@ menu.addCategory('General')
 
 ### Complex Menu with Multiple Categories
 ```js
-const menu = window.fcpManager.addMenu('advanced', 'Advanced Menu');
+const menu = window.frostManager.addMenu('advanced', 'Advanced Menu');
 
 menu.addCategory('Combat')
     .addToggle('Combat', 'KillAura', (enabled, key) => {
