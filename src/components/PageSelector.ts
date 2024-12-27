@@ -12,27 +12,27 @@ function createPageSelector(
     callback?: PageCallback
 ): PageSelectorElement {
     const container = document.createElement('div') as PageSelectorElement;
-    container.className = 'fcp-page-selector';
+    container.className = 'frost-page-selector';
     
-    const label = document.createElement('div');
-    label.className = 'fcp-page-label';
+    const label: HTMLDivElement = document.createElement('div');
+    label.className = 'frost-page-label';
     label.textContent = name;
     
     const controls: HTMLDivElement = document.createElement('div');
-    controls.className = 'fcp-page-controls';
+    controls.className = 'frost-page-controls';
     
     const leftArrow: HTMLDivElement = document.createElement('div');
-    leftArrow.className = 'fcp-page-arrow';
+    leftArrow.className = 'frost-page-arrow';
     leftArrow.innerHTML = '<';
     
     const pageValue: HTMLDivElement = document.createElement('div');
-    pageValue.className = 'fcp-page-value';
+    pageValue.className = 'frost-page-value';
     
     const rightArrow: HTMLDivElement = document.createElement('div');
-    rightArrow.className = 'fcp-page-arrow';
+    rightArrow.className = 'frost-page-arrow';
     rightArrow.innerHTML = '>';
     
-    let currentPage = defaultPage;
+    let currentPage: number = defaultPage;
     
     const updateDisplay = (triggerCallback: boolean = false): void => {
         pageValue.textContent = pages[currentPage];

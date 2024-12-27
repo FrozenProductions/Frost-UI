@@ -12,10 +12,10 @@ function createButton(
     variant: ButtonVariant = 'default'
 ): ButtonElement {
     const container = document.createElement('div') as ButtonElement;
-    container.className = 'fcp-button-container';
+    container.className = 'frost-button-container';
     
-    const button = document.createElement('button');
-    button.className = `fcp-button ${variant}`;
+    const button: HTMLButtonElement = document.createElement('button');
+    button.className = `frost-button ${variant}`;
     button.textContent = name;
     
     let enabled = true;
@@ -23,9 +23,9 @@ function createButton(
     button.addEventListener('click', (e: MouseEvent) => {
         if (!enabled) return;
         
-        const rect = button.getBoundingClientRect();
-        const ripple = document.createElement('div');
-        ripple.className = 'fcp-button-ripple';
+        const rect: DOMRect = button.getBoundingClientRect();
+        const ripple: HTMLDivElement = document.createElement('div');
+        ripple.className = 'frost-button-ripple';
         
         ripple.style.left = `${e.clientX - rect.left}px`;
         ripple.style.top = `${e.clientY - rect.top}px`;

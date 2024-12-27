@@ -1,4 +1,4 @@
-.fcp-menu {
+.frost-menu {
     position: fixed !important;
     background: linear-gradient(145deg, rgba(25, 25, 35, 0.95), rgba(15, 15, 25, 0.98)) !important;
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
@@ -16,7 +16,7 @@
     cursor: default !important;
 }
 
-.fcp-menu * {
+.frost-menu * {
     font-family: inherit !important;
     font-weight: 600 !important;
     font-size: 12px !important;
@@ -24,17 +24,17 @@
     letter-spacing: 0.01em !important;
 }
 
-.fcp-menu .fcp-category-header,
-.fcp-menu .fcp-toggle,
-.fcp-menu .fcp-slider input[type="range"],
-.fcp-menu .fcp-radio-option,
-.fcp-menu .fcp-select-value,
-.fcp-menu .fcp-color-preview,
-.fcp-menu .fcp-page-arrow {
+.frost-menu .frost-category-header,
+.frost-menu .frost-toggle,
+.frost-menu .frost-slider input[type="range"],
+.frost-menu .frost-radio-option,
+.frost-menu .frost-select-value,
+.frost-menu .frost-color-preview,
+.frost-menu .frost-page-arrow {
     cursor: pointer !important;
 }
 
-.fcp-header {
+.frost-header {
     background: rgba(30, 30, 40, 0.6);
     padding: 16px 20px;
     cursor: move !important;
@@ -49,7 +49,7 @@
     letter-spacing: 0.01em !important;
 }
 
-.fcp-content {
+.frost-content {
     padding: 16px;
     max-height: 70vh;
     overflow-y: auto;
@@ -79,10 +79,10 @@
     }
 }
 
-.fcp-menu.show {
+.frost-menu.show {
     animation: menuSlideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-.fcp-menu.hide {
+.frost-menu.hide {
     animation: menuSlideOut 0.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 } 

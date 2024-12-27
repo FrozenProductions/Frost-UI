@@ -11,21 +11,21 @@ function createColorInput(
     callback?: ColorCallback
 ): ColorInputElement {
     const container = document.createElement('div') as ColorInputElement;
-    container.className = 'fcp-color-input';
+    container.className = 'frost-color-input';
     
     const leftSide: HTMLDivElement = document.createElement('div');
-    leftSide.className = 'fcp-color-left';
+    leftSide.className = 'frost-color-left';
     
     const label: HTMLSpanElement = document.createElement('span');
     label.textContent = name;
     
     const preview: HTMLDivElement = document.createElement('div');
-    preview.className = 'fcp-color-preview';
+    preview.className = 'frost-color-preview';
     preview.style.backgroundColor = defaultValue;
     
     const picker: HTMLInputElement = document.createElement('input');
     picker.type = 'color';
-    picker.className = 'fcp-color-picker';
+    picker.className = 'frost-color-picker';
     picker.value = defaultValue;
     
     preview.addEventListener('click', (e: MouseEvent) => {

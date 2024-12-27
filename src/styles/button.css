@@ -1,11 +1,11 @@
-.fcp-button-container {
+.frost-button-container {
     margin: 4px 0;
     padding: 8px 10px;
     border-radius: 6px;
     transition: all 0.2s ease;
 }
 
-.fcp-button {
+.frost-button {
     position: relative;
     width: 100%;
     padding: 10px 16px;
@@ -25,24 +25,24 @@
     justify-content: center;
 }
 
-.fcp-button:hover {
+.frost-button:hover {
     background: rgba(45, 45, 55, 0.4);
     transform: translateX(4px);
     border-color: rgba(114, 137, 218, 0.2);
 }
 
-.fcp-button:active {
+.frost-button:active {
     transform: translateX(4px) translateY(1px);
 }
 
-.fcp-button.disabled {
+.frost-button.disabled {
     opacity: 0.5;
     cursor: not-allowed;
     transform: none;
     border-color: rgba(255, 255, 255, 0.05);
 }
 
-.fcp-button-ripple {
+.frost-button-ripple {
     position: absolute;
     border-radius: 50%;
     background: rgba(114, 137, 218, 0.4);
@@ -64,26 +64,26 @@
     }
 }
 
-.fcp-button.primary {
+.frost-button.primary {
     background: linear-gradient(135deg, rgba(114, 137, 218, 0.8), rgba(91, 110, 175, 0.8));
     border-color: rgba(114, 137, 218, 0.5);
 }
 
-.fcp-button.primary:hover {
+.frost-button.primary:hover {
     background: linear-gradient(135deg, rgba(114, 137, 218, 0.9), rgba(91, 110, 175, 0.9));
     box-shadow: 0 4px 12px rgba(114, 137, 218, 0.2);
 }
 
-.fcp-button.primary .fcp-button-ripple {
+.frost-button.primary .frost-button-ripple {
     background: rgba(255, 255, 255, 0.4);
 }
 
-.fcp-button.destructive {
+.frost-button.destructive {
     background: linear-gradient(135deg, rgba(240, 71, 71, 0.8), rgba(200, 50, 50, 0.8));
     border-color: rgba(240, 71, 71, 0.5);
 }
 
-.fcp-button.destructive:hover {
+.frost-button.destructive:hover {
     background: linear-gradient(135deg, rgba(240, 71, 71, 0.9), rgba(200, 50, 50, 0.9));
     box-shadow: 0 4px 12px rgba(240, 71, 71, 0.2);
 } 

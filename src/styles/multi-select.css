@@ -1,4 +1,4 @@
-.fcp-multi-select-container {
+.frost-multi-select-container {
     background: rgba(40, 40, 50, 0.4);
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 8px;
@@ -6,7 +6,7 @@
     margin: 4px 0;
 }
 
-.fcp-multi-select-label {
+.frost-multi-select-label {
     display: block;
     margin-bottom: 8px;
     font-size: 12px !important;
@@ -16,11 +16,11 @@
     letter-spacing: 0.02em !important;
 }
 
-.fcp-multi-select {
+.frost-multi-select {
     position: relative;
 }
 
-.fcp-multi-select-value {
+.frost-multi-select-value {
     background: rgba(30, 30, 40, 0.6);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 4px;
@@ -30,12 +30,12 @@
     font-size: 12px;
 }
 
-.fcp-multi-select-value:hover {
+.frost-multi-select-value:hover {
     background: rgba(50, 50, 60, 0.6);
     border-color: rgba(255, 255, 255, 0.2);
 }
 
-.fcp-multi-select-dropdown {
+.frost-multi-select-dropdown {
     position: fixed;
     min-width: 200px;
     background: rgba(20, 20, 30, 0.98);
@@ -49,11 +49,11 @@
     overflow-y: auto;
 }
 
-.fcp-multi-select-dropdown.show {
+.frost-multi-select-dropdown.show {
     display: block;
 }
 
-.fcp-multi-select-item {
+.frost-multi-select-item {
     display: flex;
     align-items: center;
     padding: 8px;
@@ -63,11 +63,11 @@
     color: white;
 }
 
-.fcp-multi-select-item:hover {
+.frost-multi-select-item:hover {
     background: rgba(114, 137, 218, 0.1);
 }
 
-.fcp-multi-select-checkbox {
+.frost-multi-select-checkbox {
     width: 16px;
     height: 16px;
     border: 2px solid rgba(255, 255, 255, 0.2);
@@ -76,12 +76,12 @@
     position: relative;
 }
 
-.fcp-multi-select-item.selected .fcp-multi-select-checkbox {
+.frost-multi-select-item.selected .frost-multi-select-checkbox {
     background: #7289da;
     border-color: #7289da;
 }
 
-.fcp-multi-select-item.selected .fcp-multi-select-checkbox:after {
+.frost-multi-select-item.selected .frost-multi-select-checkbox:after {
     content: '';
     position: absolute;
     left: 4px;
@@ -93,7 +93,7 @@
     transform: rotate(45deg);
 }
 
-.fcp-multi-select-item span {
+.frost-multi-select-item span {
     color: rgba(255, 255, 255, 0.9);
     font-weight: 450 !important;
     font-size: 12px !important;

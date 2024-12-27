@@ -5,17 +5,17 @@ interface CategoryData {
 
 function createCategory(name: string): CategoryData {
     const category: HTMLDivElement = document.createElement('div');
-    category.className = 'fcp-category';
+    category.className = 'frost-category';
     
     const header: HTMLDivElement = document.createElement('div');
-    header.className = 'fcp-category-header';
+    header.className = 'frost-category-header';
     
     const title: HTMLSpanElement = document.createElement('span');
-    title.className = 'fcp-category-title';
+    title.className = 'frost-category-title';
     title.textContent = name;
     
     const content: HTMLDivElement = document.createElement('div');
-    content.className = 'fcp-category-content';
+    content.className = 'frost-category-content';
     
     header.addEventListener('click', () => {
         content.classList.toggle('open');

@@ -12,20 +12,20 @@ function createMultiSelect(
     callback?: MultiSelectCallback
 ): MultiSelectElement {
     const container = document.createElement('div') as MultiSelectElement;
-    container.className = 'fcp-multi-select-container';
+    container.className = 'frost-multi-select-container';
     
     const label: HTMLDivElement = document.createElement('div');
-    label.className = 'fcp-multi-select-label';
+    label.className = 'frost-multi-select-label';
     label.textContent = name;
     
     const select: HTMLDivElement = document.createElement('div');
-    select.className = 'fcp-multi-select';
+    select.className = 'frost-multi-select';
     
     const selectedDisplay: HTMLDivElement = document.createElement('div');
-    selectedDisplay.className = 'fcp-multi-select-value';
+    selectedDisplay.className = 'frost-multi-select-value';
     
     const dropdown: HTMLDivElement = document.createElement('div');
-    dropdown.className = 'fcp-multi-select-dropdown';
+    dropdown.className = 'frost-multi-select-dropdown';
     
     const selected = new Set<string>(defaultValues);
     
@@ -46,13 +46,13 @@ function createMultiSelect(
     
     options.forEach((option: string) => {
         const item: HTMLDivElement = document.createElement('div');
-        item.className = 'fcp-multi-select-item';
+        item.className = 'frost-multi-select-item';
         if (selected.has(option)) {
             item.classList.add('selected');
         }
         
         const checkbox: HTMLDivElement = document.createElement('div');
-        checkbox.className = 'fcp-multi-select-checkbox';
+        checkbox.className = 'frost-multi-select-checkbox';
         
         const text: HTMLSpanElement = document.createElement('span');
         text.textContent = option;
@@ -77,7 +77,7 @@ function createMultiSelect(
 
     select.addEventListener('click', (e: MouseEvent) => {
         const target = e.target as HTMLElement;
-        if (!target.closest('.fcp-multi-select-dropdown')) {
+        if (!target.closest('.frost-multi-select-dropdown')) {
             positionDropdown();
             dropdown.classList.toggle('show');
         }
@@ -85,7 +85,7 @@ function createMultiSelect(
     
     document.addEventListener('click', (e: MouseEvent) => {
         const target = e.target as HTMLElement;
-        if (!target.closest('.fcp-multi-select')) {
+        if (!target.closest('.frost-multi-select')) {
             dropdown.classList.remove('show');
         }
     });
@@ -114,9 +114,9 @@ function createMultiSelect(
     container.getValue = () => Array.from(selected);
     container.setValue = (values: string[]) => {
         selected.clear();
-        values.forEach(value => selected.add(value));
+        values.forEach((value: string) => selected.add(value));
         updateDisplay();
-        dropdown.querySelectorAll('.fcp-multi-select-item').forEach(item => {
+        dropdown.querySelectorAll('.frost-multi-select-item').forEach(item => {
             const value: string | null | undefined = item.querySelector('span')?.textContent;
             if (value) {
                 item.classList.toggle('selected', selected.has(value));

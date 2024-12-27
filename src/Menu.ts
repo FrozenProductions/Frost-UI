@@ -59,15 +59,15 @@ class FrostUI {
 
     private createMainContainer(): void {
         this.container = document.createElement('div');
-        this.container.className = 'fcp-menu';
+        this.container.className = 'frost-menu';
         this.container.style.display = 'none';
         
         const header: HTMLDivElement = document.createElement('div');
-        header.className = 'fcp-header';
+        header.className = 'frost-header';
         header.textContent = this.title;
         
         const content: HTMLDivElement = document.createElement('div');
-        content.className = 'fcp-content';
+        content.className = 'frost-content';
         
         this.container.appendChild(header);
         this.container.appendChild(content);
@@ -77,7 +77,7 @@ class FrostUI {
     }
 
     private setupEventListeners(): void {
-        const header: HTMLDivElement | null = this.container.querySelector('.fcp-header');
+        const header: HTMLDivElement | null = this.container.querySelector('.frost-header');
         if (!header) return;
 
         header.addEventListener('mousedown', ((e: Event) => {
@@ -127,7 +127,7 @@ class FrostUI {
     public addCategory(name: string): this {
         if (!this.categories.has(name)) {
             const category: CategoryData = createCategory(name);
-            const content: HTMLElement | null = this.container.querySelector('.fcp-content');
+            const content: HTMLElement | null = this.container.querySelector('.frost-content');
             if (content) {
                 content.appendChild(category.element);
                 this.categories.set(name, category);
@@ -146,7 +146,7 @@ class FrostUI {
         if (!categoryData) return this;
 
         const toggle = createToggle(name, this.id, category, callback, keybind);
-        const content = categoryData.element.querySelector('.fcp-category-content');
+        const content = categoryData.element.querySelector('.frost-category-content');
         if (content) {
             content.appendChild(toggle);
             categoryData.items.set(name, toggle);
@@ -167,7 +167,7 @@ class FrostUI {
         if (!categoryData) return this;
 
         const slider: SliderElement = createSlider(name, min, max, defaultValue, callback);
-        const content: HTMLDivElement | null = categoryData.element.querySelector('.fcp-category-content');
+        const content: HTMLDivElement | null = categoryData.element.querySelector('.frost-category-content');
         if (content) {
             content.appendChild(slider);
             categoryData.items.set(name, slider);
@@ -187,7 +187,7 @@ class FrostUI {
         if (!categoryData) return this;
 
         const radioGroup: RadioGroupElement = createRadioGroup(name, options, defaultValue, callback);
-        const content: HTMLDivElement | null = categoryData.element.querySelector('.fcp-category-content');
+        const content: HTMLDivElement | null = categoryData.element.querySelector('.frost-category-content');
         if (content) {
             content.appendChild(radioGroup);
             categoryData.items.set(name, radioGroup);
@@ -207,7 +207,7 @@ class FrostUI {
         if (!categoryData) return this;
 
         const select: SelectElement = createSelect(name, options, defaultValue, callback);
-        const content: HTMLDivElement | null = categoryData.element.querySelector('.fcp-category-content');
+        const content: HTMLDivElement | null = categoryData.element.querySelector('.frost-category-content');
         if (content) {
             content.appendChild(select);
             categoryData.items.set(name, select);
@@ -226,7 +226,7 @@ class FrostUI {
         if (!categoryData) return this;
 
         const colorInput: ColorInputElement = createColorInput(name, defaultValue, callback);
-        const content: HTMLDivElement | null = categoryData.element.querySelector('.fcp-category-content');
+        const content: HTMLDivElement | null = categoryData.element.querySelector('.frost-category-content');
         if (content) {
             content.appendChild(colorInput);
             categoryData.items.set(name, colorInput);
@@ -246,7 +246,7 @@ class FrostUI {
         if (!categoryData) return this;
 
         const multiSelect: MultiSelectElement = createMultiSelect(name, options, defaultValues, callback);
-        const content: HTMLDivElement | null = categoryData.element.querySelector('.fcp-category-content');
+        const content: HTMLDivElement | null = categoryData.element.querySelector('.frost-category-content');
         if (content) {
             content.appendChild(multiSelect);
             categoryData.items.set(name, multiSelect);
@@ -266,7 +266,7 @@ class FrostUI {
         if (!categoryData) return this;
 
         const pageSelector: PageSelectorElement = createPageSelector(name, pages, defaultPage, callback);
-        const content: HTMLDivElement | null = categoryData.element.querySelector('.fcp-category-content');
+        const content: HTMLDivElement | null = categoryData.element.querySelector('.frost-category-content');
         if (content) {
             content.appendChild(pageSelector);
             categoryData.items.set(name, pageSelector);
@@ -285,7 +285,7 @@ class FrostUI {
         if (!categoryData) return this;
 
         const button: ButtonElement = createButton(name, callback, variant);
-        const content: HTMLDivElement | null = categoryData.element.querySelector('.fcp-category-content');
+        const content: HTMLDivElement | null = categoryData.element.querySelector('.frost-category-content');
         if (content) {
             content.appendChild(button);
             categoryData.items.set(name, button);

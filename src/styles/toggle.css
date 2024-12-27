@@ -1,4 +1,4 @@
-.fcp-toggle {
+.frost-toggle {
     display: flex;
     align-items: center;
     margin: 4px 0;
@@ -11,19 +11,19 @@
     justify-content: space-between;
 }
 
-.fcp-toggle:hover {
+.frost-toggle:hover {
     background: rgba(45, 45, 55, 0.4);
     transform: translateX(4px);
     border-color: rgba(114, 137, 218, 0.2);
 }
 
-.fcp-toggle.active {
+.frost-toggle.active {
     background: linear-gradient(135deg, rgba(114, 137, 218, 0.3), rgba(91, 110, 175, 0.3));
     border-color: rgba(114, 137, 218, 0.5);
     transform: translateX(4px);
 }
 
-.fcp-toggle-switch {
+.frost-toggle-switch {
     position: relative;
     width: 44px;
     height: 22px;
@@ -35,12 +35,12 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.fcp-toggle-switch.active {
+.frost-toggle-switch.active {
     background: linear-gradient(135deg, #7289da, #5b6eaf);
     border-color: rgba(255, 255, 255, 0.2);
 }
 
-.fcp-toggle-switch::after {
+.frost-toggle-switch::after {
     content: '';
     position: absolute;
     top: 2px;
@@ -52,11 +52,11 @@
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.fcp-toggle-switch.active::after {
+.frost-toggle-switch.active::after {
     transform: translateX(22px);
 }
 
-.fcp-toggle-key {
+.frost-toggle-key {
     font-size: 12px;
     padding: 4px 8px;
     background: rgba(30, 30, 40, 0.6);
@@ -66,12 +66,12 @@
     transition: all 0.2s ease;
 }
 
-.fcp-toggle-key:hover {
+.frost-toggle-key:hover {
     background: rgba(40, 40, 50, 0.6);
     border-color: rgba(255, 255, 255, 0.2);
 }
 
-.fcp-toggle-key.binding {
+.frost-toggle-key.binding {
     background: rgba(114, 137, 218, 0.3);
     border-color: #7289da;
 }

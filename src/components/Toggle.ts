@@ -15,12 +15,12 @@ function createToggle(
     callback?: ToggleCallback,
     keybind?: string
 ): ToggleElement {
-    const toggle = document.createElement('div') as ToggleElement;
-    toggle.className = 'fcp-toggle';
-    let isActive = false;
+    const toggle: ToggleElement = document.createElement('div') as ToggleElement;
+    toggle.className = 'frost-toggle';
+    let isActive: boolean = false;
     
     const leftSide: HTMLDivElement = document.createElement('div');
-    leftSide.className = 'fcp-toggle-left';
+    leftSide.className = 'frost-toggle-left';
     
     const label: HTMLSpanElement = document.createElement('span');
     label.textContent = name;
@@ -28,12 +28,12 @@ function createToggle(
     leftSide.appendChild(label);
     
     const rightSide: HTMLDivElement = document.createElement('div');
-    rightSide.className = 'fcp-toggle-right';
+    rightSide.className = 'frost-toggle-right';
     
     toggle.toggleState = () => {
         isActive = !isActive;
         toggle.classList.toggle('active', isActive);
-        const currentKey = keybindInput.querySelector('.fcp-keybind-display')?.textContent || '';
+        const currentKey = keybindInput.querySelector('.frost-keybind-display')?.textContent || '';
         if (callback) callback(isActive, currentKey);
     };
     
@@ -58,7 +58,7 @@ function createToggle(
         if (target === toggle || target === leftSide || target === label) {
             isActive = !isActive;
             toggle.classList.toggle('active', isActive);
-            const currentKey = keybindInput.querySelector('.fcp-keybind-display')?.textContent || '';
+            const currentKey = keybindInput.querySelector('.frost-keybind-display')?.textContent || '';
             if (callback) callback(isActive, currentKey);
         }
     });

@@ -10,14 +10,14 @@ function createKeybindInput(
     callback?: KeybindCallback
 ): KeybindInputElement {
     const keybindInput = document.createElement('div') as KeybindInputElement;
-    keybindInput.className = 'fcp-keybind';
+    keybindInput.className = 'frost-keybind';
     
     const keyDisplay: HTMLSpanElement = document.createElement('span');
-    keyDisplay.className = 'fcp-keybind-display';
+    keyDisplay.className = 'frost-keybind-display';
     keyDisplay.textContent = currentKey || 'None';
     
     const clearButton: HTMLButtonElement = document.createElement('button');
-    clearButton.className = 'fcp-keybind-clear';
+    clearButton.className = 'frost-keybind-clear';
     clearButton.textContent = '×';
     clearButton.style.display = currentKey ? 'block' : 'none';
     

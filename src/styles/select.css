@@ -1,4 +1,4 @@
-.fcp-select-container {
+.frost-select-container {
     position: relative;
     margin: 4px 0;
     padding: 8px 10px;
@@ -7,7 +7,7 @@
     border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.fcp-select-label {
+.frost-select-label {
     display: block;
     margin-bottom: 8px;
     font-size: 12px !important;
@@ -17,13 +17,13 @@
     letter-spacing: 0.02em !important;
 }
 
-.fcp-select {
+.frost-select {
     position: relative;
     width: 100%;
     cursor: pointer;
 }
 
-.fcp-select-value {
+.frost-select-value {
     background: rgba(30, 30, 40, 0.6);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 4px;
@@ -31,13 +31,13 @@
     transition: all 0.2s ease;
 }
 
-.fcp-select-value:hover {
+.frost-select-value:hover {
     background: rgba(45, 45, 55, 0.4);
     transform: translateX(4px);
     border-color: rgba(114, 137, 218, 0.2);
 }
 
-.fcp-select-dropdown {
+.frost-select-dropdown {
     position: fixed;
     min-width: 200px;
     background: rgba(20, 20, 30, 0.98);
@@ -52,11 +52,11 @@
     overflow-y: auto;
 }
 
-.fcp-select-dropdown.show {
+.frost-select-dropdown.show {
     display: block;
 }
 
-.fcp-select-option {
+.frost-select-option {
     padding: 8px 12px;
     cursor: pointer;
     transition: background 0.2s ease;
@@ -64,19 +64,19 @@
     font-weight: 450 !important;
 }
 
-.fcp-select-option:hover {
+.frost-select-option:hover {
     background: rgba(114, 137, 218, 0.2);
 }
 
-.fcp-select-dropdown::-webkit-scrollbar {
+.frost-select-dropdown::-webkit-scrollbar {
     width: 6px;
 }
 
-.fcp-select-dropdown::-webkit-scrollbar-track {
+.frost-select-dropdown::-webkit-scrollbar-track {
     background: rgba(0, 0, 0, 0.2);
 }
 
-.fcp-select-dropdown::-webkit-scrollbar-thumb {
+.frost-select-dropdown::-webkit-scrollbar-thumb {
     background: rgba(255, 255, 255, 0.2);
     border-radius: 3px;
 } 

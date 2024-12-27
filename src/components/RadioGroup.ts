@@ -12,33 +12,33 @@ function createRadioGroup(
     callback?: RadioCallback
 ): RadioGroupElement {
     const container = document.createElement('div') as RadioGroupElement;
-    container.className = 'fcp-radio-group';
+    container.className = 'frost-radio-group';
     
     const label: HTMLDivElement = document.createElement('div');
-    label.className = 'fcp-radio-label';
+    label.className = 'frost-radio-label';
     label.textContent = name;
     
-    const optionsContainer = document.createElement('div');
-    optionsContainer.className = 'fcp-radio-options';
+    const optionsContainer: HTMLDivElement = document.createElement('div');
+    optionsContainer.className = 'frost-radio-options';
     
     const optionsArray: string[] = Array.isArray(options) ? options : [options];
     let currentValue: string = defaultValue || optionsArray[0];
     
     optionsArray.forEach((option: string) => {
         const radioButton: HTMLButtonElement = document.createElement('button');
-        radioButton.className = 'fcp-radio-option';
+        radioButton.className = 'frost-radio-option';
         if (option === currentValue) {
             radioButton.classList.add('active');
         }
         
         const radioIcon: HTMLDivElement = document.createElement('div');
-        radioIcon.className = 'fcp-radio-icon';
+        radioIcon.className = 'frost-radio-icon';
         
         const ripple: HTMLDivElement = document.createElement('div');
-        ripple.className = 'fcp-radio-ripple';
+        ripple.className = 'frost-radio-ripple';
         
         const radioText: HTMLSpanElement = document.createElement('span');
-        radioText.className = 'fcp-radio-text';
+        radioText.className = 'frost-radio-text';
         radioText.textContent = option;
         
         radioIcon.appendChild(ripple);
@@ -48,7 +48,7 @@ function createRadioGroup(
         radioButton.addEventListener('click', () => {
             if (currentValue === option) return;
             
-            optionsContainer.querySelectorAll('.fcp-radio-option').forEach((btn: Element) => {
+            optionsContainer.querySelectorAll('.frost-radio-option').forEach((btn: Element) => {
                 btn.classList.remove('active');
             });
             
@@ -73,9 +73,9 @@ function createRadioGroup(
     container.setValue = (value: string) => {
         if (optionsArray.includes(value)) {
             currentValue = value;
-            optionsContainer.querySelectorAll('.fcp-radio-option').forEach((btn: Element) => {
+            optionsContainer.querySelectorAll('.frost-radio-option').forEach((btn: Element) => {
                 btn.classList.remove('active');
-                if (btn.querySelector('.fcp-radio-text')?.textContent === value) {
+                if (btn.querySelector('.frost-radio-text')?.textContent === value) {
                     btn.classList.add('active');
                 }
             });

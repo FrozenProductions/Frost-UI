@@ -12,27 +12,27 @@ function createSelect(
     callback?: SelectCallback
 ): SelectElement {
     const selectContainer = document.createElement('div') as SelectElement;
-    selectContainer.className = 'fcp-select-container';
+    selectContainer.className = 'frost-select-container';
     
     const label: HTMLSpanElement = document.createElement('span');
-    label.className = 'fcp-select-label';
+    label.className = 'frost-select-label';
     label.textContent = name;
     
     const select: HTMLDivElement = document.createElement('div');
-    select.className = 'fcp-select';
+    select.className = 'frost-select';
     
     const selectedValue: HTMLDivElement = document.createElement('div');
-    selectedValue.className = 'fcp-select-value';
+    selectedValue.className = 'frost-select-value';
     selectedValue.textContent = defaultValue;
     
     const dropdown: HTMLDivElement = document.createElement('div');
-    dropdown.className = 'fcp-select-dropdown';
+    dropdown.className = 'frost-select-dropdown';
     
     const optionsArray: string[] = Array.isArray(options) ? options : [options];
     
-    optionsArray.forEach(option => {
-        const optionElement = document.createElement('div');
-        optionElement.className = 'fcp-select-option';
+    optionsArray.forEach((option: string) => {
+        const optionElement: HTMLDivElement = document.createElement('div');
+        optionElement.className = 'frost-select-option';
         optionElement.textContent = option;
         
         optionElement.addEventListener('click', () => {
@@ -49,14 +49,14 @@ function createSelect(
     
     select.addEventListener('click', (e: MouseEvent) => {
         const target = e.target as HTMLElement;
-        if (!target.closest('.fcp-select-dropdown')) {
+        if (!target.closest('.frost-select-dropdown')) {
             dropdown.classList.toggle('show');
         }
     });
     
     document.addEventListener('click', (e: MouseEvent) => {
         const target = e.target as HTMLElement;
-        if (!target.closest('.fcp-select')) {
+        if (!target.closest('.frost-select')) {
             dropdown.classList.remove('show');
         }
     });

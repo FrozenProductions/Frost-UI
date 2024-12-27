@@ -12,16 +12,16 @@ function createSlider(
     defaultValue: number,
     callback?: SliderCallback
 ): SliderElement {
-    const slider = document.createElement('div') as SliderElement;
-    slider.className = 'fcp-slider';
+    const slider: SliderElement = document.createElement('div') as SliderElement;
+    slider.className = 'frost-slider';
     
-    const label = document.createElement('span');
+    const label: HTMLSpanElement = document.createElement('span');
     label.textContent = name;
     
-    const controlsWrapper = document.createElement('div');
-    controlsWrapper.className = 'fcp-slider-controls';
+    const controlsWrapper: HTMLDivElement = document.createElement('div');
+    controlsWrapper.className = 'frost-slider-controls';
     
-    const input = document.createElement('input');
+    const input: HTMLInputElement = document.createElement('input');
     input.type = 'range';
     input.min = min.toString();
     input.max = max.toString();
@@ -29,7 +29,7 @@ function createSlider(
     
     const valueInput: HTMLInputElement = document.createElement('input');
     valueInput.type = 'text';
-    valueInput.className = 'fcp-slider-value';
+    valueInput.className = 'frost-slider-value';
     valueInput.value = defaultValue.toString();
     valueInput.maxLength = 5;
     
@@ -59,7 +59,7 @@ function createSlider(
 
     valueInput.addEventListener('input', (e: Event) => {
         const target = e.target as HTMLInputElement;
-        const val = target.value.replace(/[^\d.-]/g, '');
+        const val: string = target.value.replace(/[^\d.-]/g, '');
         valueInput.value = val;
         
         if (Number(val) < min) {

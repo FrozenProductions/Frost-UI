@@ -1,4 +1,4 @@
-.fcp-page-selector {
+.frost-page-selector {
     background: rgba(40, 40, 50, 0.4);
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 6px;
@@ -10,13 +10,13 @@
     transition: all 0.2s ease;
 }
 
-.fcp-page-selector:hover {
+.frost-page-selector:hover {
     background: rgba(45, 45, 55, 0.4);
     transform: translateX(4px);
     border-color: rgba(114, 137, 218, 0.2);
 }
 
-.fcp-page-label {
+.frost-page-label {
     font-size: 12px !important;
     font-weight: 600 !important;
     opacity: 0.9;
@@ -25,7 +25,7 @@
     color: rgba(255, 255, 255, 0.85);
 }
 
-.fcp-page-controls {
+.frost-page-controls {
     display: flex;
     align-items: center;
     background: rgba(30, 30, 40, 0.4);
@@ -34,7 +34,7 @@
     padding: 2px 6px;
 }
 
-.fcp-page-arrow {
+.frost-page-arrow {
     color: rgba(255, 255, 255, 0.8);
     cursor: pointer;
     font-family: none !important;
@@ -47,13 +47,13 @@
     line-height: 20px;
 }
 
-.fcp-page-arrow:hover {
+.frost-page-arrow:hover {
     opacity: 1;
     color: #7289da;
     transform: scale(1.1);
 }
 
-.fcp-page-value {
+.frost-page-value {
     min-width: 70px;
     text-align: center;
     font-size: 11px !important;
