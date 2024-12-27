@@ -85,6 +85,20 @@ menu.addCategory('Settings')
     ], 0);
 ```
 
+### Menu with Buttons
+```js
+menu.addCategory('Actions')
+    .addButton('Actions', 'Save Settings', () => {
+        saveConfig();
+    })
+    .addButton('Actions', 'Apply Changes', () => {
+        applyChanges();
+    }, 'primary')
+    .addButton('Actions', 'Reset All', () => {
+        resetConfig();
+    }, 'destructive');
+```
+
 ## Notes
 
 - All menus are draggable by default
