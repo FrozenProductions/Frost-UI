@@ -6,6 +6,7 @@ import { createSelect, SelectElement } from './components/Select';
 import { ColorInputElement, createColorInput } from './components/ColorInput';
 import { createMultiSelect, MultiSelectElement } from './components/MultiSelect';
 import { createPageSelector, PageSelectorElement } from './components/PageSelector';
+import { createButton, ButtonElement, ButtonVariant } from './components/Button';
 import './core.css';
 
 interface Position {
@@ -269,6 +270,25 @@ class FrostUI {
         if (content) {
             content.appendChild(pageSelector);
             categoryData.items.set(name, pageSelector);
+        }
+        
+        return this;
+    }
+
+    public addButton(
+        category: string,
+        name: string,
+        callback?: () => void,
+        variant: ButtonVariant = 'default'
+    ): this {
+        const categoryData: CategoryData | undefined = this.categories.get(category);
+        if (!categoryData) return this;
+
+        const button: ButtonElement = createButton(name, callback, variant);
+        const content: HTMLDivElement | null = categoryData.element.querySelector('.fcp-category-content');
+        if (content) {
+            content.appendChild(button);
+            categoryData.items.set(name, button);
         }
         
         return this;

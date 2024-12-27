@@ -1,0 +1,89 @@
+.fcp-button-container {
+    margin: 4px 0;
+    padding: 8px 10px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.fcp-button {
+    position: relative;
+    width: 100%;
+    padding: 10px 16px;
+    background: rgba(40, 40, 50, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.02em !important;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fcp-button:hover {
+    background: rgba(45, 45, 55, 0.4);
+    transform: translateX(4px);
+    border-color: rgba(114, 137, 218, 0.2);
+}
+
+.fcp-button:active {
+    transform: translateX(4px) translateY(1px);
+}
+
+.fcp-button.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    border-color: rgba(255, 255, 255, 0.05);
+}
+
+.fcp-button-ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(114, 137, 218, 0.4);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    animation: buttonRipple 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes buttonRipple {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 0.6;
+    }
+    100% {
+        width: 500px;
+        height: 500px;
+        opacity: 0;
+    }
+}
+
+.fcp-button.primary {
+    background: linear-gradient(135deg, rgba(114, 137, 218, 0.8), rgba(91, 110, 175, 0.8));
+    border-color: rgba(114, 137, 218, 0.5);
+}
+
+.fcp-button.primary:hover {
+    background: linear-gradient(135deg, rgba(114, 137, 218, 0.9), rgba(91, 110, 175, 0.9));
+    box-shadow: 0 4px 12px rgba(114, 137, 218, 0.2);
+}
+
+.fcp-button.primary .fcp-button-ripple {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.fcp-button.destructive {
+    background: linear-gradient(135deg, rgba(240, 71, 71, 0.8), rgba(200, 50, 50, 0.8));
+    border-color: rgba(240, 71, 71, 0.5);
+}
+
+.fcp-button.destructive:hover {
+    background: linear-gradient(135deg, rgba(240, 71, 71, 0.9), rgba(200, 50, 50, 0.9));
+    box-shadow: 0 4px 12px rgba(240, 71, 71, 0.2);
+} 

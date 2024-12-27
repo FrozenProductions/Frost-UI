@@ -85,7 +85,6 @@
             .addToggle('Combat', 'KillAura', (enabled, key) => {
                 config.combat.killAura = enabled;
                 saveConfig();
-                // callback
             }, 'KeyK')
             .addSlider('Combat', 'Reach', 3, 6, config.combat.reach, (value) => {
                 config.combat.reach = value;
@@ -137,7 +136,6 @@
             .addToggle('Movement', 'Speed', (enabled) => {
                 config.movement.speed = enabled;
                 saveConfig();
-                // callback
             })
             .addSlider('Movement', 'Speed Value', 1, 3, config.movement.speedValue, (value) => {
                 config.movement.speedValue = value;
@@ -177,7 +175,6 @@
             .addToggle('ESP', 'Players', (enabled) => {
                 config.render.esp = enabled;
                 saveConfig();
-                // callback
             })
             .addToggle('ESP', 'Tracers', (enabled) => {
                 config.render.tracers = enabled;
@@ -223,7 +220,6 @@
             .addToggle('Timer', 'Enabled', (enabled) => {
                 config.world.timer = enabled;
                 saveConfig();
-                // callback
             })
             .addSlider('Timer', 'Speed', 0, 5, config.world.timerSpeed, (value) => {
                 config.world.timerSpeed = value;
@@ -250,5 +246,11 @@
             .addToggle('World', 'Cave Finder', (enabled) => {
                 config.world.caveFinder = enabled;
                 saveConfig();
-            });
+            })
+            .addButton('World', 'Example', () => {
+                // callback
+            }, 'primary')
+            .addButton('World', 'Example', () => {
+                // callback
+            }, 'destructive');
     })();
