@@ -19,6 +19,7 @@ Frost-UI is a lightweight, customizable menu library for creating interactive us
 - Toggle switches
 - Sliders
 - Keybind inputs
+- Buttons
 - Radio groups
 - Select dropdowns
 - Multi-select
