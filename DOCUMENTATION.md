@@ -6,7 +6,7 @@ A lightweight, customizable menu library for creating interactive user interface
 - [Installation](#installation)
 - [Menu Creation](#menu-creation)
 - [Components](#components)
-- [Notes](#notes)
+- [Toasts](#toasts)
 
 ## Installation
 
@@ -157,12 +157,59 @@ menu.addButton(
 );
 ```
 
-## Notes
-- All menus are draggable by default
-- Keybinds use the KeyboardEvent.code format
-- Components support real-time callbacks
-- Configuration can be saved using GM_setValue/GM_getValue
-- Menus can be toggled with assigned keys (default: ShiftRight)
-- All styles use !important to prevent conflicts with page CSS
+I'll add a Toasts section to the documentation. Here's the addition that should go under the Components section:
+
+## Toasts
+Creates temporary notifications with different styles and actions:
+
+Basic Usage:
+```javascript
+// Simple notification
+window.frostManager.showToast("Operation completed");
+
+// With type and duration (5 seconds)
+window.frostManager.showToast({
+    message: "Settings saved",
+    type: "success",
+    duration: 5000
+});`
+```
+
+Action Toasts:
+```javascript
+window.frostManager.showToast({
+    message: "Changes will be lost",
+    type: "warning",
+    variant: "action",
+    action: {
+        text: "Undo",
+        onClick: () => restoreChanges(),
+        type: "primary"
+    }
+});`
+```
+
+Toast Types:
+- success: Green checkmark for successful operations
+- error: Red X for errors
+- warning: Yellow exclamation for warnings
+- info: Blue info icon for information (default)
+
+Options:
+- message: Text to display
+- type: 'success' | 'error' | 'info' | 'warning' | 'undefined'
+- duration: Time in milliseconds (default: 3000, 0 for persistent)
+- variant: 'default' | 'action'
+- action: Optional button configuration
+  - text: Button label
+  - onClick: Click handler
+  - type: 'primary' | 'destructive'
+
+Notes:
+- Toasts appear in top-right corner
+- Hover pauses auto-dismiss
+- Click X to dismiss manually
+- Action variant adds interactive button
+- Duration 0 creates persistent toast
 
 For more implementation examples, see the example userscript in the repository.

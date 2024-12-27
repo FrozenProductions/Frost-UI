@@ -13,6 +13,7 @@
 Frost-UI is a lightweight, customizable menu library for creating interactive user interfaces in userscripts. It provides a clean, modern design with support for various input types and keybinds.
 
 ![Menu Preview](https://raw.githubusercontent.com/FrozenProductions/Frost-UI/main/assets/preview.png)
+![Toast Preview](https://raw.githubusercontent.com/FrozenProductions/Frost-UI/main/assets/toast.png)
 
 ## Features
 - Draggable menus

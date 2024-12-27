@@ -1,11 +1,13 @@
 import { CategoryData } from './components/Category';
 import { ToggleElement } from './components/Toggle';
 import FrostUI from './Menu';
+import { createToast, ToastOptions } from './components/Toast';
 
 class FrostManager {
     private menus: Map<string, FrostUI>;
     private keybinds: Map<string, string>;
     private globalKeybinds: Map<string, () => void>;
+    private toastContainer: HTMLDivElement | null = null;
 
     constructor() {
         this.menus = new Map();
@@ -63,6 +65,21 @@ class FrostManager {
             this.keybinds.set(bindId, key);
             this.globalKeybinds.set(key, (toggle as { toggleState: () => void }).toggleState.bind(toggle));
         }
+    }
+
+    private initToastContainer(): void {
+        if (!this.toastContainer) {
+            this.toastContainer = document.createElement('div');
+            this.toastContainer.className = 'frost-toast-container';
+            document.body.appendChild(this.toastContainer);
+        }
+    }
+
+    public showToast(options: string | ToastOptions): void {
+        this.initToastContainer();
+        const toastOptions = typeof options === 'string' ? { message: options } : options;
+        const toast = createToast(toastOptions);
+        this.toastContainer?.appendChild(toast);
     }
 }
 
