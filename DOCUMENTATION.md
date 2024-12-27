@@ -4,105 +4,165 @@ A lightweight, customizable menu library for creating interactive user interface
 
 ## Table of Contents
 - [Installation](#installation)
-- [Basic-Usage](#basic-usage)
-- [Menu-Manager](#menu-manager)
-- [Examples](#examples)
+- [Menu Creation](#menu-creation)
+- [Components](#components)
+- [Notes](#notes)
 
 ## Installation
 
-Add the following to your userscript header:
+Add to your userscript header:
 
-```js
+```javascript
 // @require https://raw.githubusercontent.com/FrozenProductions/Frost-UI/main/scripts/Library.js
 ```
 
-## Basic-Usage
+## Menu-Creation
 
-The library exposes a global `frostManager` object that you can use to create and manage menus:
+### Creating a Menu
+The `addMenu` method creates a new menu instance:
 
-```js
-const menu = window.frostManager.addMenu('myMenu', 'My Menu', { x: 100, y: 100 }, 'ShiftRight');
-
-menu.addCategory('Settings')
-    .addToggle('Settings', 'Enable Feature', (enabled) => {
-        console.log(`Feature ${enabled ? 'enabled' : 'disabled'}`);
-    })
-    .addSlider('Settings', 'Speed', 1, 10, 5, (value) => {
-        console.log(`Speed set to ${value}`);
-    });
+```javascript
+const menu = window.frostManager.addMenu(
+    'uniqueId',          // Unique identifier for the menu
+    'Menu Title',        // Display title
+    { x: 100, y: 100 }, // Initial position (optional)
+    'ShiftRight'        // Toggle key (optional, defaults to 'ShiftRight')
+);
 ```
 
-## Menu-Manager
+### Categories
+Categories help organize menu items:
 
-The MenuManager class provides methods for creating and managing menus:
-
-### Methods
-
-- `addMenu(id: string, title: string, position?: { x: number, y: number }, toggleKey?: string): FrostUI`
-
-## Examples
-
-### Basic Menu
-```js
-const menu = window.frostManager.addMenu('basic', 'Basic Menu', { x: 100, y: 100 });
-
-menu.addCategory('General')
-    .addToggle('General', 'Enable Feature')
-    .addSlider('General', 'Speed', 0, 100, 50);
+```javascript
+menu.addCategory('Combat')     // Creates a collapsible section
+    .addCategory('Movement')   // Chain multiple categories
+    .addCategory('Render');    // Each category can contain multiple items
 ```
 
-### Complex Menu with Multiple Categories
-```js
-const menu = window.frostManager.addMenu('advanced', 'Advanced Menu');
+## Components
 
-menu.addCategory('Combat')
-    .addToggle('Combat', 'KillAura', (enabled, key) => {
-        // Callback
-    }, 'KeyK')
-    .addSlider('Combat', 'Range', 3, 6, 4);
+### Toggle Switch
+Creates a toggle with optional keybind:
 
-menu.addCategory('Movement')
-    .addToggle('Movement', 'Speed')
-    .addSlider('Movement', 'Speed Value', 1, 3, 1);
-
-menu.addCategory('Render')
-    .addToggle('Render', 'ESP')
-    .addColorInput('Render', 'ESP Color', '#7289DA');
+```javascript
+menu.addToggle(
+    'Combat',           // Category name
+    'KillAura',         // Toggle name
+    (enabled, key) => { // Callback function
+        console.log(`KillAura ${enabled ? 'enabled' : 'disabled'}`);
+        console.log(`Current keybind: ${key}`);
+    },
+    'KeyK'             // Optional keybind (uses KeyboardEvent.code format)
+);
 ```
 
-### Menu with MultiSelect and PageSelector
-```js
-menu.addCategory('Settings')
-    .addMultiSelect('Settings', 'Target Types', [
+### Slider
+Creates a numeric slider:
+
+```javascript
+menu.addSlider(
+    'Combat',           // Category name
+    'Range',            // Slider name
+    3,                  // Minimum value
+    6,                  // Maximum value
+    4,                  // Default value
+    (value) => {        // Callback function
+        console.log(`Range set to ${value}`);
+    }
+);
+```
+
+### Color Picker
+Creates a color input with preview:
+
+```javascript
+menu.addColorInput(
+    'Render',           // Category name
+    'ESP Color',        // Input name
+    '#7289DA',         // Default color (hex format)
+    (color) => {        // Callback function
+        console.log(`Color changed to ${color}`);
+    }
+);
+```
+
+### Multi-Select
+Creates a dropdown with multiple selectable options:
+
+```javascript
+menu.addMultiSelect(
+    'Combat',           // Category name
+    'Target Types',     // Select name
+    [                   // Available options
         'Players',
         'Animals',
         'Monsters'
-    ], ['Players'])
-    .addPageSelector('Settings', 'Mode', [
+    ],
+    ['Players'],        // Default selected values
+    (selected) => {     // Callback function
+        console.log('Selected targets:', selected);
+    }
+);
+```
+
+### Radio Group
+Creates mutually exclusive options:
+
+```javascript
+menu.addRadioGroup(
+    'Combat',           // Category name
+    'Target Mode',      // Group name
+    [                   // Available options
+        'Single',
+        'Multiple',
+        'Switch'
+    ],
+    'Single',          // Default selected value
+    (selected) => {    // Callback function
+        console.log(`Mode changed to ${selected}`);
+    }
+);
+```
+
+### Page Selector
+Creates a paginated interface:
+
+```javascript
+menu.addPageSelector(
+    'Settings',         // Category name
+    'Mode',             // Selector name
+    [                   // Page names
         'Normal',
         'Advanced',
         'Custom'
-    ], 0);
+    ],
+    0,                  // Default page index
+    (page) => {         // Callback function
+        console.log(`Switched to ${page} mode`);
+    }
+);
 ```
 
-### Menu with Buttons
-```js
-menu.addCategory('Actions')
-    .addButton('Actions', 'Save Settings', () => {
+### Buttons
+Creates clickable buttons with different styles:
+
+```javascript
+menu.addButton(
+    'Settings',         // Category name
+    'Save Config',      // Button text
+    () => {            // Click callback
         saveConfig();
-    })
-    .addButton('Actions', 'Apply Changes', () => {
-        applyChanges();
-    }, 'primary')
-    .addButton('Actions', 'Reset All', () => {
-        resetConfig();
-    }, 'destructive');
+    },
+    'primary'          // Button variant ('default', 'primary', 'destructive')
+);
 ```
 
 ## Notes
-
 - All menus are draggable by default
-- Keybinds are automatically managed by the MenuManager
-- Components support callbacks for real-time updates
+- Keybinds use the KeyboardEvent.code format
+- Components support real-time callbacks
 - Configuration can be saved using GM_setValue/GM_getValue
 - Menus can be toggled with assigned keys (default: ShiftRight)
+- All styles use !important to prevent conflicts with page CSS
+
+For more implementation examples, see the example userscript in the repository.
