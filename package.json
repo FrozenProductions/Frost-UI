@@ -1,6 +1,13 @@
 {
   "name": "frost-ui",
   "version": "1.0.0",
+  "author": "FrozenProductions",
+  "description": "Frost-UI is a lightweight, customizable menu library for creating interactive user interfaces in userscripts. It provides a clean, modern design with support for various input types and keybinds.",
+  "homepage": "https://github.com/FrozenProductions/Frost-UI",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FrozenProductions/Frost-UI.git"
+  },
   "main": "dist/Library.js",
   "scripts": {
     "build": "webpack",
