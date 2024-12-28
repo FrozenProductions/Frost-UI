@@ -7,6 +7,7 @@ import { ColorInputElement, createColorInput } from "./components/ColorInput";
 import { createMultiSelect, MultiSelectElement } from "./components/MultiSelect";
 import { createPageSelector, PageSelectorElement } from "./components/PageSelector";
 import { createButton, ButtonElement, ButtonVariant } from "./components/Button";
+import { createSwitch, SwitchElement, SwitchVariant } from "./components/Switch";
 import "./core.css";
 
 interface Position {
@@ -278,6 +279,26 @@ class FrostUI {
         if (content) {
             content.appendChild(button);
             categoryData.items.set(name, button);
+        }
+
+        return this;
+    }
+
+    public addSwitch(
+        category: string,
+        name: string,
+        defaultValue: boolean = false,
+        callback?: (enabled: boolean) => void,
+        variant: SwitchVariant = "default"
+    ): this {
+        const categoryData: CategoryData | undefined = this.categories.get(category);
+        if (!categoryData) return this;
+
+        const switchElement: SwitchElement = createSwitch(name, defaultValue, callback, variant);
+        const content: HTMLDivElement | null = categoryData.element.querySelector(".frost-category-content");
+        if (content) {
+            content.appendChild(switchElement);
+            categoryData.items.set(name, switchElement);
         }
 
         return this;
