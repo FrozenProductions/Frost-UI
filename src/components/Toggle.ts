@@ -39,7 +39,6 @@ function createToggle(
 
     const keybindInput: HTMLDivElement = createKeybindInput(keybind, (newKey: string | null) => {
         window.frostManager.updateKeybind(menuId, category, name, newKey || "");
-        if (callback) callback(isActive, newKey || "");
     });
 
     setTimeout(() => {
