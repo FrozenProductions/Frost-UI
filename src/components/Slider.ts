@@ -62,19 +62,49 @@ function createSlider(
         const val: string = target.value.replace(/[^\d.-]/g, "");
         valueInput.value = val;
 
-        if (Number(val) < min) {
-            valueInput.classList.add("invalid");
-            setTimeout(() => {
-                valueInput.classList.remove("invalid");
-            }, 400);
+        if (val !== "") {
+            const numVal = Number(val);
+            if (numVal < min || numVal > max) {
+                valueInput.classList.add("invalid");
+                setTimeout(() => {
+                    valueInput.classList.remove("invalid");
+                }, 400);
+            }
         }
     });
 
     valueInput.addEventListener("blur", () => {
-        let val: number = Number(valueInput.value);
-        if (isNaN(val)) val = defaultValue;
-        valueInput.classList.remove("invalid");
-        updateValue(val);
+        const val: string = valueInput.value;
+
+        if (val === "" || isNaN(Number(val))) {
+            valueInput.value = defaultValue.toString();
+            updateValue(defaultValue);
+            return;
+        }
+
+        const numVal = Number(val);
+
+        if (numVal < min) {
+            valueInput.classList.add("invalid");
+            setTimeout(() => {
+                valueInput.classList.remove("invalid");
+                valueInput.value = min.toString();
+                updateValue(min);
+            }, 400);
+            return;
+        }
+
+        if (numVal > max) {
+            valueInput.classList.add("invalid");
+            setTimeout(() => {
+                valueInput.classList.remove("invalid");
+                valueInput.value = max.toString();
+                updateValue(max);
+            }, 400);
+            return;
+        }
+
+        updateValue(numVal);
     });
 
     valueInput.addEventListener("keydown", (e: KeyboardEvent) => {
