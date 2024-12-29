@@ -47,9 +47,17 @@ function createSelect(
     select.appendChild(selectedValue);
     select.appendChild(dropdown);
 
+    const positionDropdown = (): void => {
+        const rect = select.getBoundingClientRect();
+        dropdown.style.left = `${rect.left}px`;
+        dropdown.style.top = `${rect.bottom + 4}px`;
+        dropdown.style.width = `${rect.width}px`;
+    };
+
     select.addEventListener("click", (e: MouseEvent) => {
         const target = e.target as HTMLElement;
         if (!target.closest(".frost-select-dropdown")) {
+            positionDropdown();
             dropdown.classList.toggle("show");
         }
     });
@@ -61,8 +69,31 @@ function createSelect(
         }
     });
 
+    window.addEventListener("resize", () => {
+        if (dropdown.classList.contains("show")) {
+            positionDropdown();
+        }
+    });
+
+    document.addEventListener(
+        "scroll",
+        (e: Event) => {
+            const target = e.target as HTMLElement;
+            if (
+                dropdown.classList.contains("show") &&
+                ((target instanceof HTMLElement && target.contains(selectContainer)) ||
+                    target === document.documentElement)
+            ) {
+                positionDropdown();
+            }
+        },
+        true
+    );
+
     selectContainer.appendChild(label);
     selectContainer.appendChild(select);
+
+    document.body.appendChild(dropdown);
 
     selectContainer.getValue = () => selectedValue.textContent || defaultValue;
     selectContainer.setValue = (value: string) => {
