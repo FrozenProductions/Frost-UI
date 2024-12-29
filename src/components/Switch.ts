@@ -15,9 +15,17 @@ function createSwitch(
     const container = document.createElement("div") as SwitchElement;
     container.className = `frost-switch-container ${variant}`;
 
+    const leftSide: HTMLDivElement = document.createElement("div");
+    leftSide.className = "frost-switch-left";
+
     const label: HTMLSpanElement = document.createElement("span");
     label.className = "frost-switch-label";
     label.textContent = name;
+
+    leftSide.appendChild(label);
+
+    const rightSide: HTMLDivElement = document.createElement("div");
+    rightSide.className = "frost-switch-right";
 
     const switchTrack: HTMLDivElement = document.createElement("div");
     switchTrack.className = "frost-switch-track";
@@ -26,37 +34,19 @@ function createSwitch(
     const switchThumb: HTMLDivElement = document.createElement("div");
     switchThumb.className = "frost-switch-thumb";
 
-    const rippleContainer: HTMLDivElement = document.createElement("div");
-    rippleContainer.className = "frost-switch-ripple";
-
     let isActive = defaultValue;
 
-    const createRipple = (e: MouseEvent) => {
-        const ripple: HTMLDivElement = document.createElement("div");
-        ripple.className = "ripple";
-
-        const rect = switchThumb.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height);
-        ripple.style.width = ripple.style.height = `${size * 2}px`;
-
-        ripple.style.left = `${e.clientX - rect.left - size}px`;
-        ripple.style.top = `${e.clientY - rect.top - size}px`;
-
-        rippleContainer.appendChild(ripple);
-        setTimeout(() => ripple.remove(), 600);
-    };
-
-    const toggleSwitch = (e: MouseEvent) => {
+    const toggleSwitch = () => {
         isActive = !isActive;
         switchTrack.classList.toggle("active", isActive);
-        createRipple(e);
         if (callback) callback(isActive);
     };
 
-    switchThumb.appendChild(rippleContainer);
     switchTrack.appendChild(switchThumb);
-    container.appendChild(label);
-    container.appendChild(switchTrack);
+    rightSide.appendChild(switchTrack);
+
+    container.appendChild(leftSide);
+    container.appendChild(rightSide);
 
     container.addEventListener("click", toggleSwitch);
 
