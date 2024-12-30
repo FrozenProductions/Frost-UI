@@ -157,8 +157,6 @@ menu.addButton(
 );
 ```
 
-I'll add a Toasts section to the documentation. Here's the addition that should go under the Components section:
-
 ## Toasts
 Creates temporary notifications with different styles and actions:
 
