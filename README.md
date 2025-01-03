@@ -31,6 +31,7 @@ Frost-UI is an elegant and lightweight UI library designed specifically for user
     -   Sliders
     -   Buttons
     -   Radio Groups
+    -   Themes
 
 -   **Advanced Inputs**
     -   Keybind Controls
