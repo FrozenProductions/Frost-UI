@@ -74,7 +74,7 @@
 }
 
 .frost-radio-option.active .frost-radio-icon::after {
-    content: '';
+    content: "";
     position: absolute;
     width: 8px;
     height: 8px;

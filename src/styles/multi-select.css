@@ -83,7 +83,7 @@
 }
 
 .frost-multi-select-item.selected .frost-multi-select-checkbox:after {
-    content: '';
+    content: "";
     position: absolute;
     left: 4px;
     top: 1px;

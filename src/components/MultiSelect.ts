@@ -11,25 +11,25 @@ function createMultiSelect(
     defaultValues: string[] = [],
     callback?: MultiSelectCallback
 ): MultiSelectElement {
-    const container = document.createElement("div") as MultiSelectElement;
-    container.className = "frost-multi-select-container";
+    const container = document.createElement('div') as MultiSelectElement;
+    container.className = 'frost-multi-select-container';
 
-    const label: HTMLDivElement = document.createElement("div");
-    label.className = "frost-multi-select-label";
+    const label: HTMLDivElement = document.createElement('div');
+    label.className = 'frost-multi-select-label';
     label.textContent = name;
 
-    const select: HTMLDivElement = document.createElement("div");
-    select.className = "frost-multi-select";
+    const select: HTMLDivElement = document.createElement('div');
+    select.className = 'frost-multi-select';
 
-    const selectedDisplay: HTMLDivElement = document.createElement("div");
-    selectedDisplay.className = "frost-multi-select-value";
+    const selectedDisplay: HTMLDivElement = document.createElement('div');
+    selectedDisplay.className = 'frost-multi-select-value';
 
-    const dropdown: HTMLDivElement = document.createElement("div");
-    dropdown.className = "frost-multi-select-dropdown";
+    const dropdown: HTMLDivElement = document.createElement('div');
+    dropdown.className = 'frost-multi-select-dropdown';
 
-    const menuContainer: Element | null = document.querySelector(".frost-menu");
+    const menuContainer: Element | null = document.querySelector('.frost-menu');
     const themeClass: string | null | undefined = menuContainer
-        ? Array.from(menuContainer.classList).find((c: string) => c.startsWith("frost-theme-"))
+        ? Array.from(menuContainer.classList).find((c: string) => c.startsWith('frost-theme-'))
         : null;
     if (themeClass) {
         dropdown.classList.add(themeClass);
@@ -39,9 +39,9 @@ function createMultiSelect(
 
     const updateDisplay = (): void => {
         if (selected.size === 0) {
-            selectedDisplay.textContent = "None";
+            selectedDisplay.textContent = 'None';
         } else {
-            selectedDisplay.textContent = Array.from(selected).join(", ");
+            selectedDisplay.textContent = Array.from(selected).join(', ');
         }
     };
 
@@ -52,65 +52,66 @@ function createMultiSelect(
         dropdown.style.width = `${rect.width}px`;
     };
 
-    options.forEach((option: string) => {
-        const item: HTMLDivElement = document.createElement("div");
-        item.className = "frost-multi-select-item";
+    for (const option of options) {
+        const item: HTMLDivElement = document.createElement('div');
+        item.className = 'frost-multi-select-item';
         if (selected.has(option)) {
-            item.classList.add("selected");
+            item.classList.add('selected');
         }
 
-        const checkbox: HTMLDivElement = document.createElement("div");
-        checkbox.className = "frost-multi-select-checkbox";
+        const checkbox: HTMLDivElement = document.createElement('div');
+        checkbox.className = 'frost-multi-select-checkbox';
 
-        const text: HTMLSpanElement = document.createElement("span");
+        const text: HTMLSpanElement = document.createElement('span');
         text.textContent = option;
 
         item.appendChild(checkbox);
         item.appendChild(text);
         dropdown.appendChild(item);
 
-        item.addEventListener("click", (e: MouseEvent) => {
+        item.addEventListener('click', (e: MouseEvent) => {
             e.stopPropagation();
             if (selected.has(option)) {
                 selected.delete(option);
-                item.classList.remove("selected");
+                item.classList.remove('selected');
             } else {
                 selected.add(option);
-                item.classList.add("selected");
+                item.classList.add('selected');
             }
             updateDisplay();
             if (callback) callback(Array.from(selected));
         });
-    });
+    }
 
-    select.addEventListener("click", (e: MouseEvent) => {
+    select.addEventListener('click', (e: MouseEvent) => {
         const target = e.target as HTMLElement;
-        if (!target.closest(".frost-multi-select-dropdown")) {
+        if (!target.closest('.frost-multi-select-dropdown')) {
             positionDropdown();
-            dropdown.classList.toggle("show");
+            dropdown.classList.toggle('show');
         }
     });
 
-    document.addEventListener("click", (e: MouseEvent) => {
+    document.addEventListener('click', (e: MouseEvent) => {
         const target = e.target as HTMLElement;
-        if (!target.closest(".frost-multi-select")) {
-            dropdown.classList.remove("show");
+        if (!target.closest('.frost-multi-select')) {
+            dropdown.classList.remove('show');
         }
     });
 
-    window.addEventListener("resize", () => {
-        if (dropdown.classList.contains("show")) {
+    window.addEventListener('resize', () => {
+        if (dropdown.classList.contains('show')) {
             positionDropdown();
         }
     });
 
     document.addEventListener(
-        "scroll",
+        'scroll',
         (e: Event) => {
             const target = e.target as HTMLElement;
             if (
-                dropdown.classList.contains("show") &&
-                ((target instanceof HTMLElement && target.contains(container)) || target === document.documentElement)
+                dropdown.classList.contains('show') &&
+                ((target instanceof HTMLElement && target.contains(container)) ||
+                    target === document.documentElement)
             ) {
                 positionDropdown();
             }
@@ -128,31 +129,39 @@ function createMultiSelect(
     container.getValue = () => Array.from(selected);
     container.setValue = (values: string[]) => {
         selected.clear();
-        values.forEach((value: string) => selected.add(value));
+        for (const value of values) {
+            selected.add(value);
+        }
         updateDisplay();
-        dropdown.querySelectorAll(".frost-multi-select-item").forEach((item: Element) => {
-            const value: string | null | undefined = item.querySelector("span")?.textContent;
+        for (const item of dropdown.querySelectorAll('.frost-multi-select-item')) {
+            const value: string | null | undefined = item.querySelector('span')?.textContent;
             if (value) {
-                item.classList.toggle("selected", selected.has(value));
+                item.classList.toggle('selected', selected.has(value));
             }
-        });
+        }
         if (callback) callback(Array.from(selected));
     };
 
     const observer: MutationObserver = new MutationObserver((mutations: MutationRecord[]) => {
-        mutations.forEach((mutation: MutationRecord) => {
-            if (mutation.type === "attributes" && mutation.attributeName === "class") {
-                const newThemeClass: string | null | undefined = Array.from(menuContainer!.classList).find(
-                    (c: string) => c.startsWith("frost-theme-")
+        for (const mutation of mutations) {
+            if (
+                mutation.type === 'attributes' &&
+                mutation.attributeName === 'class' &&
+                menuContainer
+            ) {
+                const newThemeClass: string | undefined = Array.from(menuContainer.classList).find(
+                    (c: string) => c.startsWith('frost-theme-')
                 );
                 dropdown.classList.remove(
-                    ...Array.from(dropdown.classList).filter((c: string) => c.startsWith("frost-theme-"))
+                    ...Array.from(dropdown.classList).filter((c: string) =>
+                        c.startsWith('frost-theme-')
+                    )
                 );
                 if (newThemeClass) {
                     dropdown.classList.add(newThemeClass);
                 }
             }
-        });
+        }
     });
 
     if (menuContainer) {
@@ -162,4 +171,4 @@ function createMultiSelect(
     return container;
 }
 
-export { createMultiSelect, MultiSelectElement };
+export { createMultiSelect, type MultiSelectElement };

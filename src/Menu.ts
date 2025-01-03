@@ -1,14 +1,14 @@
-import { createCategory, CategoryData } from "./components/Category";
-import { createSlider, SliderElement } from "./components/Slider";
-import { createToggle, ToggleCallback, ToggleElement } from "./components/Toggle";
-import { createRadioGroup, RadioGroupElement } from "./components/RadioGroup";
-import { createSelect, SelectElement } from "./components/Select";
-import { ColorInputElement, createColorInput } from "./components/ColorInput";
-import { createMultiSelect, MultiSelectElement } from "./components/MultiSelect";
-import { createPageSelector, PageSelectorElement } from "./components/PageSelector";
-import { createButton, ButtonElement, ButtonVariant } from "./components/Button";
-import { createSwitch, SwitchElement, SwitchVariant } from "./components/Switch";
-import "./core.css";
+import { type ButtonElement, type ButtonVariant, createButton } from './components/Button';
+import { type CategoryData, createCategory } from './components/Category';
+import { type ColorInputElement, createColorInput } from './components/ColorInput';
+import { type MultiSelectElement, createMultiSelect } from './components/MultiSelect';
+import { type PageSelectorElement, createPageSelector } from './components/PageSelector';
+import { type RadioGroupElement, createRadioGroup } from './components/RadioGroup';
+import { type SelectElement, createSelect } from './components/Select';
+import { type SliderElement, createSlider } from './components/Slider';
+import { type SwitchElement, type SwitchVariant, createSwitch } from './components/Switch';
+import { type ToggleCallback, type ToggleElement, createToggle } from './components/Toggle';
+import './core.css';
 
 interface Position {
     x: number;
@@ -20,7 +20,7 @@ interface DragOffset {
     y: number;
 }
 
-export type FrostTheme = "dark" | "midnight" | "nord" | string;
+export type FrostTheme = 'dark' | 'midnight' | 'nord' | string;
 
 class FrostUI {
     private id: string;
@@ -33,7 +33,12 @@ class FrostUI {
     private dragOffset: DragOffset;
     private container!: HTMLDivElement;
 
-    constructor(id: string, title: string, position: Position = { x: 100, y: 100 }, toggleKey: string = "ShiftRight") {
+    constructor(
+        id: string,
+        title: string,
+        position: Position = { x: 100, y: 100 },
+        toggleKey = 'ShiftRight'
+    ) {
         this.id = id;
         this.title = title;
         this.position = position;
@@ -47,7 +52,7 @@ class FrostUI {
         this.setupEventListeners();
 
         document.addEventListener(
-            "keydown",
+            'keydown',
             (e: KeyboardEvent) => {
                 if (e.code === this.toggleKey && !e.repeat) {
                     e.preventDefault();
@@ -60,16 +65,16 @@ class FrostUI {
     }
 
     private createMainContainer(): void {
-        this.container = document.createElement("div");
-        this.container.className = "frost-menu";
-        this.container.style.display = "none";
+        this.container = document.createElement('div');
+        this.container.className = 'frost-menu';
+        this.container.style.display = 'none';
 
-        const header: HTMLDivElement = document.createElement("div");
-        header.className = "frost-header";
+        const header: HTMLDivElement = document.createElement('div');
+        header.className = 'frost-header';
         header.textContent = this.title;
 
-        const content: HTMLDivElement = document.createElement("div");
-        content.className = "frost-content";
+        const content: HTMLDivElement = document.createElement('div');
+        content.className = 'frost-content';
 
         this.container.appendChild(header);
         this.container.appendChild(content);
@@ -79,17 +84,17 @@ class FrostUI {
     }
 
     private setupEventListeners(): void {
-        const header: HTMLDivElement | null = this.container.querySelector(".frost-header");
+        const header: HTMLDivElement | null = this.container.querySelector('.frost-header');
         if (!header) return;
 
-        header.addEventListener("mousedown", ((e: Event) => {
+        header.addEventListener('mousedown', ((e: Event) => {
             const mouseEvent = e as MouseEvent;
             this.isDragging = true;
             this.dragOffset.x = mouseEvent.clientX - this.position.x;
             this.dragOffset.y = mouseEvent.clientY - this.position.y;
         }) as EventListener);
 
-        document.addEventListener("mousemove", (e: MouseEvent) => {
+        document.addEventListener('mousemove', (e: MouseEvent) => {
             if (this.isDragging) {
                 this.position.x = e.clientX - this.dragOffset.x;
                 this.position.y = e.clientY - this.dragOffset.y;
@@ -97,7 +102,7 @@ class FrostUI {
             }
         });
 
-        document.addEventListener("mouseup", () => {
+        document.addEventListener('mouseup', () => {
             this.isDragging = false;
         });
     }
@@ -109,14 +114,14 @@ class FrostUI {
     private toggle(): void {
         this.isOpen = !this.isOpen;
         if (this.isOpen) {
-            this.container.style.display = "block";
-            this.container.classList.remove("hide");
-            this.container.classList.add("show");
+            this.container.style.display = 'block';
+            this.container.classList.remove('hide');
+            this.container.classList.add('show');
         } else {
-            this.container.classList.remove("show");
-            this.container.classList.add("hide");
+            this.container.classList.remove('show');
+            this.container.classList.add('hide');
             setTimeout(() => {
-                this.container.style.display = "none";
+                this.container.style.display = 'none';
             }, 200);
         }
     }
@@ -129,7 +134,7 @@ class FrostUI {
     public addCategory(name: string): this {
         if (!this.categories.has(name)) {
             const category: CategoryData = createCategory(name);
-            const content: HTMLElement | null = this.container.querySelector(".frost-content");
+            const content: HTMLElement | null = this.container.querySelector('.frost-content');
             if (content) {
                 content.appendChild(category.element);
                 this.categories.set(name, category);
@@ -138,12 +143,18 @@ class FrostUI {
         return this;
     }
 
-    public addToggle(category: string, name: string, callback?: ToggleCallback, keybind?: string): this {
+    public addToggle(
+        category: string,
+        name: string,
+        callback?: ToggleCallback,
+        keybind?: string
+    ): this {
         const categoryData: CategoryData | undefined = this.categories.get(category);
         if (!categoryData) return this;
 
         const toggle: ToggleElement = createToggle(name, this.id, category, callback, keybind);
-        const content: HTMLDivElement | null = categoryData.element.querySelector(".frost-category-content");
+        const content: HTMLDivElement | null =
+            categoryData.element.querySelector('.frost-category-content');
         if (content) {
             content.appendChild(toggle);
             categoryData.items.set(name, toggle);
@@ -164,7 +175,8 @@ class FrostUI {
         if (!categoryData) return this;
 
         const slider: SliderElement = createSlider(name, min, max, defaultValue, callback);
-        const content: HTMLDivElement | null = categoryData.element.querySelector(".frost-category-content");
+        const content: HTMLDivElement | null =
+            categoryData.element.querySelector('.frost-category-content');
         if (content) {
             content.appendChild(slider);
             categoryData.items.set(name, slider);
@@ -183,8 +195,14 @@ class FrostUI {
         const categoryData: CategoryData | undefined = this.categories.get(category);
         if (!categoryData) return this;
 
-        const radioGroup: RadioGroupElement = createRadioGroup(name, options, defaultValue, callback);
-        const content: HTMLDivElement | null = categoryData.element.querySelector(".frost-category-content");
+        const radioGroup: RadioGroupElement = createRadioGroup(
+            name,
+            options,
+            defaultValue,
+            callback
+        );
+        const content: HTMLDivElement | null =
+            categoryData.element.querySelector('.frost-category-content');
         if (content) {
             content.appendChild(radioGroup);
             categoryData.items.set(name, radioGroup);
@@ -204,7 +222,8 @@ class FrostUI {
         if (!categoryData) return this;
 
         const select: SelectElement = createSelect(name, options, defaultValue, callback);
-        const content: HTMLDivElement | null = categoryData.element.querySelector(".frost-category-content");
+        const content: HTMLDivElement | null =
+            categoryData.element.querySelector('.frost-category-content');
         if (content) {
             content.appendChild(select);
             categoryData.items.set(name, select);
@@ -223,7 +242,8 @@ class FrostUI {
         if (!categoryData) return this;
 
         const colorInput: ColorInputElement = createColorInput(name, defaultValue, callback);
-        const content: HTMLDivElement | null = categoryData.element.querySelector(".frost-category-content");
+        const content: HTMLDivElement | null =
+            categoryData.element.querySelector('.frost-category-content');
         if (content) {
             content.appendChild(colorInput);
             categoryData.items.set(name, colorInput);
@@ -242,8 +262,14 @@ class FrostUI {
         const categoryData: CategoryData | undefined = this.categories.get(category);
         if (!categoryData) return this;
 
-        const multiSelect: MultiSelectElement = createMultiSelect(name, options, defaultValues, callback);
-        const content: HTMLDivElement | null = categoryData.element.querySelector(".frost-category-content");
+        const multiSelect: MultiSelectElement = createMultiSelect(
+            name,
+            options,
+            defaultValues,
+            callback
+        );
+        const content: HTMLDivElement | null =
+            categoryData.element.querySelector('.frost-category-content');
         if (content) {
             content.appendChild(multiSelect);
             categoryData.items.set(name, multiSelect);
@@ -262,8 +288,14 @@ class FrostUI {
         const categoryData: CategoryData | undefined = this.categories.get(category);
         if (!categoryData) return this;
 
-        const pageSelector: PageSelectorElement = createPageSelector(name, pages, defaultPage, callback);
-        const content: HTMLDivElement | null = categoryData.element.querySelector(".frost-category-content");
+        const pageSelector: PageSelectorElement = createPageSelector(
+            name,
+            pages,
+            defaultPage,
+            callback
+        );
+        const content: HTMLDivElement | null =
+            categoryData.element.querySelector('.frost-category-content');
         if (content) {
             content.appendChild(pageSelector);
             categoryData.items.set(name, pageSelector);
@@ -272,12 +304,18 @@ class FrostUI {
         return this;
     }
 
-    public addButton(category: string, name: string, callback?: () => void, variant: ButtonVariant = "default"): this {
+    public addButton(
+        category: string,
+        name: string,
+        callback?: () => void,
+        variant: ButtonVariant = 'default'
+    ): this {
         const categoryData: CategoryData | undefined = this.categories.get(category);
         if (!categoryData) return this;
 
         const button: ButtonElement = createButton(name, callback, variant);
-        const content: HTMLDivElement | null = categoryData.element.querySelector(".frost-category-content");
+        const content: HTMLDivElement | null =
+            categoryData.element.querySelector('.frost-category-content');
         if (content) {
             content.appendChild(button);
             categoryData.items.set(name, button);
@@ -289,15 +327,16 @@ class FrostUI {
     public addSwitch(
         category: string,
         name: string,
-        defaultValue: boolean = false,
+        defaultValue = false,
         callback?: (enabled: boolean) => void,
-        variant: SwitchVariant = "default"
+        variant: SwitchVariant = 'default'
     ): this {
         const categoryData: CategoryData | undefined = this.categories.get(category);
         if (!categoryData) return this;
 
         const switchElement: SwitchElement = createSwitch(name, defaultValue, callback, variant);
-        const content: HTMLDivElement | null = categoryData.element.querySelector(".frost-category-content");
+        const content: HTMLDivElement | null =
+            categoryData.element.querySelector('.frost-category-content');
         if (content) {
             content.appendChild(switchElement);
             categoryData.items.set(name, switchElement);
@@ -314,11 +353,13 @@ class FrostUI {
         if (!this.container) return this;
 
         const themeClasses = Array.from(this.container.classList).filter((className) =>
-            className.startsWith("frost-theme-")
+            className.startsWith('frost-theme-')
         );
-        themeClasses.forEach((className) => this.container.classList.remove(className));
+        for (const className of themeClasses) {
+            this.container.classList.remove(className);
+        }
 
-        if (theme !== "dark") {
+        if (theme !== 'dark') {
             this.container.classList.add(`frost-theme-${theme}`);
         }
 
@@ -326,14 +367,14 @@ class FrostUI {
     }
 
     public getTheme(): FrostTheme {
-        if (!this.container) return "dark";
+        if (!this.container) return 'dark';
 
         const themeClass = Array.from(this.container.classList).find((className) =>
-            className.startsWith("frost-theme-")
+            className.startsWith('frost-theme-')
         );
 
-        if (!themeClass) return "dark";
-        return themeClass.replace("frost-theme-", "") as FrostTheme;
+        if (!themeClass) return 'dark';
+        return themeClass.replace('frost-theme-', '') as FrostTheme;
     }
 }
 export default FrostUI;

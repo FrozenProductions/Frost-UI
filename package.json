@@ -1,27 +1,37 @@
 {
-  "name": "frost-ui",
-  "version": "1.0.0",
-  "author": "FrozenProductions",
-  "description": "Frost-UI is a lightweight, customizable menu library for creating interactive user interfaces in userscripts. It provides a clean, modern design with support for various input types and keybinds.",
-  "homepage": "https://github.com/FrozenProductions/Frost-UI",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/FrozenProductions/Frost-UI.git"
-  },
-  "main": "dist/Library.js",
-  "scripts": {
-    "build": "webpack",
-    "build:prod": "webpack --mode production --output-path scripts/",
-    "watch": "webpack --watch",
-    "type-check": "tsc --noEmit"
-  },
-  "devDependencies": {
-    "@types/node": "^18.0.0",
-    "css-loader": "^7.1.2",
-    "style-loader": "^4.0.0",
-    "ts-loader": "^9.4.0",
-    "typescript": "^5.0.0",
-    "webpack": "^5.85.0",
-    "webpack-cli": "^5.1.1"
-  }
+    "name": "frost-ui",
+    "version": "1.0.0",
+    "author": "FrozenProductions",
+    "description": "Frost-UI is a lightweight, customizable menu library for creating interactive user interfaces in userscripts. It provides a clean, modern design with support for various input types and keybinds.",
+    "homepage": "https://github.com/FrozenProductions/Frost-UI",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/FrozenProductions/Frost-UI.git"
+    },
+    "main": "dist/Library.js",
+    "scripts": {
+        "build": "webpack",
+        "build:prod": "webpack --mode production --output-path scripts/",
+        "watch": "webpack --watch",
+        "type-check": "tsc --noEmit",
+        "format": "biome format --write .",
+        "lint": "biome lint .",
+        "check": "biome check --apply .",
+        "check:ci": "biome ci ."
+    },
+    "lint-staged": {
+        "*.{js,jsx,ts,tsx}": "biome format --write"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "1.9.4",
+        "@types/node": "^18.0.0",
+        "css-loader": "^7.1.2",
+        "husky": "^8.0.0",
+        "style-loader": "^4.0.0",
+        "ts-loader": "^9.4.0",
+        "typescript": "^5.0.0",
+        "webpack": "^5.85.0",
+        "webpack-cli": "^5.1.1",
+        "lint-staged": "^15.0.0"
+    }
 }

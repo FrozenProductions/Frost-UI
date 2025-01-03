@@ -37,7 +37,6 @@
 .frost-page-arrow {
     color: var(--frost-text-primary);
     cursor: pointer;
-    font-family: none !important;
     justify-content: center;
     align-items: center;
     transition: all 0.2s ease;

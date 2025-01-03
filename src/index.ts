@@ -1,11 +1,11 @@
-import FrostUI from "./Menu";
-import { frostManager } from "./MenuManager";
-import { createCategory } from "./components/Category";
-import { createToggle } from "./components/Toggle";
-import { createSlider } from "./components/Slider";
-import { createKeybindInput } from "./components/KeybindInput";
-import { createMultiSelect } from "./components/MultiSelect";
-import { createPageSelector } from "./components/PageSelector";
+import FrostUI from './Menu';
+import { frostManager } from './MenuManager';
+import { createCategory } from './components/Category';
+import { createKeybindInput } from './components/KeybindInput';
+import { createMultiSelect } from './components/MultiSelect';
+import { createPageSelector } from './components/PageSelector';
+import { createSlider } from './components/Slider';
+import { createToggle } from './components/Toggle';
 
 declare global {
     interface Window {

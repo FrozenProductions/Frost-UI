@@ -15,9 +15,7 @@
  *  NOTE: THIS IS JUST A SIMPLE EXAMPLE
  *━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━*/
 
-(function () {
-    'use strict';
-
+(() => {
     /*━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
      *  Configuration Setup
      *━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━*/
@@ -30,11 +28,11 @@
             noJump: false,
             autoClicker: {
                 enabled: false,
-                cps: 12
+                cps: 12,
             },
             targetMode: 'Single',
             priority: 'Distance',
-            targetTypes: ['Players']
+            targetTypes: ['Players'],
         },
         movement: {
             speed: false,
@@ -44,7 +42,7 @@
             sprint: false,
             step: false,
             stepHeight: 1,
-            stepMode: 'Normal'
+            stepMode: 'Normal',
         },
         render: {
             esp: false,
@@ -55,7 +53,7 @@
             opacity: 100,
             noWeather: false,
             clearSky: false,
-            espColor: '#7289DA'
+            espColor: '#7289DA',
         },
         world: {
             timer: false,
@@ -64,8 +62,8 @@
             autoMine: false,
             autoFarm: false,
             xray: false,
-            caveFinder: false
-        }
+            caveFinder: false,
+        },
     });
 
     const saveConfig = () => GM_setValue('menuConfig', config);
@@ -74,13 +72,33 @@
      *  Menu Initialization
      *━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━*/
 
-    const combatMenu = window.frostManager.addMenu('combat', 'Combat Menu', { x: 100, y: 100 }, 'ShiftRight');
-    const movementMenu = window.frostManager.addMenu('movement', 'Movement Menu', { x: 420, y: 100 }, 'ShiftRight');
-    const renderMenu = window.frostManager.addMenu('render', 'Render Menu', { x: 740, y: 100 }, 'ShiftRight');
-    const worldMenu = window.frostManager.addMenu('world', 'World Menu', { x: 740, y: 400 }, 'ShiftRight');
+    const combatMenu = window.frostManager.addMenu(
+        'combat',
+        'Combat Menu',
+        { x: 100, y: 100 },
+        'ShiftRight'
+    );
+    const movementMenu = window.frostManager.addMenu(
+        'movement',
+        'Movement Menu',
+        { x: 420, y: 100 },
+        'ShiftRight'
+    );
+    const renderMenu = window.frostManager.addMenu(
+        'render',
+        'Render Menu',
+        { x: 740, y: 100 },
+        'ShiftRight'
+    );
+    const worldMenu = window.frostManager.addMenu(
+        'world',
+        'World Menu',
+        { x: 740, y: 400 },
+        'ShiftRight'
+    );
 
-    combatMenu.setTheme("midnight");
-    movementMenu.setTheme("nord");
+    combatMenu.setTheme('midnight');
+    movementMenu.setTheme('nord');
 
     /*━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
      *  Combat Menu Setup
@@ -88,22 +106,38 @@
 
     combatMenu
         .addCategory('Combat')
-        .addToggle('Combat', 'KillAura', (enabled, key) => {
-            config.combat.killAura = enabled;
-            saveConfig();
-        }, 'KeyK')
+        .addToggle(
+            'Combat',
+            'KillAura',
+            (enabled, key) => {
+                config.combat.killAura = enabled;
+                saveConfig();
+            },
+            'KeyK'
+        )
         .addSlider('Combat', 'Reach', 3, 6, config.combat.reach, (value) => {
             config.combat.reach = value;
             saveConfig();
         })
-        .addToggle('Combat', 'Criticals', (enabled) => {
-            config.combat.criticals = enabled;
-            saveConfig();
-        }, 'KeyJ')
-        .addSwitch('Combat', 'NoJump', config.combat.noJump, (enabled) => {
-            config.combat.noJump = enabled;
-            saveConfig();
-        }, 'slim')
+        .addToggle(
+            'Combat',
+            'Criticals',
+            (enabled) => {
+                config.combat.criticals = enabled;
+                saveConfig();
+            },
+            'KeyJ'
+        )
+        .addSwitch(
+            'Combat',
+            'NoJump',
+            config.combat.noJump,
+            (enabled) => {
+                config.combat.noJump = enabled;
+                saveConfig();
+            },
+            'slim'
+        )
         .addCategory('AutoClicker')
         .addToggle('AutoClicker', 'Enabled', (enabled) => {
             config.combat.autoClicker.enabled = enabled;
@@ -114,28 +148,36 @@
             saveConfig();
         })
         .addCategory('Target')
-        .addRadioGroup('Target', 'Target Mode', [
-            'Single',
-            'Multiple',
-            'Switch'
-        ], config.combat.targetMode, (value) => {
-            config.combat.targetMode = value;
-            saveConfig();
-        })
-        .addSelect('Target', 'Priority', ['Distance', 'Health', 'Angle'], config.combat.priority, (value) => {
-            config.combat.priority = value;
-            saveConfig();
-        })
-        .addMultiSelect('Target', 'Target Types', [
-            'Players',
-            'Animals',
-            'Monsters',
-            'Villagers',
-            'Invisibles'
-        ], config.combat.targetTypes, (selected) => {
-            config.combat.targetTypes = selected;
-            saveConfig();
-        });
+        .addRadioGroup(
+            'Target',
+            'Target Mode',
+            ['Single', 'Multiple', 'Switch'],
+            config.combat.targetMode,
+            (value) => {
+                config.combat.targetMode = value;
+                saveConfig();
+            }
+        )
+        .addSelect(
+            'Target',
+            'Priority',
+            ['Distance', 'Health', 'Angle'],
+            config.combat.priority,
+            (value) => {
+                config.combat.priority = value;
+                saveConfig();
+            }
+        )
+        .addMultiSelect(
+            'Target',
+            'Target Types',
+            ['Players', 'Animals', 'Monsters', 'Villagers', 'Invisibles'],
+            config.combat.targetTypes,
+            (selected) => {
+                config.combat.targetTypes = selected;
+                saveConfig();
+            }
+        );
 
     /*━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
      *  Movement Menu Setup
@@ -159,10 +201,16 @@
             config.movement.noFall = enabled;
             saveConfig();
         })
-        .addSwitch('Movement', 'Sprint', config.movement.sprint, (enabled) => {
-            config.movement.sprint = enabled;
-            saveConfig();
-        }, 'pill')
+        .addSwitch(
+            'Movement',
+            'Sprint',
+            config.movement.sprint,
+            (enabled) => {
+                config.movement.sprint = enabled;
+                saveConfig();
+            },
+            'pill'
+        )
         .addCategory('Step')
         .addToggle('Step', 'Enabled', (enabled) => {
             config.movement.step = enabled;
@@ -172,10 +220,16 @@
             config.movement.stepHeight = value;
             saveConfig();
         })
-        .addPageSelector('Step', 'Step Mode', ['Normal', 'Jump', 'Spider', 'Matrix'], 0, (value) => {
-            config.movement.stepMode = value;
-            saveConfig();
-        });
+        .addPageSelector(
+            'Step',
+            'Step Mode',
+            ['Normal', 'Jump', 'Spider', 'Matrix'],
+            0,
+            (value) => {
+                config.movement.stepMode = value;
+                saveConfig();
+            }
+        );
 
     /*━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
      *  Render Menu Setup
@@ -258,58 +312,68 @@
             config.world.caveFinder = enabled;
             saveConfig();
         })
-        .addButton('World', 'Example', () => {
-            window.frostManager.showToast({
-                message: "Success",
-                type: "success",
-                duration: 0
-            });
-            window.frostManager.showToast({
-                message: "Error",
-                type: "error",
-                duration: 0
-            });
-            window.frostManager.showToast({
-                message: "Warning",
-                type: "warning",
-                duration: 0
-            });
-            window.frostManager.showToast({
-                message: "Info",
-                type: "info",
-                duration: 0
-            });
-            window.frostManager.showToast({
-                message: "Undefined",
-                type: "undefined",
-                duration: 0
-            });
-        }, 'primary')
-        .addButton('World', 'Example', () => {
-            window.frostManager.showToast({
-                message: "Success",
-                type: "success",
-                duration: 0
-            });
-            window.frostManager.showToast({
-                message: "Error",
-                type: "error",
-                duration: 0
-            });
-            window.frostManager.showToast({
-                message: "Warning",
-                type: "warning",
-                duration: 0
-            });
-            window.frostManager.showToast({
-                message: "Info",
-                type: "info",
-                duration: 0
-            });
-            window.frostManager.showToast({
-                message: "Undefined",
-                type: "undefined",
-                duration: 0
-            });
-        }, 'destructive');
+        .addButton(
+            'World',
+            'Example',
+            () => {
+                window.frostManager.showToast({
+                    message: 'Success',
+                    type: 'success',
+                    duration: 0,
+                });
+                window.frostManager.showToast({
+                    message: 'Error',
+                    type: 'error',
+                    duration: 0,
+                });
+                window.frostManager.showToast({
+                    message: 'Warning',
+                    type: 'warning',
+                    duration: 0,
+                });
+                window.frostManager.showToast({
+                    message: 'Info',
+                    type: 'info',
+                    duration: 0,
+                });
+                window.frostManager.showToast({
+                    message: 'Undefined',
+                    type: 'undefined',
+                    duration: 0,
+                });
+            },
+            'primary'
+        )
+        .addButton(
+            'World',
+            'Example',
+            () => {
+                window.frostManager.showToast({
+                    message: 'Success',
+                    type: 'success',
+                    duration: 0,
+                });
+                window.frostManager.showToast({
+                    message: 'Error',
+                    type: 'error',
+                    duration: 0,
+                });
+                window.frostManager.showToast({
+                    message: 'Warning',
+                    type: 'warning',
+                    duration: 0,
+                });
+                window.frostManager.showToast({
+                    message: 'Info',
+                    type: 'info',
+                    duration: 0,
+                });
+                window.frostManager.showToast({
+                    message: 'Undefined',
+                    type: 'undefined',
+                    duration: 0,
+                });
+            },
+            'destructive'
+        );
 })();
