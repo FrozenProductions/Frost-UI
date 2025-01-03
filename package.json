@@ -10,6 +10,7 @@
     },
     "main": "dist/Library.js",
     "scripts": {
+        "prepare": "husky install",
         "build": "webpack",
         "build:prod": "webpack --mode production --output-path scripts/",
         "watch": "webpack --watch",
