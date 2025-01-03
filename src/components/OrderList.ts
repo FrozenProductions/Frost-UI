@@ -1,4 +1,4 @@
-import icons from '../icons/index';
+import icons from "../icons/index";
 
 interface OrderListElement extends HTMLDivElement {
     getValue: () => string[];
@@ -7,20 +7,16 @@ interface OrderListElement extends HTMLDivElement {
 
 type OrderListCallback = (items: string[]) => void;
 
-function createOrderList(
-    name: string,
-    items: string[] = [],
-    callback?: OrderListCallback
-): OrderListElement {
-    const container = document.createElement('div') as OrderListElement;
-    container.className = 'frost-order-list';
+function createOrderList(name: string, items: string[] = [], callback?: OrderListCallback): OrderListElement {
+    const container = document.createElement("div") as OrderListElement;
+    container.className = "frost-order-list";
 
-    const label: HTMLDivElement = document.createElement('div');
-    label.className = 'frost-order-label';
+    const label: HTMLDivElement = document.createElement("div");
+    label.className = "frost-order-label";
     label.textContent = name;
 
-    const listContainer: HTMLDivElement = document.createElement('div');
-    listContainer.className = 'frost-order-items';
+    const listContainer: HTMLDivElement = document.createElement("div");
+    listContainer.className = "frost-order-items";
 
     let currentItems: string[] = [...items];
     let draggedItem: HTMLDivElement | null = null;
@@ -34,8 +30,8 @@ function createOrderList(
         const gap: number = 8;
         const distance: number = height + gap;
 
-        item1.style.transition = 'transform 0.2s ease-in-out';
-        item2.style.transition = 'transform 0.2s ease-in-out';
+        item1.style.transition = "transform 0.2s ease-in-out";
+        item2.style.transition = "transform 0.2s ease-in-out";
 
         item1.style.transform = moveUp ? `translateY(-${distance}px)` : `translateY(${distance}px)`;
         item2.style.transform = moveUp ? `translateY(${distance}px)` : `translateY(-${distance}px)`;
@@ -48,26 +44,25 @@ function createOrderList(
     };
 
     const createItem = (text: string, index: number): HTMLDivElement => {
-        const item: HTMLDivElement = document.createElement('div');
-        item.className = 'frost-order-item';
+        const item: HTMLDivElement = document.createElement("div");
+        item.className = "frost-order-item";
 
-        const handle: HTMLDivElement = document.createElement('div');
-        handle.className = 'frost-order-handle';
-        handle.innerHTML = '⋮⋮';
+        const handle: HTMLDivElement = document.createElement("div");
+        handle.className = "frost-order-handle";
+        handle.innerHTML = icons.order_list;
 
-        const content: HTMLSpanElement = document.createElement('span');
+        const content: HTMLSpanElement = document.createElement("span");
+        content.className = "frost-order-content";
         content.textContent = text;
 
-        const moveUpBtn: HTMLButtonElement = document.createElement('button');
-        moveUpBtn.className = 'frost-order-move-up';
+        const moveUpBtn: HTMLButtonElement = document.createElement("button");
+        moveUpBtn.className = "frost-order-move-up";
         moveUpBtn.innerHTML = icons.up_arrow;
         moveUpBtn.onclick = async (e: MouseEvent) => {
             e.stopPropagation();
             if (index > 0 && !isAnimating) {
                 isAnimating = true;
-                const items = [
-                    ...listContainer.querySelectorAll('.frost-order-item'),
-                ] as HTMLElement[];
+                const items = [...listContainer.querySelectorAll(".frost-order-item")] as HTMLElement[];
                 const currentItem: HTMLElement = items[index];
                 const prevItem: HTMLElement = items[index - 1];
 
@@ -82,16 +77,14 @@ function createOrderList(
             }
         };
 
-        const moveDownBtn = document.createElement('button');
-        moveDownBtn.className = 'frost-order-move-down';
+        const moveDownBtn = document.createElement("button");
+        moveDownBtn.className = "frost-order-move-down";
         moveDownBtn.innerHTML = icons.down_arrow;
         moveDownBtn.onclick = async (e: MouseEvent) => {
             e.stopPropagation();
             if (index < currentItems.length - 1 && !isAnimating) {
                 isAnimating = true;
-                const items = [
-                    ...listContainer.querySelectorAll('.frost-order-item'),
-                ] as HTMLElement[];
+                const items = [...listContainer.querySelectorAll(".frost-order-item")] as HTMLElement[];
                 const currentItem: HTMLElement = items[index];
                 const nextItem: HTMLElement = items[index + 1];
 
@@ -106,8 +99,8 @@ function createOrderList(
             }
         };
 
-        const controls: HTMLDivElement = document.createElement('div');
-        controls.className = 'frost-order-controls';
+        const controls: HTMLDivElement = document.createElement("div");
+        controls.className = "frost-order-controls";
         controls.appendChild(moveUpBtn);
         controls.appendChild(moveDownBtn);
 
@@ -115,7 +108,7 @@ function createOrderList(
         item.appendChild(content);
         item.appendChild(controls);
 
-        handle.addEventListener('mousedown', (e: MouseEvent) => {
+        handle.addEventListener("mousedown", (e: MouseEvent) => {
             if (isAnimating) return;
             e.preventDefault();
             draggedItem = item;
@@ -123,13 +116,13 @@ function createOrderList(
             itemHeight = item.offsetHeight;
             initialIndex = index;
 
-            item.classList.add('dragging');
+            item.classList.add("dragging");
 
-            const items = [...listContainer.querySelectorAll('.frost-order-item')] as HTMLElement[];
+            const items = [...listContainer.querySelectorAll(".frost-order-item")] as HTMLElement[];
             for (const [idx, itm] of items.entries()) {
-                itm.style.transition = 'transform 0.15s ease-in-out';
-                itm.style.transform = 'translateY(0)';
-                itm.setAttribute('data-index', idx.toString());
+                itm.style.transition = "transform 0.15s ease-in-out";
+                itm.style.transform = "translateY(0)";
+                itm.setAttribute("data-index", idx.toString());
             }
         });
 
@@ -137,40 +130,34 @@ function createOrderList(
     };
 
     const updateList = () => {
-        listContainer.innerHTML = '';
+        listContainer.innerHTML = "";
         currentItems.forEach((item, index) => {
             listContainer.appendChild(createItem(item, index));
         });
         if (callback) callback(currentItems);
     };
 
-    document.addEventListener('mousemove', (e: MouseEvent) => {
+    document.addEventListener("mousemove", (e: MouseEvent) => {
         if (!draggedItem || !itemHeight) return;
 
         const deltaY: number = e.clientY - dragStartY;
-        const items: HTMLElement[] = [
-            ...listContainer.querySelectorAll('.frost-order-item'),
-        ] as HTMLElement[];
+        const items: HTMLElement[] = [...listContainer.querySelectorAll(".frost-order-item")] as HTMLElement[];
         const currentIndex: number = initialIndex + Math.round(deltaY / itemHeight);
 
         draggedItem.style.transform = `translateY(${deltaY}px)`;
-        draggedItem.style.transition = 'none';
+        draggedItem.style.transition = "none";
 
         for (const item of items) {
             if (item === draggedItem) continue;
 
-            const itemIndex: number = Number.parseInt(item.getAttribute('data-index') || '0');
+            const itemIndex: number = Number.parseInt(item.getAttribute("data-index") || "0");
             const shift: number = getShiftAmount(itemIndex, initialIndex, currentIndex);
 
             item.style.transform = `translateY(${shift * itemHeight}px)`;
         }
     });
 
-    const getShiftAmount = (
-        itemIndex: number,
-        startIndex: number,
-        currentIndex: number
-    ): number => {
+    const getShiftAmount = (itemIndex: number, startIndex: number, currentIndex: number): number => {
         if (currentIndex >= startIndex) {
             if (itemIndex > startIndex && itemIndex <= currentIndex) return -1;
         } else {
@@ -179,18 +166,13 @@ function createOrderList(
         return 0;
     };
 
-    document.addEventListener('mouseup', () => {
+    document.addEventListener("mouseup", () => {
         if (!draggedItem) return;
 
-        const items = [...listContainer.querySelectorAll('.frost-order-item')] as HTMLElement[];
+        const items = [...listContainer.querySelectorAll(".frost-order-item")] as HTMLElement[];
         const deltaY: number =
-            Number.parseFloat(
-                draggedItem.style.transform.replace('translateY(', '').replace('px)', '')
-            ) || 0;
-        const newIndex = Math.min(
-            Math.max(0, initialIndex + Math.round(deltaY / itemHeight)),
-            items.length - 1
-        );
+            Number.parseFloat(draggedItem.style.transform.replace("translateY(", "").replace("px)", "")) || 0;
+        const newIndex = Math.min(Math.max(0, initialIndex + Math.round(deltaY / itemHeight)), items.length - 1);
 
         if (newIndex !== initialIndex) {
             const [item] = currentItems.splice(initialIndex, 1);
@@ -198,12 +180,12 @@ function createOrderList(
             updateList();
         } else {
             for (const item of items) {
-                item.style.transform = 'translateY(0)';
-                item.style.transition = 'transform 0.15s ease-in-out';
+                item.style.transform = "translateY(0)";
+                item.style.transition = "transform 0.15s ease-in-out";
             }
         }
 
-        draggedItem.classList.remove('dragging');
+        draggedItem.classList.remove("dragging");
         draggedItem = null;
         itemHeight = 0;
         initialIndex = -1;

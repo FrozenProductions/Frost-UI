@@ -14,6 +14,8 @@ const icons = {
     down_arrow: `<svg xmlns="http://www.w3.org/2000/svg" height="12" width="12" viewBox="0 0 12 12"><title>chevron down</title><g fill="#ffffff" class="nc-icon-wrapper"><polyline points="1.75 4.25 6 8.5 10.25 4.25" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></polyline></g></svg>`,
 
     up_arrow: `<svg xmlns="http://www.w3.org/2000/svg" height="12" width="12" viewBox="0 0 12 12"><title>chevron up</title><g fill="#ffffff" class="nc-icon-wrapper"><polyline points="10.25 7.75 6 3.5 1.75 7.75" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></polyline></g></svg>`,
+
+    order_list: `<svg xmlns="http://www.w3.org/2000/svg" height="12" width="12" viewBox="0 0 12 12" preserveAspectRatio="xMidYMid meet"><title>menu</title><g fill="#ffffff" class="nc-icon-wrapper" transform="translate(0,1.5)"><path fill="#ffffff" stroke-width="0" data-color="color-2" d="M0.5 4.5h11v1h-11z"></path><path stroke-width="0" fill="#ffffff" d="M0.5 1h11v1h-11z"></path><path stroke-width="0" fill="#ffffff" d="M0.5 8h11v1h-11z"></path></g></svg>`,
 };
 
 export default icons;
