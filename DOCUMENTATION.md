@@ -185,6 +185,10 @@ Frost-UI comes with a built-in theme system and several preset themes:
 -   Dark (default)
 -   Midnight
 -   Nord
+-   Cyber
+-   Deep
+-   Obsidian
+-   Dusk
 
 ```javascript
 const menuElement = document.querySelector(".frost-menu");
