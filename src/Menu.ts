@@ -20,6 +20,8 @@ interface DragOffset {
     y: number;
 }
 
+export type FrostTheme = "dark" | "midnight" | "nord" | string;
+
 class FrostUI {
     private id: string;
     private title: string;
@@ -307,6 +309,31 @@ class FrostUI {
     public getCategories(): Map<string, CategoryData> {
         return this.categories;
     }
-}
 
+    public setTheme(theme: FrostTheme): this {
+        if (!this.container) return this;
+
+        const themeClasses = Array.from(this.container.classList).filter((className) =>
+            className.startsWith("frost-theme-")
+        );
+        themeClasses.forEach((className) => this.container.classList.remove(className));
+
+        if (theme !== "dark") {
+            this.container.classList.add(`frost-theme-${theme}`);
+        }
+
+        return this;
+    }
+
+    public getTheme(): FrostTheme {
+        if (!this.container) return "dark";
+
+        const themeClass = Array.from(this.container.classList).find((className) =>
+            className.startsWith("frost-theme-")
+        );
+
+        if (!themeClass) return "dark";
+        return themeClass.replace("frost-theme-", "") as FrostTheme;
+    }
+}
 export default FrostUI;

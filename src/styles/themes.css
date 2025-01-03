@@ -1,0 +1,51 @@
+:root {
+    --frost-bg-primary: rgba(25, 25, 35, 0.95);
+    --frost-bg-secondary: rgba(30, 30, 40, 0.6);
+    --frost-bg-tertiary: rgba(40, 40, 50, 0.4);
+    --frost-border-color: rgba(255, 255, 255, 0.1);
+    --frost-text-primary: rgba(255, 255, 255, 0.9);
+    --frost-text-secondary: rgba(255, 255, 255, 0.7);
+    --frost-accent-color: #7289da;
+    --frost-accent-hover: #5b6eaf;
+    --frost-shadow-color: rgba(0, 0, 0, 0.2);
+    --frost-ripple-color: rgba(255, 255, 255, 0.7);
+}
+
+.frost-theme-dark {
+    --frost-bg-primary: rgba(25, 25, 35, 0.95);
+    --frost-bg-secondary: rgba(30, 30, 40, 0.6);
+    --frost-bg-tertiary: rgba(40, 40, 50, 0.4);
+    --frost-border-color: rgba(255, 255, 255, 0.1);
+    --frost-text-primary: rgba(255, 255, 255, 0.9);
+    --frost-text-secondary: rgba(255, 255, 255, 0.7);
+    --frost-accent-color: #7289da;
+    --frost-accent-hover: #5b6eaf;
+    --frost-shadow-color: rgba(0, 0, 0, 0.2);
+    --frost-ripple-color: rgba(255, 255, 255, 0.7);
+}
+
+.frost-theme-midnight {
+    --frost-bg-primary: rgba(20, 20, 30, 0.95);
+    --frost-bg-secondary: rgba(25, 25, 35, 0.6);
+    --frost-bg-tertiary: rgba(30, 30, 40, 0.4);
+    --frost-border-color: rgba(255, 255, 255, 0.05);
+    --frost-text-primary: rgba(255, 255, 255, 0.9);
+    --frost-text-secondary: rgba(255, 255, 255, 0.7);
+    --frost-accent-color: #9b59b6;
+    --frost-accent-hover: #8e44ad;
+    --frost-shadow-color: rgba(0, 0, 0, 0.3);
+    --frost-ripple-color: rgba(255, 255, 255, 0.7);
+}
+
+.frost-theme-nord {
+    --frost-bg-primary: rgba(46, 52, 64, 0.95);
+    --frost-bg-secondary: rgba(59, 66, 82, 0.6);
+    --frost-bg-tertiary: rgba(67, 76, 94, 0.4);
+    --frost-border-color: rgba(236, 239, 244, 0.1);
+    --frost-text-primary: rgba(236, 239, 244, 0.9);
+    --frost-text-secondary: rgba(229, 233, 240, 0.7);
+    --frost-accent-color: #88c0d0;
+    --frost-accent-hover: #81a1c1;
+    --frost-shadow-color: rgba(0, 0, 0, 0.2);
+    --frost-ripple-color: rgba(236, 239, 244, 0.7);
+} 

@@ -5,21 +5,21 @@
     margin: 4px 0;
     padding: 8px 10px;
     border-radius: 6px;
-    background: rgba(40, 40, 50, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: var(--frost-bg-tertiary);
+    border: 1px solid var(--frost-border-color);
     transition: all 0.2s ease;
 }
 
 .frost-switch-container:hover {
-    background: rgba(45, 45, 55, 0.4);
+    background: var(--frost-bg-secondary);
     transform: translateX(4px);
-    border-color: rgba(114, 137, 218, 0.2);
+    border-color: var(--frost-accent-color);
 }
 
 .frost-switch-label {
     font-size: 12px !important;
     font-weight: 600 !important;
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--frost-text-primary);
     text-transform: uppercase;
     letter-spacing: 0.02em !important;
 }
@@ -28,16 +28,16 @@
     position: relative;
     width: 44px;
     height: 24px;
-    background: rgba(30, 30, 40, 0.6);
+    background: var(--frost-bg-secondary);
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--frost-border-color);
 }
 
 .frost-switch-track.active {
-    background: linear-gradient(135deg, #7289da, #5b6eaf);
-    border-color: rgba(255, 255, 255, 0.2);
+    background: linear-gradient(135deg, var(--frost-accent-color), var(--frost-accent-hover));
+    border-color: var(--frost-accent-color);
 }
 
 .frost-switch-container .frost-switch-thumb {

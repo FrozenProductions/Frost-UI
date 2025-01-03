@@ -1,6 +1,6 @@
 .frost-slider {
-    background: rgba(40, 40, 50, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: var(--frost-bg-tertiary);
+    border: 1px solid var(--frost-border-color);
     border-radius: 6px;
     padding: 8px 10px;
     margin: 4px 0;
@@ -8,15 +8,15 @@
 }
 
 .frost-slider:hover {
-    background: rgba(45, 45, 55, 0.4);
+    background: var(--frost-bg-secondary);
     transform: translateX(4px);
-    border-color: rgba(114, 137, 218, 0.2);
+    border-color: var(--frost-accent-color);
 }
 
 .frost-slider span {
     font-size: 12px !important;
     font-weight: 600 !important;
-    opacity: 0.9;
+    color: var(--frost-text-primary);
     margin-bottom: 8px;
     display: block;
     text-transform: uppercase;
@@ -34,7 +34,13 @@
     -webkit-appearance: none;
     height: 6px;
     flex: 1;
-    background: rgba(60, 60, 80, 0.6);
+    background: linear-gradient(
+        to right,
+        var(--frost-accent-color) 0%,
+        var(--frost-accent-color) var(--slider-value, 50%),
+        var(--frost-bg-secondary) var(--slider-value, 50%),
+        var(--frost-bg-secondary) 100%
+    );
     border-radius: 3px;
     outline: none;
     cursor: pointer;
@@ -44,21 +50,27 @@
     -webkit-appearance: none;
     height: 12px;
     width: 12px;
-    background: #7289da;
+    background: var(--frost-accent-color);
     border-radius: 50%;
     cursor: pointer;
     transition: transform 0.2s ease;
     transform: scale(1);
+    box-shadow: 0 2px 4px var(--frost-shadow-color);
 }
 
 .frost-slider input[type="range"]::-webkit-slider-thumb:hover {
     transform: scale(1.2);
+    background: var(--frost-accent-hover);
+}
+
+.frost-slider input[type="range"]::-webkit-slider-thumb:active {
+    transform: scale(0.95);
 }
 
 .frost-slider-value {
-    background: rgba(30, 30, 40, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #fff;
+    background: var(--frost-bg-secondary);
+    border: 1px solid var(--frost-border-color);
+    color: var(--frost-text-primary);
     padding: 4px 8px;
     border-radius: 4px;
     font-size: 11px !important;
@@ -68,8 +80,8 @@
 }
 
 .frost-slider-value:focus {
-    background: rgba(40, 40, 50, 0.6);
-    border-color: #7289da;
+    background: var(--frost-bg-tertiary);
+    border-color: var(--frost-accent-color);
     outline: none;
 }
 

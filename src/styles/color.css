@@ -5,16 +5,16 @@
     padding: 8px 10px;
     border-radius: 6px;
     transition: all 0.2s ease;
-    background: rgba(40, 40, 50, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: var(--frost-bg-tertiary);
+    border: 1px solid var(--frost-border-color);
     cursor: pointer;
     justify-content: space-between;
 }
 
 .frost-color-input:hover {
-    background: rgba(45, 45, 55, 0.4);
+    background: var(--frost-bg-secondary);
     transform: translateX(4px);
-    border-color: rgba(114, 137, 218, 0.2);
+    border-color: var(--frost-accent-color);
 }
 
 .frost-color-left {
@@ -25,7 +25,7 @@
 .frost-color-left span {
     font-size: 12px !important;
     font-weight: 600 !important;
-    opacity: 0.9;
+    color: var(--frost-text-primary);
     text-transform: uppercase;
     letter-spacing: 0.01em !important;
 }
@@ -34,7 +34,7 @@
     width: 24px;
     height: 24px;
     border-radius: 4px;
-    border: 2px solid rgba(255, 255, 255, 0.1);
+    border: 2px solid var(--frost-border-color);
     transition: all 0.2s ease;
     position: relative;
     overflow: hidden;
@@ -43,7 +43,7 @@
 
 .frost-color-preview:hover {
     transform: scale(1.05);
-    border-color: rgba(255, 255, 255, 0.2);
+    border-color: var(--frost-accent-color);
 }
 
 .frost-color-preview:active {
@@ -67,23 +67,23 @@
 }
 
 .frost-color-format {
-    background: rgba(30, 30, 40, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--frost-bg-secondary);
+    border: 1px solid var(--frost-border-color);
     border-radius: 4px;
     padding: 4px 8px;
     font-size: 11px;
     cursor: pointer;
     transition: all 0.2s ease;
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--frost-text-secondary);
 }
 
 .frost-color-format:hover {
-    background: rgba(40, 40, 50, 0.6);
-    color: rgba(255, 255, 255, 0.9);
+    background: var(--frost-bg-tertiary);
+    color: var(--frost-text-primary);
 }
 
 .frost-color-format.active {
-    background: rgba(114, 137, 218, 0.2);
-    border-color: rgba(114, 137, 218, 0.5);
-    color: rgba(255, 255, 255, 0.9);
+    background: var(--frost-bg-secondary);
+    border-color: var(--frost-accent-color);
+    color: var(--frost-text-primary);
 }

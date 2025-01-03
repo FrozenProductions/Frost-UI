@@ -1,14 +1,14 @@
 .frost-category {
     margin-bottom: 8px;
-    background: rgba(30, 30, 35, 0.3);
+    background: var(--frost-bg-secondary);
     border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--frost-border-color);
     overflow: hidden;
 }
 
 .frost-category-header {
     padding: 8px 12px;
-    background: rgba(50, 50, 60, 0.4);
+    background: var(--frost-bg-tertiary);
     cursor: pointer;
     font-weight: 600 !important;
     font-size: 12px !important;
@@ -18,10 +18,11 @@
     align-items: center;
     text-transform: uppercase !important;
     letter-spacing: 0.02em !important;
+    color: var(--frost-text-primary);
 }
 
 .frost-category-header:hover {
-    background: rgba(60, 60, 70, 0.4);
+    background: var(--frost-bg-secondary);
     padding-left: 20px;
 }
 

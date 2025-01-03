@@ -28,6 +28,14 @@ function createSelect(
     const dropdown: HTMLDivElement = document.createElement("div");
     dropdown.className = "frost-select-dropdown";
 
+    const menuContainer: Element | null = document.querySelector(".frost-menu");
+    const themeClass: string | null | undefined = menuContainer
+        ? Array.from(menuContainer.classList).find((c: string) => c.startsWith("frost-theme-"))
+        : null;
+    if (themeClass) {
+        dropdown.classList.add(themeClass);
+    }
+
     const optionsArray: string[] = Array.isArray(options) ? options : [options];
 
     optionsArray.forEach((option: string) => {
@@ -45,10 +53,10 @@ function createSelect(
     });
 
     select.appendChild(selectedValue);
-    select.appendChild(dropdown);
+    document.body.appendChild(dropdown);
 
     const positionDropdown = (): void => {
-        const rect = select.getBoundingClientRect();
+        const rect: DOMRect = select.getBoundingClientRect();
         dropdown.style.left = `${rect.left}px`;
         dropdown.style.top = `${rect.bottom + 4}px`;
         dropdown.style.width = `${rect.width}px`;
@@ -93,8 +101,6 @@ function createSelect(
     selectContainer.appendChild(label);
     selectContainer.appendChild(select);
 
-    document.body.appendChild(dropdown);
-
     selectContainer.getValue = () => selectedValue.textContent || defaultValue;
     selectContainer.setValue = (value: string) => {
         if (optionsArray.includes(value)) {
@@ -102,6 +108,26 @@ function createSelect(
             if (callback) callback(value);
         }
     };
+
+    const observer: MutationObserver = new MutationObserver((mutations: MutationRecord[]) => {
+        mutations.forEach((mutation: MutationRecord) => {
+            if (mutation.type === "attributes" && mutation.attributeName === "class") {
+                const newThemeClass: string | null | undefined = Array.from(menuContainer!.classList).find(
+                    (c: string) => c.startsWith("frost-theme-")
+                );
+                dropdown.classList.remove(
+                    ...Array.from(dropdown.classList).filter((c: string) => c.startsWith("frost-theme-"))
+                );
+                if (newThemeClass) {
+                    dropdown.classList.add(newThemeClass);
+                }
+            }
+        });
+    });
+
+    if (menuContainer) {
+        observer.observe(menuContainer, { attributes: true });
+    }
 
     return selectContainer;
 }

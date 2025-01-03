@@ -1,11 +1,11 @@
 .frost-menu {
     position: fixed !important;
-    background: linear-gradient(145deg, rgba(25, 25, 35, 0.95), rgba(15, 15, 25, 0.98)) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    background: linear-gradient(145deg, var(--frost-bg-primary), var(--frost-bg-primary)) !important;
+    border: 1px solid var(--frost-border-color) !important;
     border-radius: 12px !important;
     min-width: 280px !important;
     max-width: 280px !important;
-    color: #fff !important;
+    color: var(--frost-text-primary) !important;
     font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
     -webkit-font-smoothing: antialiased !important;
     -moz-osx-font-smoothing: grayscale !important;
@@ -35,10 +35,10 @@
 }
 
 .frost-header {
-    background: rgba(30, 30, 40, 0.6);
+    background: var(--frost-bg-secondary);
     padding: 16px 20px;
     cursor: move !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid var(--frost-border-color);
     border-radius: 12px 12px 0 0;
     font-weight: 600 !important;
     font-size: 14px !important;
@@ -47,6 +47,7 @@
     align-items: center;
     text-transform: uppercase !important;
     letter-spacing: 0.01em !important;
+    color: var(--frost-text-primary);
 }
 
 .frost-content {

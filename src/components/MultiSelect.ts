@@ -27,6 +27,14 @@ function createMultiSelect(
     const dropdown: HTMLDivElement = document.createElement("div");
     dropdown.className = "frost-multi-select-dropdown";
 
+    const menuContainer: Element | null = document.querySelector(".frost-menu");
+    const themeClass: string | null | undefined = menuContainer
+        ? Array.from(menuContainer.classList).find((c: string) => c.startsWith("frost-theme-"))
+        : null;
+    if (themeClass) {
+        dropdown.classList.add(themeClass);
+    }
+
     const selected = new Set<string>(defaultValues);
 
     const updateDisplay = (): void => {
@@ -38,7 +46,7 @@ function createMultiSelect(
     };
 
     const positionDropdown = (): void => {
-        const rect = select.getBoundingClientRect();
+        const rect: DOMRect = select.getBoundingClientRect();
         dropdown.style.left = `${rect.left}px`;
         dropdown.style.top = `${rect.bottom + 4}px`;
         dropdown.style.width = `${rect.width}px`;
@@ -130,6 +138,26 @@ function createMultiSelect(
         });
         if (callback) callback(Array.from(selected));
     };
+
+    const observer: MutationObserver = new MutationObserver((mutations: MutationRecord[]) => {
+        mutations.forEach((mutation: MutationRecord) => {
+            if (mutation.type === "attributes" && mutation.attributeName === "class") {
+                const newThemeClass: string | null | undefined = Array.from(menuContainer!.classList).find(
+                    (c: string) => c.startsWith("frost-theme-")
+                );
+                dropdown.classList.remove(
+                    ...Array.from(dropdown.classList).filter((c: string) => c.startsWith("frost-theme-"))
+                );
+                if (newThemeClass) {
+                    dropdown.classList.add(newThemeClass);
+                }
+            }
+        });
+    });
+
+    if (menuContainer) {
+        observer.observe(menuContainer, { attributes: true });
+    }
 
     return container;
 }

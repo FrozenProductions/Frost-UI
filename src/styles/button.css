@@ -9,10 +9,10 @@
     position: relative;
     width: 100%;
     padding: 10px 16px;
-    background: rgba(40, 40, 50, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: var(--frost-bg-tertiary);
+    border: 1px solid var(--frost-border-color);
     border-radius: 6px;
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--frost-text-primary);
     font-size: 12px !important;
     font-weight: 600 !important;
     text-transform: uppercase;
@@ -26,9 +26,9 @@
 }
 
 .frost-button:hover {
-    background: rgba(45, 45, 55, 0.4);
+    background: var(--frost-bg-secondary);
     transform: translateX(4px);
-    border-color: rgba(114, 137, 218, 0.2);
+    border-color: var(--frost-accent-color);
 }
 
 .frost-button:active {
@@ -45,7 +45,7 @@
 .frost-button-ripple {
     position: absolute;
     border-radius: 50%;
-    background: rgba(114, 137, 218, 0.4);
+    background: var(--frost-ripple-color);
     transform: translate(-50%, -50%);
     pointer-events: none;
     animation: buttonRipple 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -66,13 +66,13 @@
 }
 
 .frost-button.primary {
-    background: linear-gradient(135deg, rgba(114, 137, 218, 0.8), rgba(91, 110, 175, 0.8));
-    border-color: rgba(114, 137, 218, 0.5);
+    background: linear-gradient(135deg, var(--frost-accent-color), var(--frost-accent-hover));
+    border-color: var(--frost-accent-color);
 }
 
 .frost-button.primary:hover {
-    background: linear-gradient(135deg, rgba(114, 137, 218, 0.9), rgba(91, 110, 175, 0.9));
-    box-shadow: 0 4px 12px rgba(114, 137, 218, 0.2);
+    background: linear-gradient(135deg, var(--frost-accent-color), var(--frost-accent-hover));
+    box-shadow: 0 4px 12px var(--frost-shadow-color);
 }
 
 .frost-button.primary .frost-button-ripple {

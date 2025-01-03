@@ -1,6 +1,6 @@
 .frost-multi-select-container {
-    background: rgba(40, 40, 50, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: var(--frost-bg-tertiary);
+    border: 1px solid var(--frost-border-color);
     border-radius: 8px;
     padding: 12px;
     margin: 4px 0;
@@ -11,7 +11,7 @@
     margin-bottom: 8px;
     font-size: 12px !important;
     font-weight: 600 !important;
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--frost-text-primary);
     text-transform: uppercase;
     letter-spacing: 0.02em !important;
 }
@@ -21,30 +21,31 @@
 }
 
 .frost-multi-select-value {
-    background: rgba(30, 30, 40, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--frost-bg-secondary);
+    border: 1px solid var(--frost-border-color);
     border-radius: 4px;
     padding: 8px 12px;
     cursor: pointer;
     transition: all 0.2s ease;
     font-size: 12px;
+    color: var(--frost-text-primary);
 }
 
 .frost-multi-select-value:hover {
-    background: rgba(50, 50, 60, 0.6);
-    border-color: rgba(255, 255, 255, 0.2);
+    background: var(--frost-bg-tertiary);
+    border-color: var(--frost-accent-color);
 }
 
 .frost-multi-select-dropdown {
     position: fixed;
     min-width: 200px;
-    background: rgba(20, 20, 30, 0.98);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--frost-bg-primary);
+    border: 1px solid var(--frost-border-color);
     border-radius: 6px;
     margin-top: 4px;
     display: none;
     z-index: 1000000;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px var(--frost-shadow-color);
     max-height: 300px;
     overflow-y: auto;
 }
@@ -77,8 +78,8 @@
 }
 
 .frost-multi-select-item.selected .frost-multi-select-checkbox {
-    background: #7289da;
-    border-color: #7289da;
+    background: var(--frost-accent-color);
+    border-color: var(--frost-accent-color);
 }
 
 .frost-multi-select-item.selected .frost-multi-select-checkbox:after {
@@ -88,13 +89,13 @@
     top: 1px;
     width: 4px;
     height: 8px;
-    border: solid white;
+    border: solid var(--frost-text-primary);
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
 }
 
 .frost-multi-select-item span {
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--frost-text-primary);
     font-weight: 450 !important;
     font-size: 12px !important;
 }

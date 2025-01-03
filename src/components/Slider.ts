@@ -12,111 +12,67 @@ function createSlider(
     defaultValue: number,
     callback?: SliderCallback
 ): SliderElement {
-    const slider: SliderElement = document.createElement("div") as SliderElement;
-    slider.className = "frost-slider";
+    const container = document.createElement("div") as SliderElement;
+    container.className = "frost-slider";
 
     const label: HTMLSpanElement = document.createElement("span");
     label.textContent = name;
 
-    const controlsWrapper: HTMLDivElement = document.createElement("div");
-    controlsWrapper.className = "frost-slider-controls";
+    const controls: HTMLDivElement = document.createElement("div");
+    controls.className = "frost-slider-controls";
 
     const input: HTMLInputElement = document.createElement("input");
     input.type = "range";
     input.min = min.toString();
     input.max = max.toString();
     input.value = defaultValue.toString();
+    input.step = "any";
 
-    const valueInput: HTMLInputElement = document.createElement("input");
-    valueInput.type = "text";
-    valueInput.className = "frost-slider-value";
-    valueInput.value = defaultValue.toString();
-    valueInput.maxLength = 5;
+    const percentage: number = ((defaultValue - min) / (max - min)) * 100;
+    input.style.setProperty("--slider-value", `${percentage}%`);
 
-    slider.appendChild(label);
-    controlsWrapper.appendChild(input);
-    controlsWrapper.appendChild(valueInput);
-    slider.appendChild(controlsWrapper);
+    const value: HTMLInputElement = document.createElement("input");
+    value.type = "text";
+    value.className = "frost-slider-value";
+    value.value = defaultValue.toString();
 
-    const updateSliderBackground: (val: number) => void = (val: number): void => {
-        const percentage: number = ((val - min) / (max - min)) * 100;
-        input.style.background = `linear-gradient(to right, #7289da 0%, #7289da ${percentage}%, rgba(60, 60, 80, 0.6) ${percentage}%)`;
+    const updateValue = (newValue: number): void => {
+        const clampedValue: number = Math.min(Math.max(newValue, min), max);
+        input.value = clampedValue.toString();
+        value.value = clampedValue.toString();
+
+        const percentage: number = ((clampedValue - min) / (max - min)) * 100;
+        input.style.setProperty("--slider-value", `${percentage}%`);
+
+        if (callback) callback(clampedValue);
     };
-
-    const updateValue: (val: number) => void = (val: number): void => {
-        val = Math.min(Math.max(val, min), max);
-        input.value = val.toString();
-        valueInput.value = val.toString();
-        updateSliderBackground(val);
-        if (callback) callback(val);
-    };
-
-    updateSliderBackground(defaultValue);
 
     input.addEventListener("input", () => {
-        updateValue(Number(input.value));
+        updateValue(parseFloat(input.value));
     });
 
-    valueInput.addEventListener("input", (e: Event) => {
-        const target = e.target as HTMLInputElement;
-        const val: string = target.value.replace(/[^\d.-]/g, "");
-        valueInput.value = val;
-
-        if (val !== "") {
-            const numVal = Number(val);
-            if (numVal < min || numVal > max) {
-                valueInput.classList.add("invalid");
-                setTimeout(() => {
-                    valueInput.classList.remove("invalid");
-                }, 400);
-            }
-        }
-    });
-
-    valueInput.addEventListener("blur", () => {
-        const val: string = valueInput.value;
-
-        if (val === "" || isNaN(Number(val))) {
-            valueInput.value = defaultValue.toString();
-            updateValue(defaultValue);
+    value.addEventListener("change", () => {
+        const newValue = parseFloat(value.value);
+        if (isNaN(newValue)) {
+            value.classList.add("invalid");
+            setTimeout(() => value.classList.remove("invalid"), 400);
+            value.value = input.value;
             return;
         }
-
-        const numVal = Number(val);
-
-        if (numVal < min) {
-            valueInput.classList.add("invalid");
-            setTimeout(() => {
-                valueInput.classList.remove("invalid");
-                valueInput.value = min.toString();
-                updateValue(min);
-            }, 400);
-            return;
-        }
-
-        if (numVal > max) {
-            valueInput.classList.add("invalid");
-            setTimeout(() => {
-                valueInput.classList.remove("invalid");
-                valueInput.value = max.toString();
-                updateValue(max);
-            }, 400);
-            return;
-        }
-
-        updateValue(numVal);
+        updateValue(newValue);
     });
 
-    valueInput.addEventListener("keydown", (e: KeyboardEvent) => {
-        if (e.key === "Enter") {
-            valueInput.blur();
-        }
-    });
+    value.addEventListener("focus", () => value.select());
 
-    slider.getValue = () => Number(input.value);
-    slider.setValue = (value: number) => updateValue(value);
+    controls.appendChild(input);
+    controls.appendChild(value);
+    container.appendChild(label);
+    container.appendChild(controls);
 
-    return slider;
+    container.getValue = () => parseFloat(input.value);
+    container.setValue = (newValue: number) => updateValue(newValue);
+
+    return container;
 }
 
 export { createSlider, SliderElement };
