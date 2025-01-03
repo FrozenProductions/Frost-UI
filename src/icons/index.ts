@@ -10,6 +10,10 @@ const icons = {
     undefined: `<svg xmlns="http://www.w3.org/2000/svg" height="48" width="48" viewBox="0 0 48 48"><title>c question</title><g fill="#787878" class="nc-icon-wrapper"><path d="M24,1C11.297,1,1,11.297,1,24s10.297,23,23,23,23-10.297,23-23c-.014-12.697-10.303-22.986-23-23Zm-1,38c-1.381,0-2.5-1.119-2.5-2.5s1.119-2.5,2.5-2.5,2.5,1.119,2.5,2.5-1.119,2.5-2.5,2.5Zm5.089-14.841c-2.867,2.426-3.089,3.536-3.089,4.841v1c0,.552-.448,1-1,1h-2c-.552,0-1-.448-1-1v-1c0-2.977,1.221-5.116,4.505-7.895,.956-.809,3.937-3.668,2.173-6.521-1.144-1.851-5.372-2.126-8.869-.579l-.914,.404c-.505,.223-1.096-.005-1.319-.51l-.809-1.829c-.223-.505,.005-1.096,.51-1.319l.914-.404c4.851-2.146,11.376-1.935,13.889,2.135,2.29,3.704,1.144,8.18-2.991,11.678Z" fill="#787878"></path></g></svg>`,
 
     close: `<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 24 24"><title>e remove</title><g stroke-linejoin="miter" fill="#F7F7F7" stroke-linecap="butt" class="nc-icon-wrapper"><line x1="19" y1="19" x2="5" y2="5" fill="none" stroke="#F7F7F7" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2" data-color="color-2"></line><line x1="19" y1="5" x2="5" y2="19" fill="none" stroke="#F7F7F7" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2"></line></g></svg>`,
+
+    down_arrow: `<svg xmlns="http://www.w3.org/2000/svg" height="12" width="12" viewBox="0 0 12 12"><title>chevron down</title><g fill="#ffffff" class="nc-icon-wrapper"><polyline points="1.75 4.25 6 8.5 10.25 4.25" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></polyline></g></svg>`,
+
+    up_arrow: `<svg xmlns="http://www.w3.org/2000/svg" height="12" width="12" viewBox="0 0 12 12"><title>chevron up</title><g fill="#ffffff" class="nc-icon-wrapper"><polyline points="10.25 7.75 6 3.5 1.75 7.75" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></polyline></g></svg>`,
 };
 
 export default icons;

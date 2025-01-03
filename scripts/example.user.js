@@ -33,6 +33,7 @@
             targetMode: 'Single',
             priority: 'Distance',
             targetTypes: ['Players'],
+            targetPriority: ['Players', 'Monsters', 'Animals'],
         },
         movement: {
             speed: false,
@@ -97,9 +98,6 @@
         'ShiftRight'
     );
 
-    combatMenu.setTheme('midnight');
-    movementMenu.setTheme('nord');
-
     /*━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
      *  Combat Menu Setup
      *━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━*/
@@ -128,6 +126,10 @@
             },
             'KeyJ'
         )
+        .addOrderList('Combat', 'Target Priority', config.combat.targetPriority, (items) => {
+            config.combat.targetPriority = items;
+            saveConfig();
+        })
         .addSwitch(
             'Combat',
             'NoJump',

@@ -39,6 +39,7 @@ Frost-UI is an elegant and lightweight UI library designed specifically for user
     -   Multi-select Menus
     -   Color Pickers
     -   Page Navigation
+    -   Order Lists
 
 ### Smart Management
 

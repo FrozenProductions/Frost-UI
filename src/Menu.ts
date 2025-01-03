@@ -2,6 +2,7 @@ import { type ButtonElement, type ButtonVariant, createButton } from './componen
 import { type CategoryData, createCategory } from './components/Category';
 import { type ColorInputElement, createColorInput } from './components/ColorInput';
 import { type MultiSelectElement, createMultiSelect } from './components/MultiSelect';
+import { type OrderListElement, createOrderList } from './components/OrderList';
 import { type PageSelectorElement, createPageSelector } from './components/PageSelector';
 import { type RadioGroupElement, createRadioGroup } from './components/RadioGroup';
 import { type SelectElement, createSelect } from './components/Select';
@@ -158,6 +159,27 @@ class FrostUI {
         if (content) {
             content.appendChild(toggle);
             categoryData.items.set(name, toggle);
+        }
+
+        return this;
+    }
+
+    public addSwitch(
+        category: string,
+        name: string,
+        defaultValue = false,
+        callback?: (enabled: boolean) => void,
+        variant: SwitchVariant = 'default'
+    ): this {
+        const categoryData: CategoryData | undefined = this.categories.get(category);
+        if (!categoryData) return this;
+
+        const switchElement: SwitchElement = createSwitch(name, defaultValue, callback, variant);
+        const content: HTMLDivElement | null =
+            categoryData.element.querySelector('.frost-category-content');
+        if (content) {
+            content.appendChild(switchElement);
+            categoryData.items.set(name, switchElement);
         }
 
         return this;
@@ -324,22 +346,21 @@ class FrostUI {
         return this;
     }
 
-    public addSwitch(
+    public addOrderList(
         category: string,
         name: string,
-        defaultValue = false,
-        callback?: (enabled: boolean) => void,
-        variant: SwitchVariant = 'default'
+        items: string[],
+        callback?: (items: string[]) => void
     ): this {
         const categoryData: CategoryData | undefined = this.categories.get(category);
         if (!categoryData) return this;
 
-        const switchElement: SwitchElement = createSwitch(name, defaultValue, callback, variant);
+        const orderList: OrderListElement = createOrderList(name, items, callback);
         const content: HTMLDivElement | null =
             categoryData.element.querySelector('.frost-category-content');
         if (content) {
-            content.appendChild(switchElement);
-            categoryData.items.set(name, switchElement);
+            content.appendChild(orderList);
+            categoryData.items.set(name, orderList);
         }
 
         return this;
@@ -362,19 +383,7 @@ class FrostUI {
         if (theme !== 'dark') {
             this.container.classList.add(`frost-theme-${theme}`);
         }
-
         return this;
-    }
-
-    public getTheme(): FrostTheme {
-        if (!this.container) return 'dark';
-
-        const themeClass = Array.from(this.container.classList).find((className) =>
-            className.startsWith('frost-theme-')
-        );
-
-        if (!themeClass) return 'dark';
-        return themeClass.replace('frost-theme-', '') as FrostTheme;
     }
 }
 export default FrostUI;

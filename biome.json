@@ -7,7 +7,14 @@
     },
     "files": {
         "ignoreUnknown": false,
-        "ignore": ["dist/*", "node_modules/*", "build/*", "*.min.js", "scripts/*", "*.config.js"]
+        "ignore": [
+            "dist/*",
+            "node_modules/*",
+            "build/*",
+            "*.min.js",
+            "scripts/Library.js",
+            "*.config.js"
+        ]
     },
     "formatter": {
         "enabled": true,

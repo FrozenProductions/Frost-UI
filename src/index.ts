@@ -3,6 +3,7 @@ import { frostManager } from './MenuManager';
 import { createCategory } from './components/Category';
 import { createKeybindInput } from './components/KeybindInput';
 import { createMultiSelect } from './components/MultiSelect';
+import { createOrderList } from './components/OrderList';
 import { createPageSelector } from './components/PageSelector';
 import { createSlider } from './components/Slider';
 import { createToggle } from './components/Toggle';
@@ -26,6 +27,7 @@ export {
     createKeybindInput,
     createMultiSelect,
     createPageSelector,
+    createOrderList,
 };
 
 export default FrostUI;

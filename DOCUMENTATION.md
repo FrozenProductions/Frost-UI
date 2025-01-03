@@ -178,6 +178,44 @@ menu.addButton(
 );
 ```
 
+### OrderList
+
+The OrderList component provides a draggable and reorderable list of items with smooth animations.
+
+```javascript
+// Create an OrderList with initial items
+menu.addOrderList("Category", "Priority List", ["Item 1", "Item 2", "Item 3"], (items) => {
+    console.log("New order:", items);
+    // Save the new order
+    config.priority = items;
+    saveConfig();
+});
+```
+
+#### Features:
+
+-   Drag and drop reordering with smooth animations
+-   Up/down arrow buttons for single-step reordering
+-   Visual feedback during interactions
+-   Callback function for order changes
+-   Smooth transitions and animations
+-   Touch-friendly drag handle
+
+#### Example with Configuration:
+
+```javascript
+const config = {
+    priority: ["High", "Medium", "Low"],
+};
+
+const menu = window.frostManager.addMenu("settings", "Settings Menu", { x: 100, y: 100 }, "ShiftRight");
+
+menu.addCategory("Priority").addOrderList("Priority", "Task Priority", config.priority, (items) => {
+    config.priority = items;
+    saveConfig();
+});
+```
+
 ## Themes
 
 Frost-UI comes with a built-in theme system and several preset themes:
