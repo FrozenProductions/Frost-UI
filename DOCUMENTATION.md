@@ -237,6 +237,42 @@ menu.addCategory("Priority").addOrderList("Priority", "Task Priority", config.pr
 });
 ```
 
+### GridSelector
+
+The GridSelector component creates a grid of selectable items with optional icons and labels.
+
+```javascript
+// Create a GridSelector with icons and labels
+menu.addGridSelector(
+    "Combat", // Category name
+    "Targets", // Selector name
+    [
+        // Grid items
+        { id: "player", icon: "👤", label: "Players" },
+        { id: "monster", icon: "👾", label: "Monsters" },
+        { id: "animal", icon: "🦊", label: "Animals" },
+        { id: "vehicle", icon: "🚗", label: "Vehicles" },
+        { id: "item", icon: "📦", label: "Items" },
+        { id: "block", icon: "⬛", label: "Blocks" },
+    ],
+    ["player", "monster"], // Default selected items
+    (selected) => {
+        // Callback function
+        console.log("Selected targets:", selected);
+    },
+    3 // Number of columns (optional, defaults to 3)
+);
+```
+
+#### Features:
+
+-   Grid layout with customizable number of columns
+-   Support for icons and labels
+-   Multiple item selection
+-   Smooth hover and selection animations
+-   Callback function for selection changes
+-   Touch-friendly interface
+
 ### Charts
 
 The Chart component provides a real-time data visualization with smooth animations, tooltips, and multiple series support.

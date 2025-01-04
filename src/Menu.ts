@@ -3,6 +3,7 @@ import { type CategoryData, createCategory } from "./components/Category";
 import { type ChartElement, type ChartOptions, createChart } from "./components/Chart";
 import { type ColorInputElement, createColorInput } from "./components/ColorInput";
 import { type DualSliderElement, type DualSliderOptions, createDualSlider } from "./components/DualSlider";
+import { type GridItem, type GridSelectorElement, createGridSelector } from "./components/GridSelector";
 import { type MultiSelectElement, createMultiSelect } from "./components/MultiSelect";
 import { type OrderListElement, createOrderList } from "./components/OrderList";
 import { type PageSelectorElement, createPageSelector } from "./components/PageSelector";
@@ -375,6 +376,27 @@ class FrostUI {
         if (content) {
             content.appendChild(chart);
             categoryData.items.set(name, chart);
+        }
+
+        return this;
+    }
+
+    public addGridSelector(
+        category: string,
+        name: string,
+        items: GridItem[],
+        defaultSelected: string[] = [],
+        callback?: (selected: string[]) => void,
+        columns = 3
+    ): this {
+        const categoryData: CategoryData | undefined = this.categories.get(category);
+        if (!categoryData) return this;
+
+        const gridSelector: GridSelectorElement = createGridSelector(name, items, defaultSelected, callback, columns);
+        const content: HTMLDivElement | null = categoryData.element.querySelector(".frost-category-content");
+        if (content) {
+            content.appendChild(gridSelector);
+            categoryData.items.set(name, gridSelector);
         }
 
         return this;

@@ -44,6 +44,7 @@
             step: false,
             stepHeight: 1,
             stepMode: 'Normal',
+            abilities: [],
         },
         render: {
             esp: false,
@@ -219,6 +220,33 @@
                 saveConfig();
             },
             'pill'
+        )
+        .addGridSelector(
+            'Movement',
+            'Movement Abilities',
+            [
+                {
+                    id: "flight",
+                    icon: `<svg viewBox="0 0 24 24"><path fill="currentColor" d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>`,
+                    label: "Flight"
+                },
+                {
+                    id: "bhop",
+                    icon: `<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 24 24"><title>circle arrow up 2</title><g fill="#ffffff" class="nc-icon-wrapper"><path d="M12,0A12,12,0,1,0,24,12,12.013,12.013,0,0,0,12,0Zm4.451,11.717A.5.5,0,0,1,16,12H13v5a1,1,0,0,1-2,0V12H8a.5.5,0,0,1-.391-.812l4-5a.517.517,0,0,1,.782,0l4,5A.5.5,0,0,1,16.451,11.717Z" fill="#ffffff"></path></g></svg>`,
+                    label: "Bunny Hop"
+                },
+                {
+                    id: "longjump",
+                    icon: `<svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 20 20"><title>arrow trend up</title><g fill="#ffffff" class="nc-icon-wrapper"><path d="m17,6l-7.293,7.293c-.391.391-1.024.391-1.414,0l-2.586-2.586c-.391-.391-1.024-.391-1.414,0l-2.293,2.293" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" data-color="color-2"></path><polyline points="17 13 17 6 10 6" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></polyline></g></svg>`,
+                    label: "Long Jump"
+                }
+            ],
+            config.movement.abilities,
+            (selected) => {
+                config.movement.abilities = selected;
+                saveConfig();
+            },
+            1
         )
         .addCategory('Step')
         .addToggle('Step', 'Enabled', (enabled) => {
