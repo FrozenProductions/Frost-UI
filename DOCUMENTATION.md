@@ -76,7 +76,28 @@ menu.addSlider(
     (value) => {
         // Callback function
         console.log(`Range set to ${value}`);
-    }
+    },
+    0.5 // Optional step value (defaults to 1)
+);
+```
+
+### DualSlider
+
+Creates a dual-handle slider for selecting a range of values:
+
+```javascript
+menu.addDualSlider(
+    "Combat", // Category name
+    "Distance Range", // Slider name
+    3, // Minimum value
+    10, // Maximum value
+    4, // Default start value
+    7, // Default end value
+    (values) => {
+        // Callback function
+        console.log(`Range set to ${values.start} - ${values.end}`);
+    },
+    0.5 // Optional step value (defaults to 1)
 );
 ```
 

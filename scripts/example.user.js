@@ -33,7 +33,7 @@
             targetMode: 'Single',
             priority: 'Distance',
             targetTypes: ['Players'],
-            targetPriority: ['Players', 'Monsters', 'Animals'],
+            targetPriority: ['Players', 'Monsters', 'Animals']
         },
         movement: {
             speed: false,
@@ -145,10 +145,17 @@
             config.combat.autoClicker.enabled = enabled;
             saveConfig();
         })
-        .addSlider('AutoClicker', 'CPS', 1, 20, config.combat.autoClicker.cps, (value) => {
-            config.combat.autoClicker.cps = value;
-            saveConfig();
-        })
+        .addDualSlider(
+            "AutoClicker",
+            "CPS",
+            0,
+            20,
+            10,
+            15,
+            ({ start, end }) => {
+                console.log(`Price range: $${start} - $${end}`);
+            }
+        )
         .addCategory('Target')
         .addRadioGroup(
             'Target',
@@ -179,7 +186,7 @@
                 config.combat.targetTypes = selected;
                 saveConfig();
             }
-        );
+        )
 
     /*━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
      *  Movement Menu Setup
