@@ -16,6 +16,10 @@ const icons = {
     up_arrow: `<svg xmlns="http://www.w3.org/2000/svg" height="12" width="12" viewBox="0 0 12 12"><title>chevron up</title><g fill="#ffffff" class="nc-icon-wrapper"><polyline points="10.25 7.75 6 3.5 1.75 7.75" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></polyline></g></svg>`,
 
     order_list: `<svg xmlns="http://www.w3.org/2000/svg" height="12" width="12" viewBox="0 0 12 12" preserveAspectRatio="xMidYMid meet"><title>menu</title><g fill="#ffffff" class="nc-icon-wrapper" transform="translate(0,1.5)"><path fill="#ffffff" stroke-width="0" data-color="color-2" d="M0.5 4.5h11v1h-11z"></path><path stroke-width="0" fill="#ffffff" d="M0.5 1h11v1h-11z"></path><path stroke-width="0" fill="#ffffff" d="M0.5 8h11v1h-11z"></path></g></svg>`,
+
+    page_left: `<svg xmlns="http://www.w3.org/2000/svg" height="12" width="12" viewBox="0 0 12 12"><title>left arrow 3</title><g fill="#ffffff" class="nc-icon-wrapper"><path d="M8.47 12.05a0.38 0.38 0 0 0 0.54 0l0.38-0.38a0.38 0.38 0 0 0 0-0.54l-5.05-5.05 5.05-5.05a0.38 0.38 0 0 0 0-0.54l-0.38-0.38a0.38 0.38 0 0 0-0.54 0l-5.7 5.7a0.38 0.38 0 0 0 0 0.54z" fill="#ffffff"></path></g></svg>`,
+
+    page_right: `<svg xmlns="http://www.w3.org/2000/svg" height="12" width="12" viewBox="0 0 12 12"><title>right arrow 3</title><g fill="#ffffff" class="nc-icon-wrapper"><path d="M2.77 11.67l0.38 0.38a0.38 0.38 0 0 0 0.54 0l5.7-5.7a0.38 0.38 0 0 0 0-0.54l-5.7-5.7a0.38 0.38 0 0 0-0.54 0l-0.38 0.38a0.38 0.38 0 0 0 0 0.54l5.05 5.05-5.05 5.05a0.38 0.38 0 0 0 0 0.54z" fill="#ffffff"></path></g></svg>`,
 };
 
 export default icons;

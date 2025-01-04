@@ -37,13 +37,14 @@
 .frost-page-arrow {
     color: var(--frost-text-primary);
     cursor: pointer;
+    display: flex;
     justify-content: center;
     align-items: center;
     transition: all 0.2s ease;
     opacity: 0.6;
     height: 20px;
+    width: 20px;
     padding: 0;
-    line-height: 20px;
 }
 
 .frost-page-arrow:hover {
@@ -59,5 +60,35 @@
     color: var(--frost-text-primary);
     font-weight: 500 !important;
     padding: 0 8px;
-    transition: all 0.2s ease;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes pageValueSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pageValueSlideOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+}
+
+.frost-page-value.switching-out {
+    animation: pageValueSlideOut 0.15s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.frost-page-value.switching-in {
+    animation: pageValueSlideIn 0.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
