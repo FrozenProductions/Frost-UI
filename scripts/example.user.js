@@ -321,6 +321,21 @@
             config.world.caveFinder = enabled;
             saveConfig();
         })
+        .addChart("World", "Entities", {
+            width: 260,
+            height: 100,
+            maxDataPoints: 100,
+            series: [
+                {
+                    label: "Players",
+                    color: "#ff4757",
+                },
+                {
+                    label: "Mobs",
+                    color: "#2ed573",
+                }
+            ],
+        })
         .addButton(
             'World',
             'Example',
@@ -385,4 +400,18 @@
             },
             'destructive'
         );
+    // simulate data
+    let playerCount = 50;
+    let mobCount = 30;
+
+    setInterval(() => {
+        const chart = worldMenu.getCategories().get("World")?.items.get("Entities");
+        if (chart) {
+            playerCount = Math.max(0, Math.min(100, playerCount + (Math.random() - 0.5) * 10));
+            mobCount = Math.max(0, Math.min(100, mobCount + (Math.random() - 0.5) * 8));
+
+            chart.addDataPoint(0, playerCount);
+            chart.addDataPoint(1, mobCount);
+        }
+    }, 100);
 })();

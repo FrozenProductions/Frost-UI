@@ -1,0 +1,62 @@
+.frost-chart {
+    background: var(--frost-bg-tertiary);
+    border: 1px solid var(--frost-border-color);
+    border-radius: 6px;
+    padding: 8px 10px;
+    margin: 4px 0;
+    transition: all 0.2s ease;
+}
+
+.frost-chart:hover {
+    background: var(--frost-bg-secondary);
+    transform: translateX(4px);
+    border-color: var(--frost-accent-color);
+}
+
+.frost-chart-title {
+    display: block;
+    color: var(--frost-text-primary);
+    font-weight: 600;
+    font-size: 12px !important;
+    padding: 4px 8px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.01em !important;
+}
+
+.frost-chart canvas {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.frost-chart-tooltip {
+    position: fixed;
+    background: var(--frost-bg-tertiary);
+    border: 1px solid var(--frost-border-color);
+    border-radius: 4px;
+    padding: 8px;
+    pointer-events: none;
+    z-index: 1000001;
+    box-shadow: 0 2px 8px var(--frost-shadow-color);
+    font-size: 12px;
+    transform: translate(10px, -50%);
+    opacity: 0;
+    transition: opacity 0.1s ease;
+}
+
+.frost-chart-tooltip.show {
+    opacity: 1;
+}
+
+.frost-chart-tooltip-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    white-space: nowrap;
+    color: var(--frost-text-primary);
+}
+
+.frost-chart-tooltip-row span {
+    font-weight: 500;
+}

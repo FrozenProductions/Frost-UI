@@ -29,6 +29,7 @@ Frost-UI is an elegant and lightweight UI library designed specifically for user
     -   Toast Notifications
     -   Toggle Switches
     -   Sliders
+    -   Dual Sliders
     -   Buttons
     -   Radio Groups
     -   Themes
@@ -40,6 +41,7 @@ Frost-UI is an elegant and lightweight UI library designed specifically for user
     -   Color Pickers
     -   Page Navigation
     -   Order Lists
+    -   Charts
 
 ### Smart Management
 

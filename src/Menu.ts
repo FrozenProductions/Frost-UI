@@ -1,5 +1,6 @@
 import { type ButtonElement, type ButtonVariant, createButton } from "./components/Button";
 import { type CategoryData, createCategory } from "./components/Category";
+import { type ChartElement, type ChartOptions, createChart } from "./components/Chart";
 import { type ColorInputElement, createColorInput } from "./components/ColorInput";
 import { type DualSliderElement, type DualSliderOptions, createDualSlider } from "./components/DualSlider";
 import { type MultiSelectElement, createMultiSelect } from "./components/MultiSelect";
@@ -360,6 +361,20 @@ class FrostUI {
         if (content) {
             content.appendChild(dualSlider);
             categoryData.items.set(name, dualSlider);
+        }
+
+        return this;
+    }
+
+    public addChart(category: string, name: string, options: Omit<ChartOptions, "name">): this {
+        const categoryData: CategoryData | undefined = this.categories.get(category);
+        if (!categoryData) return this;
+
+        const chart: ChartElement = createChart({ ...options, name });
+        const content: HTMLDivElement | null = categoryData.element.querySelector(".frost-category-content");
+        if (content) {
+            content.appendChild(chart);
+            categoryData.items.set(name, chart);
         }
 
         return this;

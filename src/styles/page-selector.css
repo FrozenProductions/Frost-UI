@@ -54,12 +54,12 @@
 }
 
 .frost-page-value {
-    min-width: 70px;
+    min-width: 50px;
     text-align: center;
     font-size: 11px !important;
     color: var(--frost-text-primary);
     font-weight: 500 !important;
-    padding: 0 8px;
+    padding: 0 6px;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 

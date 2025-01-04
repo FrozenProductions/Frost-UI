@@ -1,6 +1,7 @@
 import FrostUI from "./Menu";
 import { frostManager } from "./MenuManager";
 import { createCategory } from "./components/Category";
+import { createChart } from "./components/Chart";
 import { createDualSlider } from "./components/DualSlider";
 import { createKeybindInput } from "./components/KeybindInput";
 import { createMultiSelect } from "./components/MultiSelect";
@@ -30,6 +31,7 @@ export {
     createPageSelector,
     createOrderList,
     createDualSlider,
+    createChart,
 };
 
 export default FrostUI;

@@ -237,6 +237,87 @@ menu.addCategory("Priority").addOrderList("Priority", "Task Priority", config.pr
 });
 ```
 
+### Charts
+
+The Chart component provides a real-time data visualization with smooth animations, tooltips, and multiple series support.
+
+```javascript
+// Create a chart with multiple data series
+menu.addChart("Performance", "FPS Monitor", {
+    width: 260, // Optional, default: 260
+    height: 150, // Optional, default: 150
+    maxDataPoints: 100, // Optional, default: 100
+    series: [
+        {
+            label: "FPS",
+            color: "#2ecc71",
+            data: [], // Initial data points
+        },
+        {
+            label: "Frame Time",
+            color: "#e74c3c",
+            data: [], // Initial data points
+        },
+    ],
+    minY: 0, // Optional, minimum Y-axis value
+    maxY: 144, // Optional, maximum Y-axis value
+});
+```
+
+#### Features:
+
+-   Real-time data visualization with smooth animations
+-   Multiple data series with different colors
+-   Interactive tooltips showing exact values
+-   Customizable dimensions and appearance
+-   Auto-scaling Y-axis (if min/max not specified)
+-   Grid lines for better readability
+-   Hover state with data point indicators
+
+#### Methods:
+
+The chart component provides several methods for data manipulation:
+
+```javascript
+// Add a new data point to a specific series
+chart.addDataPoint(0, 60); // Add value 60 to first series
+chart.addDataPoint(1, 16.7); // Add value 16.7 to second series
+
+// Clear all data
+chart.clearData();
+
+// Get current data for all series
+const data = chart.getValue(); // Returns { "FPS": [...], "Frame Time": [...] }
+```
+
+#### Example with Real-time Updates:
+
+```javascript
+const menu = window.frostManager.addMenu("performance", "Performance Monitor");
+const chart = menu.addCategory("Metrics").addChart("Metrics", "System Performance", {
+    series: [
+        {
+            label: "CPU Usage",
+            color: "#3498db",
+            data: Array(100).fill(0),
+        },
+        {
+            label: "Memory Usage",
+            color: "#e67e22",
+            data: Array(100).fill(0),
+        },
+    ],
+    minY: 0,
+    maxY: 100,
+});
+
+// Update chart every second
+setInterval(() => {
+    chart.addDataPoint(0, Math.random() * 100); // CPU usage
+    chart.addDataPoint(1, Math.random() * 100); // Memory usage
+}, 1000);
+```
+
 ## Themes
 
 Frost-UI comes with a built-in theme system and several preset themes:
