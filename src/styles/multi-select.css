@@ -43,15 +43,20 @@
     border: 1px solid var(--frost-border-color);
     border-radius: 6px;
     margin-top: 4px;
-    display: none;
+    opacity: 0;
+    transform: translateY(-10px);
+    visibility: hidden;
     z-index: 1000000;
     box-shadow: 0 4px 12px var(--frost-shadow-color);
     max-height: 300px;
     overflow-y: auto;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .frost-multi-select-dropdown.show {
-    display: block;
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
 }
 
 .frost-multi-select-item {
@@ -83,15 +88,7 @@
 }
 
 .frost-multi-select-item.selected .frost-multi-select-checkbox:after {
-    content: "";
-    position: absolute;
-    left: 4px;
-    top: 1px;
-    width: 4px;
-    height: 8px;
-    border: solid var(--frost-text-primary);
-    border-width: 0 2px 2px 0;
-    transform: rotate(45deg);
+    display: none;
 }
 
 .frost-multi-select-item span {

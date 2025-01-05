@@ -27,17 +27,19 @@
 }
 
 .frost-category-content {
-    display: none;
+    visibility: hidden;
     padding: 0;
     opacity: 0;
-    transition: opacity 0.2s ease;
     max-height: 0;
-    transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease, padding 0.2s ease;
+    transform: translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
 }
 
 .frost-category-content.open {
-    display: block;
+    visibility: visible;
     opacity: 1;
     padding: 8px;
     max-height: 1000px;
+    transform: translateY(0);
 }

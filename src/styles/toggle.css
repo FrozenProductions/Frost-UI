@@ -10,18 +10,38 @@
     cursor: pointer;
     justify-content: space-between;
     color: var(--frost-text-primary);
+    position: relative;
+    overflow: hidden;
+}
+
+.frost-toggle::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, var(--frost-accent-color), var(--frost-accent-hover));
+    opacity: 0;
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .frost-toggle:hover {
     background: var(--frost-bg-secondary);
-    transform: translateX(4px);
     border-color: var(--frost-accent-color);
 }
 
 .frost-toggle.active {
-    background: linear-gradient(135deg, var(--frost-accent-color), var(--frost-accent-hover));
     border-color: var(--frost-accent-color);
-    transform: translateX(4px);
+}
+
+.frost-toggle.active::before {
+    opacity: 1;
+}
+
+.frost-toggle > * {
+    position: relative;
+    z-index: 1;
 }
 
 .frost-toggle-switch {
@@ -34,11 +54,28 @@
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: 1px solid var(--frost-border-color);
+    overflow: hidden;
 }
 
 .frost-toggle-switch.active {
     background: linear-gradient(135deg, var(--frost-accent-color), var(--frost-accent-hover));
     border-color: var(--frost-accent-color);
+}
+
+.frost-toggle-switch::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--frost-accent-color);
+    opacity: 0;
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.frost-toggle-switch:hover::before {
+    opacity: 0.1;
 }
 
 .frost-toggle-switch::after {
@@ -50,11 +87,25 @@
     height: 16px;
     background: white;
     border-radius: 50%;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 1;
 }
 
-.frost-toggle-switch.active::after {
-    transform: translateX(22px);
+.frost-toggle-switch:hover::after {
+    transform: scale(1.1);
+}
+
+.frost-toggle-switch.active:hover::after {
+    transform: scale(1.1);
+}
+
+.frost-toggle-switch:active::after {
+    transform: scale(0.9);
+}
+
+.frost-toggle-switch.active:active::after {
+    transform: scale(0.9);
 }
 
 .frost-toggle-key {
