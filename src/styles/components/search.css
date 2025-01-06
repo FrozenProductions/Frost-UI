@@ -1,0 +1,203 @@
+.frost-search-container {
+    position: fixed;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(600px, 90vw);
+    background: var(--frost-bg-primary);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px var(--frost-shadow-color),
+                0 2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 999999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid var(--frost-border-color);
+    transform-origin: top;
+    transform: translateX(-50%) scale(0.98);
+    overflow: hidden;
+}
+
+.frost-search-container.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) scale(1);
+}
+
+.frost-search-input-wrapper {
+    position: relative;
+    padding: 20px;
+    border-bottom: 1px solid var(--frost-border-color);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--frost-bg-primary);
+}
+
+.frost-search-input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    background: transparent;
+    color: var(--frost-text-primary);
+    padding: 0;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.frost-search-shortcut {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: var(--frost-bg-secondary);
+    color: var(--frost-text-secondary);
+    font-size: 12px;
+    user-select: none;
+    white-space: nowrap;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+}
+
+.frost-search-container:not(:focus-within) .frost-search-shortcut {
+    opacity: 0.6;
+}
+
+.frost-search-input::placeholder {
+    color: var(--frost-text-secondary);
+    opacity: 0.7;
+}
+
+.frost-search-results {
+    max-height: min(400px, 60vh);
+    overflow-y: auto;
+    padding: 6px 0;
+    background: var(--frost-bg-primary);
+    opacity: 1;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+}
+
+.frost-search-results[style*="display: none"] {
+    opacity: 0;
+    max-height: 0;
+    padding: 0;
+}
+
+.frost-search-result {
+    padding: 12px 20px;
+    cursor: pointer;
+    color: var(--frost-text-primary);
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: relative;
+    margin: 0 6px;
+    border-radius: 8px;
+}
+
+.frost-search-result > div {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.frost-search-result .item-name {
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.frost-search-result:hover {
+    background-color: var(--frost-bg-secondary);
+}
+
+.frost-search-result.selected {
+    background-color: var(--frost-bg-secondary);
+}
+
+.frost-search-result .menu-indicator {
+    color: var(--frost-text-secondary);
+    opacity: 0.7;
+    font-weight: normal;
+    margin-left: 4px;
+    white-space: nowrap;
+}
+
+.frost-search-result .highlight {
+    color: var(--frost-accent-color);
+    font-weight: 600;
+    display: inline;
+    position: relative;
+}
+
+.frost-search-result .type-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 24px;
+    height: 24px;
+    color: var(--frost-text-secondary);
+    opacity: 0.8;
+}
+
+.frost-search-result .type-indicator svg {
+    width: 16px;
+    height: 16px;
+}
+
+.frost-search-empty {
+    padding: 24px 20px;
+    text-align: center;
+    color: var(--frost-text-secondary);
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+.frost-search-results::-webkit-scrollbar {
+    width: 6px;
+}
+
+.frost-search-results::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 6px 0;
+}
+
+.frost-search-results::-webkit-scrollbar-thumb {
+    background: var(--frost-border-color);
+    border-radius: 3px;
+}
+
+.frost-search-results::-webkit-scrollbar-thumb:hover {
+    background: var(--frost-text-secondary);
+}
+
+.frost-search-highlight {
+    background-color: var(--frost-bg-secondary) !important;
+    outline: 2px solid var(--frost-accent-color) !important;
+    outline-offset: -1px;
+    border-radius: 4px;
+    position: relative;
+    z-index: 1;
+}
+
+.frost-search-highlight:focus {
+    outline: 2px solid var(--frost-accent-color) !important;
+    outline-offset: 0;
+    background-color: var(--frost-bg-tertiary) !important;
+}
+
+.frost-search-selected {
+    animation: frost-glow 2s cubic-bezier(0.4, 0, 0.2, 1);
+    outline: 2px solid var(--frost-accent-color);
+    outline-offset: -1px;
+    border-radius: 4px;
+    position: relative;
+    z-index: 1;
+    background-color: var(--frost-bg-secondary) !important;
+} 

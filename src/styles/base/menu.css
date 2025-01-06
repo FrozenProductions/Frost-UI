@@ -1,0 +1,68 @@
+.frost-menu {
+    position: fixed !important;
+    background: linear-gradient(145deg, var(--frost-bg-primary), var(--frost-bg-primary)) !important;
+    border: 1px solid var(--frost-border-color) !important;
+    border-radius: 12px !important;
+    min-width: 280px !important;
+    max-width: 280px !important;
+    color: var(--frost-text-primary) !important;
+    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, sans-serif !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+    z-index: 999999 !important;
+    user-select: none !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+    backdrop-filter: blur(10px) !important;
+    cursor: default !important;
+}
+
+.frost-menu * {
+    font-family: inherit !important;
+    font-weight: 600 !important;
+    font-size: 12px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.01em !important;
+}
+
+.frost-menu .frost-category-header,
+.frost-menu .frost-toggle,
+.frost-menu .frost-slider input[type="range"],
+.frost-menu .frost-radio-option,
+.frost-menu .frost-select-value,
+.frost-menu .frost-color-preview,
+.frost-menu .frost-page-arrow {
+    cursor: pointer !important;
+}
+
+.frost-header {
+    background: var(--frost-bg-secondary);
+    padding: 16px 20px;
+    cursor: move !important;
+    border-bottom: 1px solid var(--frost-border-color);
+    border-radius: 12px 12px 0 0;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-transform: uppercase !important;
+    letter-spacing: 0.01em !important;
+    color: var(--frost-text-primary);
+}
+
+.frost-content {
+    padding: 16px;
+    max-height: 70vh;
+    overflow-y: auto;
+    position: relative;
+    scrollbar-width: thin;
+}
+
+.frost-menu.show {
+    animation: menuSlideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.frost-menu.hide {
+    animation: menuSlideOut 0.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}

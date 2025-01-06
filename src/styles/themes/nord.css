@@ -1,0 +1,12 @@
+.frost-theme-nord {
+    --frost-bg-primary: rgba(46, 52, 64, 0.95);
+    --frost-bg-secondary: rgba(59, 66, 82, 0.6);
+    --frost-bg-tertiary: rgba(67, 76, 94, 0.4);
+    --frost-border-color: rgba(236, 239, 244, 0.1);
+    --frost-text-primary: rgba(236, 239, 244, 0.9);
+    --frost-text-secondary: rgba(229, 233, 240, 0.7);
+    --frost-accent-color: #88c0d0;
+    --frost-accent-hover: #81a1c1;
+    --frost-shadow-color: rgba(0, 0, 0, 0.2);
+    --frost-ripple-color: rgba(236, 239, 244, 0.7);
+} 

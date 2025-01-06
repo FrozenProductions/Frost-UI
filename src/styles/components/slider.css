@@ -1,0 +1,93 @@
+.frost-slider {
+    background: var(--frost-bg-tertiary);
+    border: 1px solid var(--frost-border-color);
+    border-radius: 6px;
+    padding: 8px 10px;
+    margin: 4px 0;
+    transition: all 0.2s ease;
+}
+
+.frost-slider:hover {
+    background: var(--frost-bg-secondary);
+    transform: translateX(4px);
+    border-color: var(--frost-accent-color);
+}
+
+.frost-slider span {
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    color: var(--frost-text-primary);
+    margin-bottom: 8px;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.01em !important;
+}
+
+.frost-slider-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.frost-slider input[type="range"] {
+    -webkit-appearance: none;
+    height: 6px;
+    flex: 1;
+    background: linear-gradient(
+        to right,
+        var(--frost-accent-color) 0%,
+        var(--frost-accent-color) var(--slider-value, 50%),
+        var(--frost-border-color) var(--slider-value, 50%),
+        var(--frost-border-color) 100%
+    );
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+}
+
+.frost-slider input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 12px;
+    width: 12px;
+    background: var(--frost-accent-color);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    transform: scale(1);
+    box-shadow: 0 2px 4px var(--frost-shadow-color);
+}
+
+.frost-slider input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    background: var(--frost-accent-hover);
+}
+
+.frost-slider input[type="range"]::-webkit-slider-thumb:active {
+    transform: scale(0.95);
+}
+
+.frost-slider-value {
+    background: var(--frost-bg-secondary);
+    border: 1px solid var(--frost-border-color);
+    color: var(--frost-text-primary);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    min-width: 40px;
+    text-align: center;
+}
+
+.frost-slider-value:focus {
+    background: var(--frost-bg-tertiary);
+    border-color: var(--frost-accent-color);
+    outline: none;
+}
+
+.frost-slider-value.invalid {
+    animation: shake 0.4s ease-in-out;
+    background: rgba(240, 71, 71, 0.2);
+    border-color: rgba(240, 71, 71, 0.5);
+    color: #ff4444;
+}

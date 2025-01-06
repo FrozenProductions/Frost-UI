@@ -1,7 +1,6 @@
-import FrostUI from './Menu';
-import type { CategoryData } from './components/Category';
-import { type ToastOptions, createToast } from './components/Toast';
-import type { ToggleElement } from './components/Toggle';
+import FrostUI from "./Menu";
+import { createToast } from "./components/index";
+import type { CategoryData, ToastOptions, ToggleElement } from "./types/index";
 
 class FrostManager {
     private menus: Map<string, FrostUI>;
@@ -15,9 +14,9 @@ class FrostManager {
         this.globalKeybinds = new Map();
 
         window.addEventListener(
-            'keydown',
+            "keydown",
             (e: KeyboardEvent) => {
-                if (document.activeElement?.tagName === 'INPUT') return;
+                if (document.activeElement?.tagName === "INPUT") return;
                 const action: (() => void) | undefined = this.globalKeybinds.get(e.code);
                 if (action) {
                     e.preventDefault();
@@ -29,12 +28,7 @@ class FrostManager {
         );
     }
 
-    public addMenu(
-        id: string,
-        title: string,
-        position?: { x: number; y: number },
-        toggleKey = 'ShiftRight'
-    ): FrostUI {
+    public addMenu(id: string, title: string, position?: { x: number; y: number }, toggleKey = "ShiftRight"): FrostUI {
         const menu = new FrostUI(id, title, position, toggleKey);
         this.menus.set(id, menu);
         return menu;
@@ -55,7 +49,7 @@ class FrostManager {
         if (!categoryData) return;
 
         const toggle: ToggleElement | undefined = categoryData.items.get(name) as ToggleElement;
-        if (!toggle || !('toggleState' in toggle)) return;
+        if (!toggle || !("toggleState" in toggle)) return;
 
         const bindId = `${menuId}-${category}-${name}`;
         const oldKey: string | undefined = this.keybinds.get(bindId);
@@ -65,26 +59,23 @@ class FrostManager {
             this.keybinds.delete(bindId);
         }
 
-        if (key && key !== 'None') {
+        if (key && key !== "None") {
             this.keybinds.set(bindId, key);
-            this.globalKeybinds.set(
-                key,
-                (toggle as { toggleState: () => void }).toggleState.bind(toggle)
-            );
+            this.globalKeybinds.set(key, (toggle as { toggleState: () => void }).toggleState.bind(toggle));
         }
     }
 
     private initToastContainer(): void {
         if (!this.toastContainer) {
-            this.toastContainer = document.createElement('div');
-            this.toastContainer.className = 'frost-toast-container';
+            this.toastContainer = document.createElement("div");
+            this.toastContainer.className = "frost-toast-container";
             document.body.appendChild(this.toastContainer);
         }
     }
 
     public showToast(options: string | ToastOptions): void {
         this.initToastContainer();
-        const toastOptions = typeof options === 'string' ? { message: options } : options;
+        const toastOptions = typeof options === "string" ? { message: options } : options;
         const toast = createToast(toastOptions);
         this.toastContainer?.appendChild(toast);
     }

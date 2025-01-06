@@ -1,6 +1,7 @@
 import FrostUI from "./Menu";
 import { frostManager } from "./MenuManager";
-import { Search } from "./components/Search";
+import { Search } from "./components/index";
+import "./index.css";
 
 declare global {
     interface Window {

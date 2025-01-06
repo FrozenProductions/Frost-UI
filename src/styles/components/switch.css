@@ -1,0 +1,126 @@
+.frost-switch-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 4px 0;
+    padding: 8px 10px;
+    border-radius: 6px;
+    background: var(--frost-bg-tertiary);
+    border: 1px solid var(--frost-border-color);
+    transition: all 0.2s ease;
+}
+
+.frost-switch-container:hover {
+    background: var(--frost-bg-secondary);
+    transform: translateX(4px);
+    border-color: var(--frost-accent-color);
+}
+
+.frost-switch-label {
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    color: var(--frost-text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.02em !important;
+}
+
+.frost-switch-track {
+    position: relative;
+    width: 44px;
+    height: 24px;
+    background: var(--frost-bg-secondary);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid var(--frost-border-color);
+}
+
+.frost-switch-track.active {
+    background: linear-gradient(135deg, var(--frost-accent-color), var(--frost-accent-hover));
+    border-color: var(--frost-accent-color);
+}
+
+.frost-switch-container .frost-switch-thumb {
+    position: absolute;
+    top: 50%;
+    left: 2px;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    background: white;
+    border-radius: 50%;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.frost-switch-container .frost-switch-track.active .frost-switch-thumb {
+    transform: translate(22px, -50%);
+}
+
+.frost-switch-container.slim .frost-switch-track {
+    height: 16px;
+}
+
+.frost-switch-container.slim .frost-switch-thumb {
+    width: 12px;
+    height: 12px;
+}
+
+.frost-switch-container.slim .frost-switch-track.active .frost-switch-thumb {
+    transform: translate(28px, -50%);
+}
+
+.frost-switch-container.pill .frost-switch-track {
+    border-radius: 4px;
+    height: 20px;
+}
+
+.frost-switch-container.pill .frost-switch-thumb {
+    border-radius: 2px;
+    width: 14px;
+    height: 16px;
+}
+
+.frost-switch-container.pill .frost-switch-track.active .frost-switch-thumb {
+    transform: translate(26px, -50%);
+}
+
+.frost-switch-container .frost-switch-track:active .frost-switch-thumb {
+    transform: translateY(-50%) scale(0.9);
+}
+
+.frost-switch-container .frost-switch-track.active:active .frost-switch-thumb {
+    transform: translate(22px, -50%) scale(0.9);
+}
+
+.frost-switch-container.slim .frost-switch-track.active:active .frost-switch-thumb {
+    transform: translate(28px, -50%) scale(0.9);
+}
+
+.frost-switch-container.pill .frost-switch-track.active:active .frost-switch-thumb {
+    transform: translate(26px, -50%) scale(0.9);
+}
+
+.frost-switch-ripple {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    border-radius: inherit;
+    pointer-events: none;
+}
+
+.frost-switch-ripple .ripple {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    transform: scale(0);
+    animation: switchRipple 0.6s linear;
+    pointer-events: none;
+}
+
+.frost-switch-track:hover .frost-switch-thumb {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}

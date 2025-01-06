@@ -1,0 +1,12 @@
+:root {
+    --frost-bg-primary: rgba(25, 25, 35, 0.95);
+    --frost-bg-secondary: rgba(30, 30, 40, 0.6);
+    --frost-bg-tertiary: rgba(40, 40, 50, 0.4);
+    --frost-border-color: rgba(255, 255, 255, 0.1);
+    --frost-text-primary: rgba(255, 255, 255, 0.9);
+    --frost-text-secondary: rgba(255, 255, 255, 0.7);
+    --frost-accent-color: #7289da;
+    --frost-accent-hover: #5b6eaf;
+    --frost-shadow-color: rgba(0, 0, 0, 0.2);
+    --frost-ripple-color: rgba(255, 255, 255, 0.7);
+} 

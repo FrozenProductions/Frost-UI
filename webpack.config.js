@@ -31,7 +31,7 @@ module.exports = {
         filename: 'Library.js',
         path: path.resolve(__dirname, 'dist'),
         library: {
-            name: 'FCPMenu',
+            name: 'FrostMenu',
             type: 'umd',
             export: 'default'
         },

@@ -1,30 +1,45 @@
-import { type ButtonElement, type ButtonVariant, createButton } from "./components/Button";
-import { type CategoryData, createCategory } from "./components/Category";
-import { type ChartElement, type ChartOptions, createChart } from "./components/Chart";
-import { type ColorInputElement, createColorInput } from "./components/ColorInput";
-import { type DualSliderElement, type DualSliderOptions, createDualSlider } from "./components/DualSlider";
-import { type GridItem, type GridSelectorElement, createGridSelector } from "./components/GridSelector";
-import { type MultiSelectElement, createMultiSelect } from "./components/MultiSelect";
-import { type OrderListElement, createOrderList } from "./components/OrderList";
-import { type PageSelectorElement, createPageSelector } from "./components/PageSelector";
-import { type RadioGroupElement, createRadioGroup } from "./components/RadioGroup";
-import { type SelectElement, createSelect } from "./components/Select";
-import { type SliderElement, type SliderOptions, createSlider } from "./components/Slider";
-import { type SwitchElement, type SwitchVariant, createSwitch } from "./components/Switch";
-import { type ToggleCallback, type ToggleElement, createToggle } from "./components/Toggle";
-import "./core.css";
-
-interface Position {
-    x: number;
-    y: number;
-}
-
-interface DragOffset {
-    x: number;
-    y: number;
-}
-
-export type FrostTheme = "dark" | "midnight" | "nord" | string;
+import {
+    createButton,
+    createCategory,
+    createChart,
+    createColorInput,
+    createDualSlider,
+    createGridSelector,
+    createMultiSelect,
+    createOrderList,
+    createPageSelector,
+    createRadioGroup,
+    createSelect,
+    createSlider,
+    createSwitch,
+    createToggle,
+} from "./components/index";
+import type {
+    ButtonElement,
+    ButtonVariant,
+    CategoryData,
+    ChartElement,
+    ChartOptions,
+    ColorInputElement,
+    DragOffset,
+    DualSliderElement,
+    DualSliderOptions,
+    FrostTheme,
+    GridItem,
+    GridSelectorElement,
+    MultiSelectElement,
+    OrderListElement,
+    PageSelectorElement,
+    Position,
+    RadioGroupElement,
+    SelectElement,
+    SliderElement,
+    SliderOptions,
+    SwitchElement,
+    SwitchVariant,
+    ToggleCallback,
+    ToggleElement,
+} from "./types/index";
 
 class FrostUI {
     private id: string;

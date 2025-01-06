@@ -1,0 +1,169 @@
+@keyframes menuSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes menuSlideOut {
+    from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+@keyframes buttonRipple {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 0.6;
+    }
+
+    100% {
+        width: 500px;
+        height: 500px;
+        opacity: 0;
+    }
+}
+
+@keyframes pageValueSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pageValueSlideOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+}
+
+@keyframes radioScale {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes radioRipple {
+    0% {
+        box-shadow: 0 0 0 0 rgba(114, 137, 218, 0.3);
+    }
+
+    100% {
+        box-shadow: 0 0 0 20px rgba(114, 137, 218, 0);
+    }
+}
+
+@keyframes frost-glow {
+    0% {
+        outline-color: var(--frost-accent-color);
+        outline-offset: -1px;
+    }
+    50% {
+        outline-color: var(--frost-accent-color);
+        outline-offset: 3px;
+    }
+    100% {
+        outline-color: var(--frost-accent-color);
+        outline-offset: -1px;
+    }
+}
+
+@keyframes shake {
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+    20%,
+    60% {
+        transform: translateX(-4px);
+    }
+    40%,
+    80% {
+        transform: translateX(4px);
+    }
+}
+
+@keyframes switchRipple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+@keyframes toastSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes toastSlideOut {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
