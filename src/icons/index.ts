@@ -20,6 +20,10 @@ const icons = {
     page_left: `<svg xmlns="http://www.w3.org/2000/svg" height="12" width="12" viewBox="0 0 12 12"><title>left arrow 3</title><g fill="#ffffff" class="nc-icon-wrapper"><path d="M8.47 12.05a0.38 0.38 0 0 0 0.54 0l0.38-0.38a0.38 0.38 0 0 0 0-0.54l-5.05-5.05 5.05-5.05a0.38 0.38 0 0 0 0-0.54l-0.38-0.38a0.38 0.38 0 0 0-0.54 0l-5.7 5.7a0.38 0.38 0 0 0 0 0.54z" fill="#ffffff"></path></g></svg>`,
 
     page_right: `<svg xmlns="http://www.w3.org/2000/svg" height="12" width="12" viewBox="0 0 12 12"><title>right arrow 3</title><g fill="#ffffff" class="nc-icon-wrapper"><path d="M2.77 11.67l0.38 0.38a0.38 0.38 0 0 0 0.54 0l5.7-5.7a0.38 0.38 0 0 0 0-0.54l-5.7-5.7a0.38 0.38 0 0 0-0.54 0l-0.38 0.38a0.38 0.38 0 0 0 0 0.54l5.05 5.05-5.05 5.05a0.38 0.38 0 0 0 0 0.54z" fill="#ffffff"></path></g></svg>`,
+
+    category: `<svg xmlns="http://www.w3.org/2000/svg" height="12" width="12" viewBox="0 0 12 12"><title>book</title><g stroke-linejoin="miter" fill="#ffffff" stroke-linecap="butt" class="nc-icon-wrapper"><path fill="none" stroke="#ffffff" stroke-miterlimit="10" stroke-width="2" data-color="color-2" d="M6 3v7.5"></path><path d="M8.75 1.5c-1.5 0-2.75 0.65-2.75 1.5 0-0.85-1.25-1.5-2.75-1.5s-2.75 0.65-2.75 1.5v7.5c0-0.85 1.25-1.5 2.75-1.5s2.75 0.65 2.75 1.5c0-0.85 1.25-1.5 2.75-1.5s2.75 0.65 2.75 1.5v-7.5c0-0.85-1.25-1.5-2.75-1.5z" fill="none" stroke="#ffffff" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2"></path></g></svg>`,
+
+    item: `<svg xmlns="http://www.w3.org/2000/svg" height="12" width="12" viewBox="0 0 12 12"><title>bookmark</title><g stroke-linejoin="miter" fill="#ffffff" stroke-linecap="butt" class="nc-icon-wrapper"><path d="M10 11l-4-2.5-4 2.5v-9a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v9z" fill="none" stroke="#ffffff" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2"></path></g></svg>`,
 };
 
 export default icons;

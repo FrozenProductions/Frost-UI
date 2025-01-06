@@ -99,6 +99,15 @@
         'ShiftRight'
     );
 
+    const search = new window.FrostSearch({
+        "Combat Menu": combatMenu,
+        "Movement Menu": movementMenu,
+        "Render Menu": renderMenu,
+        "World Menu": worldMenu
+    }, "k")
+
+    //search.setTheme("nord")
+
     /*━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
      *  Combat Menu Setup
      *━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━*/

@@ -106,11 +106,15 @@ class FrostUI {
         });
     }
 
+    public isMenuOpen(): boolean {
+        return this.isOpen;
+    }
+
     public setToggleKey(key: string): void {
         this.toggleKey = key;
     }
 
-    private toggle(): void {
+    public toggle(): void {
         this.isOpen = !this.isOpen;
         if (this.isOpen) {
             this.container.style.display = "block";
@@ -409,7 +413,7 @@ class FrostUI {
     public setTheme(theme: FrostTheme): this {
         if (!this.container) return this;
 
-        const themeClasses = Array.from(this.container.classList).filter((className) =>
+        const themeClasses: string[] = Array.from(this.container.classList).filter((className: string) =>
             className.startsWith("frost-theme-")
         );
         for (const className of themeClasses) {
@@ -420,6 +424,10 @@ class FrostUI {
             this.container.classList.add(`frost-theme-${theme}`);
         }
         return this;
+    }
+
+    public getContainer(): HTMLDivElement {
+        return this.container;
     }
 }
 export default FrostUI;
