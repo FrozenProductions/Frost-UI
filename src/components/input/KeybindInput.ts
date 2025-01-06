@@ -1,6 +1,7 @@
+import type { FrostUI, Search } from "../..";
 import type { KeybindCallback, KeybindInputElement } from "../../types/index";
 
-function createKeybindInput(currentKey?: string, callback?: KeybindCallback): KeybindInputElement {
+function createKeybindInput(currentKey?: string, callback?: KeybindCallback, menuId?: string): KeybindInputElement {
     const keybindInput = document.createElement("div") as KeybindInputElement;
     keybindInput.className = "frost-keybind";
 
@@ -17,6 +18,21 @@ function createKeybindInput(currentKey?: string, callback?: KeybindCallback): Ke
     keybindInput.appendChild(clearButton);
 
     let isBinding = false;
+
+    const checkKeyConflicts = (key: string): boolean => {
+        const menus: Map<string, FrostUI> = window.frostManager?.getMenus() || new Map();
+        for (const [id, menu] of menus) {
+            if (id !== menuId && menu.getToggleKey() === key) {
+                return true;
+            }
+        }
+
+        if (window.frostManager?.hasKeybind(key)) {
+            return true;
+        }
+
+        return false;
+    };
 
     keybindInput.addEventListener("click", (e: MouseEvent) => {
         const target = e.target as HTMLElement;
@@ -41,14 +57,30 @@ function createKeybindInput(currentKey?: string, callback?: KeybindCallback): Ke
 
             e.preventDefault();
             e.stopPropagation();
+            e.stopImmediatePropagation();
+
+            if (e.ctrlKey || e.metaKey || e.altKey || e.shiftKey) {
+                keyDisplay.textContent = currentKey || "None";
+                clearButton.style.display = currentKey ? "block" : "none";
+                isBinding = false;
+                keybindInput.classList.remove("binding");
+                return;
+            }
 
             const key: string = e.code;
-            keyDisplay.textContent = key;
-            clearButton.style.display = "block";
+            const hasConflict = checkKeyConflicts(key);
+
+            if (hasConflict) {
+                keyDisplay.textContent = currentKey || "None";
+                clearButton.style.display = currentKey ? "block" : "none";
+            } else {
+                keyDisplay.textContent = key;
+                clearButton.style.display = "block";
+                if (callback) callback(key);
+            }
+
             isBinding = false;
             keybindInput.classList.remove("binding");
-
-            if (callback) callback(key);
         },
         true
     );

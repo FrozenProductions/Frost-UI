@@ -1,5 +1,5 @@
 import FrostUI from "./Menu";
-import { createToast } from "./components/index";
+import { type Search, createToast } from "./components/index";
 import type { CategoryData, ToastOptions, ToggleElement } from "./types/index";
 
 class FrostManager {
@@ -7,6 +7,7 @@ class FrostManager {
     private keybinds: Map<string, string>;
     private globalKeybinds: Map<string, () => void>;
     private toastContainer: HTMLDivElement | null = null;
+    private search: Search | null = null;
 
     constructor() {
         this.menus = new Map();
@@ -17,6 +18,11 @@ class FrostManager {
             "keydown",
             (e: KeyboardEvent) => {
                 if (document.activeElement?.tagName === "INPUT") return;
+                if (e.ctrlKey || e.metaKey || e.altKey || e.shiftKey) return;
+
+                const bindingInput: HTMLInputElement | null = document.querySelector(".frost-keybind.binding");
+                if (bindingInput) return;
+
                 const action: (() => void) | undefined = this.globalKeybinds.get(e.code);
                 if (action) {
                     e.preventDefault();
@@ -78,6 +84,46 @@ class FrostManager {
         const toastOptions = typeof options === "string" ? { message: options } : options;
         const toast = createToast(toastOptions);
         this.toastContainer?.appendChild(toast);
+    }
+
+    public getMenus(): Map<string, FrostUI> {
+        return this.menus;
+    }
+
+    public getSearch(): Search | null {
+        return this.search;
+    }
+
+    public setSearch(search: Search): void {
+        this.search = search;
+    }
+
+    public hasKeybind(key: string): boolean {
+        return this.globalKeybinds.has(key);
+    }
+
+    public tryBindKey(currentMenuId: string, key: string): boolean {
+        for (const [id, menu] of this.menus) {
+            if (id !== currentMenuId && menu.getToggleKey() === key) {
+                this.showToast({
+                    message: `Key "${key}" is already used to toggle menu "${menu.getTitle()}"`,
+                    type: "error",
+                    duration: 3000,
+                });
+                return false;
+            }
+        }
+
+        if (this.globalKeybinds.has(key)) {
+            this.showToast({
+                message: `Key "${key}" is already bound to another action`,
+                type: "error",
+                duration: 3000,
+            });
+            return false;
+        }
+
+        return true;
     }
 }
 

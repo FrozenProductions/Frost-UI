@@ -69,6 +69,9 @@ class FrostUI {
             "keydown",
             (e: KeyboardEvent) => {
                 if (e.code === this.toggleKey && !e.repeat) {
+                    const bindingInput: HTMLInputElement | null = document.querySelector(".frost-keybind.binding");
+                    if (bindingInput) return;
+
                     e.preventDefault();
                     e.stopPropagation();
                     this.toggle();
@@ -127,6 +130,14 @@ class FrostUI {
 
     public setToggleKey(key: string): void {
         this.toggleKey = key;
+    }
+
+    public getToggleKey(): string {
+        return this.toggleKey;
+    }
+
+    public getTitle(): string {
+        return this.title;
     }
 
     public toggle(): void {

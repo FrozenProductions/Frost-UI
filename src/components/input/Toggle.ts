@@ -30,9 +30,13 @@ function createToggle(
         if (callback) callback(isActive, currentKey);
     };
 
-    const keybindInput: HTMLDivElement = createKeybindInput(keybind, (newKey: string | null) => {
-        window.frostManager.updateKeybind(menuId, category, name, newKey || "");
-    });
+    const keybindInput: HTMLDivElement = createKeybindInput(
+        keybind,
+        (newKey: string | null) => {
+            window.frostManager.updateKeybind(menuId, category, name, newKey || "");
+        },
+        menuId
+    );
 
     setTimeout(() => {
         if (keybind) {

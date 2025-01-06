@@ -25,13 +25,16 @@ export class Search {
             for (const [name, menu] of Object.entries(menuOrMenus)) {
                 this.menus.set(name, menu);
             }
-            const firstMenu = Object.values(menuOrMenus)[0];
+            const firstMenu: Menu = Object.values(menuOrMenus)[0];
             if (firstMenu) {
                 this.setTheme(this.getThemeFromMenu(firstMenu));
             }
         }
         this.createSearchUI();
         this.setupEventListeners();
+        if (window.frostManager) {
+            window.frostManager.setSearch(this);
+        }
     }
 
     public setKeybind(key: string): void {
@@ -59,7 +62,7 @@ export class Search {
     }
 
     public setTheme(theme: FrostTheme): void {
-        const themeClasses: string[] = Array.from(this.container.classList).filter((className) =>
+        const themeClasses: string[] = Array.from(this.container.classList).filter((className: string) =>
             className.startsWith("frost-theme-")
         );
         for (const className of themeClasses) {
