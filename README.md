@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="/assets/Logo.png" alt="Frost-UI logo" width="220" />
+</p>
+
 <div align="center">
 
 # Frost-UI
@@ -23,35 +27,34 @@ Frost-UI is an elegant and lightweight UI library designed specifically for user
 
 ### Interactive Components
 
--   **Core Elements**
+- **Core Elements**
+  - Draggable Menus with Snap-to-Grid
+  - Toast Notifications
+  - Modal Dialogs
+  - Toggle Switches
+  - Sliders
+  - Dual Sliders
+  - Buttons
+  - Radio Groups
+  - Themes
 
-    -   Draggable Menus with Snap-to-Grid
-    -   Toast Notifications
-    -   Modal Dialogs
-    -   Toggle Switches
-    -   Sliders
-    -   Dual Sliders
-    -   Buttons
-    -   Radio Groups
-    -   Themes
-
--   **Advanced Inputs**
-    -   Keybind Controls
-    -   Dropdown Selectors
-    -   Multi-select Menus
-    -   Color Pickers
-    -   Page Navigation
-    -   Order Lists
-    -   Charts
-    -   Grid Selectors
-    -   Search Menu
+- **Advanced Inputs**
+  - Keybind Controls
+  - Dropdown Selectors
+  - Multi-select Menus
+  - Color Pickers
+  - Page Navigation
+  - Order Lists
+  - Charts
+  - Grid Selectors
+  - Search Menu
 
 ### Smart Management
 
--   Organized Category System
--   Automatic Configuration Saving
--   Keyboard Shortcut Support
--   Intelligent DOM Cleanup
+- Organized Category System
+- Automatic Configuration Saving
+- Keyboard Shortcut Support
+- Intelligent DOM Cleanup
 
 ## 🚀 Getting Started
 
@@ -65,25 +68,25 @@ Frost-UI is an elegant and lightweight UI library designed specifically for user
 
 ```javascript
 const menu = window.frostManager.addMenu(
-    "uniqueId", // Unique identifier for the menu
-    "Menu Title", // Display title
-    { x: 100, y: 100 }, // Initial position (optional)
-    "ShiftRight", // Toggle key (optional, defaults to 'ShiftRight')
-    { enabled: true, gridSize: 20, showGrid: true } // Snap-to-grid config (optional)
+  "uniqueId", // Unique identifier for the menu
+  "Menu Title", // Display title
+  { x: 100, y: 100 }, // Initial position (optional)
+  "ShiftRight", // Toggle key (optional, defaults to 'ShiftRight')
+  { enabled: true, gridSize: 20, showGrid: true }, // Snap-to-grid config (optional)
 );
 ```
 
 ## 💡 Key Features
 
--   **Intuitive Controls**: Toggle menus with ShiftRight (customizable)
--   **Smart Keybinds**: Automatic keybind conflict resolution
--   **Event System**: Comprehensive callback support
--   **Clean Design**: Automatic resource management
+- **Intuitive Controls**: Toggle menus with ShiftRight (customizable)
+- **Smart Keybinds**: Automatic keybind conflict resolution
+- **Event System**: Comprehensive callback support
+- **Clean Design**: Automatic resource management
 
 ## 📚 Resources
 
--   [Full Documentation](DOCUMENTATION.md)
--   [Example Script](https://raw.githubusercontent.com/FrozenProductions/Frost-UI/main/scripts/example.user.js)
+- [Full Documentation](DOCUMENTATION.md)
+- [Example Script](https://raw.githubusercontent.com/FrozenProductions/Frost-UI/main/scripts/example.user.js)
 
 <div align="center">
 
