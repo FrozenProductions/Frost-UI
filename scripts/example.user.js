@@ -111,6 +111,17 @@
     });
 
     /*━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     *  Frost-UI Global Configuration
+     *━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━*/
+
+    // Configure Frost-UI global settings
+    window.frostManager.setConfig({
+        dimOnMenuOpen: false,       // Dim background when any menu is open
+        blurOnMenuOpen: false,      // Blur background when any menu is open
+        rememberPositions: false,   // Save menu positions across page reloads
+    });
+
+    /*━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
      *  Combat Menu Setup
      *━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━*/
 
@@ -521,7 +532,21 @@
                     theme: window.frostManager.themes.NORD
                 });
             }
-        );
+        )
+        .addCategory('UI Settings')
+        .addToggle('UI Settings', 'Dim Background', (enabled) => {
+            const config = window.frostManager.getConfig();
+            window.frostManager.setConfig({ ...config, dimOnMenuOpen: enabled });
+        })
+        .addToggle('UI Settings', 'Blur Background', (enabled) => {
+            const config = window.frostManager.getConfig();
+            window.frostManager.setConfig({ ...config, blurOnMenuOpen: enabled });
+        })
+        .addToggle('UI Settings', 'Remember Positions', (enabled) => {
+            const config = window.frostManager.getConfig();
+            window.frostManager.setConfig({ ...config, rememberPositions: enabled });
+        });
+
     let playerCount = 50;
     let mobCount = 30;
 

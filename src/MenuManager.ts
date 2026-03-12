@@ -1,6 +1,7 @@
 import FrostUI from './Menu';
 import { type Search, createModal, createToast } from './components/index';
 import { DEFAULT_FROST_CONFIG, STORAGE_KEY_CONFIG } from './types/config';
+import { themes, buttonVariant, toastType, modalCloseOn } from './constants';
 import type {
     CategoryData,
     FrostConfig,
@@ -10,44 +11,6 @@ import type {
     ToastOptions,
     ToggleElement,
 } from './types/index';
-
-class FrostManagerConstants {
-    static readonly themes = {
-        DARK: 'dark',
-        MIDNIGHT: 'midnight',
-        NORD: 'nord',
-        DEEP: 'deep',
-        OBSIDIAN: 'obsidian',
-        DUSK: 'dusk',
-        CATPPUCCIN_MACCHIATO: 'catppuccin-macchiato',
-        CATPPUCCIN_LATTE: 'catppuccin-latte',
-        DRACULA: 'dracula',
-        GRUVBOX: 'gruvbox',
-        TOKYO_NIGHT: 'tokyo-night',
-    } as const;
-
-    static readonly buttonVariant = {
-        DEFAULT: 'default',
-        PRIMARY: 'primary',
-        DESTRUCTIVE: 'destructive',
-    } as const;
-
-    static readonly toastType = {
-        SUCCESS: 'success',
-        ERROR: 'error',
-        INFO: 'info',
-        WARNING: 'warning',
-    } as const;
-}
-
-class FrostManagerModalConstants {
-    static readonly closeOn = {
-        BUTTON: 'button',
-        ESCAPE: 'escape',
-        BACKDROP: 'backdrop',
-        ANY: 'any',
-    } as const;
-}
 
 class FrostManager {
     private menus: Map<string, FrostUI>;
@@ -60,12 +23,10 @@ class FrostManager {
     private openMenuCount = 0;
     private config: FrostConfig;
 
-    static readonly modal = FrostManagerModalConstants;
-
-    readonly themes = FrostManagerConstants.themes;
-    readonly buttonVariant = FrostManagerConstants.buttonVariant;
-    readonly toastType = FrostManagerConstants.toastType;
-    readonly modal = FrostManagerModalConstants;
+    readonly themes = themes;
+    readonly buttonVariant = buttonVariant;
+    readonly toastType = toastType;
+    readonly modal = { closeOn: modalCloseOn };
 
     constructor() {
         this.menus = new Map();
