@@ -2,6 +2,36 @@ import FrostUI from './Menu';
 import { type Search, createModal, createToast } from './components/index';
 import type { CategoryData, GridConfig, ModalOptions, ModalResult, ToastOptions, ToggleElement } from './types/index';
 
+class FrostManagerModalConstants {
+    static readonly themes = {
+        DARK: 'dark',
+        MIDNIGHT: 'midnight',
+        NORD: 'nord',
+    } as const;
+
+    static readonly closeOn = {
+        BUTTON: 'button',
+        ESCAPE: 'escape',
+        BACKDROP: 'backdrop',
+        ANY: 'any',
+    } as const;
+}
+
+class FrostManagerConstants {
+    static readonly buttonVariant = {
+        DEFAULT: 'default',
+        PRIMARY: 'primary',
+        DESTRUCTIVE: 'destructive',
+    } as const;
+
+    static readonly toastType = {
+        SUCCESS: 'success',
+        ERROR: 'error',
+        INFO: 'info',
+        WARNING: 'warning',
+    } as const;
+}
+
 class FrostManager {
     private menus: Map<string, FrostUI>;
     private keybinds: Map<string, string>;
@@ -9,6 +39,12 @@ class FrostManager {
     private toastContainer: HTMLDivElement | null = null;
     private modalContainer: HTMLDivElement | null = null;
     private search: Search | null = null;
+
+    static readonly modal = FrostManagerModalConstants;
+
+    readonly modal = FrostManagerModalConstants;
+    readonly buttonVariant = FrostManagerConstants.buttonVariant;
+    readonly toastType = FrostManagerConstants.toastType;
 
     constructor() {
         this.menus = new Map();

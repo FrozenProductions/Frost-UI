@@ -371,13 +371,13 @@
                     title: 'Delete Item',
                     message: 'Are you sure you want to delete this item? This action cannot be undone.',
                     buttons: [
-                        { text: 'Cancel', variant: 'default', result: 'cancel' },
-                        { text: 'Delete', variant: 'destructive', result: 'delete' }
+                        { text: 'Cancel', variant: window.frostManager.buttonVariant.DEFAULT, result: 'cancel' },
+                        { text: 'Delete', variant: window.frostManager.buttonVariant.DESTRUCTIVE, result: 'delete' }
                     ]
                 });
                 window.frostManager.showToast({
                     message: `Result: ${result}`,
-                    type: result === 'delete' ? 'success' : 'info',
+                    type: result === 'delete' ? window.frostManager.toastType.SUCCESS : window.frostManager.toastType.INFO,
                     duration: 2000
                 });
             },
@@ -391,14 +391,14 @@
                     title: 'Critical Decision',
                     message: 'You must choose an option to continue:',
                     buttons: [
-                        { text: 'Option A', variant: 'default', result: 'a' },
-                        { text: 'Option B', variant: 'primary', result: 'b' }
+                        { text: 'Option A', variant: window.frostManager.buttonVariant.DEFAULT, result: 'a' },
+                        { text: 'Option B', variant: window.frostManager.buttonVariant.PRIMARY, result: 'b' }
                     ],
-                    closeOn: ['button']
+                    closeOn: [window.frostManager.modal.closeOn.BUTTON]
                 });
                 window.frostManager.showToast({
                     message: `Selected: ${result}`,
-                    type: 'success',
+                    type: window.frostManager.toastType.SUCCESS,
                     duration: 2000
                 });
             }
@@ -410,7 +410,7 @@
                 await window.frostManager.showModal({
                     title: 'Notice',
                     message: 'Click anywhere outside this modal to close it.',
-                    closeOn: ['backdrop']
+                    closeOn: [window.frostManager.modal.closeOn.BACKDROP]
                 });
             }
         )
@@ -422,12 +422,12 @@
                     title: 'Welcome',
                     message: 'Press the button below to continue.',
                     buttons: [
-                        { text: 'Continue', variant: 'primary', result: 'continue' }
+                        { text: 'Continue', variant: window.frostManager.buttonVariant.PRIMARY, result: 'continue' }
                     ]
                 });
                 window.frostManager.showToast({
                     message: `Result: ${result}`,
-                    type: 'success',
+                    type: window.frostManager.toastType.SUCCESS,
                     duration: 2000
                 });
             }
@@ -440,13 +440,13 @@
                     title: 'Press Escape',
                     message: 'Close this modal by pressing the Escape key.',
                     buttons: [
-                        { text: 'OK', variant: 'default', result: 'ok' }
+                        { text: 'OK', variant: window.frostManager.buttonVariant.DEFAULT, result: 'ok' }
                     ],
-                    closeOn: ['escape', 'button']
+                    closeOn: [window.frostManager.modal.closeOn.ESCAPE, window.frostManager.modal.closeOn.BUTTON]
                 });
                 window.frostManager.showToast({
                     message: result ? `Button pressed: ${result}` : 'Closed via Escape',
-                    type: 'info',
+                    type: window.frostManager.toastType.INFO,
                     duration: 2000
                 });
             }
@@ -459,7 +459,7 @@
                     title: 'No Dim',
                     message: 'This modal has no backdrop dimming.',
                     buttons: [
-                        { text: 'Close', variant: 'default', result: 'close' }
+                        { text: 'Close', variant: window.frostManager.buttonVariant.DEFAULT, result: 'close' }
                     ],
                     dim: false
                 });
@@ -473,7 +473,7 @@
                     title: 'No Blur',
                     message: 'This modal has no backdrop blur.',
                     buttons: [
-                        { text: 'Close', variant: 'default', result: 'close' }
+                        { text: 'Close', variant: window.frostManager.buttonVariant.DEFAULT, result: 'close' }
                     ],
                     blur: false
                 });
@@ -487,7 +487,7 @@
                     title: 'No Effects',
                     message: 'This modal has neither dim nor blur effects.',
                     buttons: [
-                        { text: 'Close', variant: 'default', result: 'close' }
+                        { text: 'Close', variant: window.frostManager.buttonVariant.DEFAULT, result: 'close' }
                     ],
                     dim: false,
                     blur: false
@@ -502,9 +502,9 @@
                     title: 'Midnight Theme',
                     message: 'This modal uses the midnight theme.',
                     buttons: [
-                        { text: 'Close', variant: 'default', result: 'close' }
+                        { text: 'Close', variant: window.frostManager.buttonVariant.DEFAULT, result: 'close' }
                     ],
-                    theme: 'midnight'
+                    theme: window.frostManager.modal.themes.MIDNIGHT
                 });
             }
         )
@@ -516,9 +516,9 @@
                     title: 'Nord Theme',
                     message: 'This modal uses the nord theme.',
                     buttons: [
-                        { text: 'Close', variant: 'default', result: 'close' }
+                        { text: 'Close', variant: window.frostManager.buttonVariant.DEFAULT, result: 'close' }
                     ],
-                    theme: 'nord'
+                    theme: window.frostManager.modal.themes.NORD
                 });
             }
         );

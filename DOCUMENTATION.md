@@ -787,23 +787,53 @@ search.setTheme(mainMenu.getTheme());
 The Modal component provides centered dialog overlays for user confirmations, alerts, and custom interactions:
 
 ```javascript
+const manager = window.frostManager;
+
 // Basic modal with buttons
-const result = await frostManager.showModal({
+const result = await manager.showModal({
     title: 'Confirm Action',
     message: 'Are you sure you want to proceed?',
     buttons: [
-        { text: 'Cancel', variant: 'default', result: 'cancel' },
-        { text: 'Confirm', variant: 'primary', result: 'confirm' }
+        { text: 'Cancel', variant: manager.buttonVariant.DEFAULT, result: 'cancel' },
+        { text: 'Confirm', variant: manager.buttonVariant.PRIMARY, result: 'confirm' }
     ]
 });
 console.log(result); // 'cancel', 'confirm', or null (if dismissed)
 
 // Info-only modal (no buttons)
-await frostManager.showModal({
+await manager.showModal({
     title: 'Notice',
     message: 'Click outside to close',
-    closeOn: ['backdrop']
+    closeOn: [manager.modal.closeOn.BACKDROP]
 });
+```
+
+#### Type Constants
+
+Frost-UI provides type constants for better autocomplete and type safety:
+
+```javascript
+// Theme constants
+manager.modal.themes.DARK      // 'dark'
+manager.modal.themes.MIDNIGHT  // 'midnight'
+manager.modal.themes.NORD      // 'nord'
+
+// Close method constants
+manager.modal.closeOn.BUTTON   // 'button'
+manager.modal.closeOn.ESCAPE   // 'escape'
+manager.modal.closeOn.BACKDROP // 'backdrop'
+manager.modal.closeOn.ANY      // 'any'
+
+// Button variant constants
+manager.buttonVariant.DEFAULT     // 'default'
+manager.buttonVariant.PRIMARY     // 'primary'
+manager.buttonVariant.DESTRUCTIVE // 'destructive'
+
+// Toast type constants
+manager.toastType.SUCCESS // 'success'
+manager.toastType.ERROR   // 'error'
+manager.toastType.INFO    // 'info'
+manager.toastType.WARNING // 'warning'
 ```
 
 #### Modal Options
@@ -813,17 +843,17 @@ await frostManager.showModal({
 | `title` | `string` | *required* | Modal title text |
 | `message` | `string` | *required* | Modal content message |
 | `buttons` | `ModalButton[]` | `[]` | Array of button objects (0-2 buttons) |
-| `closeOn` | `ModalCloseMethod[]` | `['any']` | How modal can be closed |
+| `closeOn` | `ModalCloseMethod[]` | `[manager.modal.closeOn.ANY]` | How modal can be closed |
 | `dim` | `boolean` | `true` | Enable backdrop darkening |
 | `blur` | `boolean` | `true` | Enable backdrop blur effect |
-| `theme` | `string` | *auto-detect* | Theme to apply (`'dark'`, `'midnight'`, `'nord'`, or custom) |
+| `theme` | `string` | *auto-detect* | Theme to apply (use `manager.modal.themes.*`) |
 
 #### Modal Button
 
 | Property | Type | Default | Description |
 | -------- | ------ | ------- | ----------- |
 | `text` | `string` | *required* | Button label |
-| `variant` | `'default'` \| `'primary'` \| `'destructive'` | `'default'` | Button style variant |
+| `variant` | `'default'` \| `'primary'` \| `'destructive'` | `manager.buttonVariant.DEFAULT` | Button style variant |
 | `result` | `string` | *button text* | Value returned when this button is clicked |
 
 #### Close Methods
@@ -855,12 +885,12 @@ The `showModal()` method returns a `Promise<string | null>`:
 
 ```javascript
 // Confirmation dialog
-const result = await frostManager.showModal({
+const result = await manager.showModal({
     title: 'Delete Item',
     message: 'This action cannot be undone.',
     buttons: [
-        { text: 'Cancel', result: 'cancel' },
-        { text: 'Delete', variant: 'destructive', result: 'delete' }
+        { text: 'Cancel', variant: manager.buttonVariant.DEFAULT, result: 'cancel' },
+        { text: 'Delete', variant: manager.buttonVariant.DESTRUCTIVE, result: 'delete' }
     ]
 });
 if (result === 'delete') {
@@ -868,19 +898,19 @@ if (result === 'delete') {
 }
 
 // Force button choice (no escape/backdrop)
-const choice = await frostManager.showModal({
+const choice = await manager.showModal({
     title: 'Required Choice',
     message: 'You must select an option:',
     buttons: [
         { text: 'Option A', result: 'a' },
         { text: 'Option B', result: 'b' }
     ],
-    closeOn: ['button'] // Only buttons can close
+    closeOn: [manager.modal.closeOn.BUTTON]
 });
 // choice is guaranteed to be 'a' or 'b', never null
 
 // No visual effects
-await frostManager.showModal({
+await manager.showModal({
     title: 'Subtle Notice',
     message: 'No backdrop effects applied',
     dim: false,
@@ -888,26 +918,26 @@ await frostManager.showModal({
 });
 
 // Explicit theme
-await frostManager.showModal({
+await manager.showModal({
     title: 'Themed Modal',
     message: 'Using midnight theme',
     buttons: [{ text: 'Close', result: 'close' }],
-    theme: 'midnight'
+    theme: manager.modal.themes.MIDNIGHT
 });
 
 // Close on specific methods only
-await frostManager.showModal({
+await manager.showModal({
     title: 'Escape or Backdrop',
     message: 'Close via Escape key or backdrop click',
-    closeOn: ['escape', 'backdrop']
+    closeOn: [manager.modal.closeOn.ESCAPE, manager.modal.closeOn.BACKDROP]
 });
 
 // Single button
-const confirmed = await frostManager.showModal({
+const confirmed = await manager.showModal({
     title: 'Welcome',
     message: 'Press Continue to proceed',
     buttons: [
-        { text: 'Continue', variant: 'primary', result: 'continue' }
+        { text: 'Continue', variant: manager.buttonVariant.PRIMARY, result: 'continue' }
     ]
 });
 ```
@@ -917,14 +947,14 @@ const confirmed = await frostManager.showModal({
 ```javascript
 // Async confirmation with error handling
 try {
-    const result = await frostManager.showModal({
+    const result = await manager.showModal({
         title: 'Save Changes',
         message: 'Do you want to save your changes before exiting?',
         buttons: [
-            { text: "Don't Save", variant: 'default', result: 'discard' },
-            { text: 'Save', variant: 'primary', result: 'save' }
+            { text: "Don't Save", variant: manager.buttonVariant.DEFAULT, result: 'discard' },
+            { text: 'Save', variant: manager.buttonVariant.PRIMARY, result: 'save' }
         ],
-        closeOn: ['button', 'escape'] // Allow escape to cancel
+        closeOn: [manager.modal.closeOn.BUTTON, manager.modal.closeOn.ESCAPE]
     });
 
     if (result === 'save') {
@@ -943,9 +973,9 @@ try {
 }
 
 // With custom theme per modal
-const themes = ['dark', 'midnight', 'nord'];
+const themes = [manager.modal.themes.DARK, manager.modal.themes.MIDNIGHT, manager.modal.themes.NORD];
 for (const theme of themes) {
-    await frostManager.showModal({
+    await manager.showModal({
         title: `${theme.charAt(0).toUpperCase() + theme.slice(1)} Theme`,
         message: `This modal uses the ${theme} theme`,
         buttons: [{ text: 'Next', result: 'next' }],
@@ -1067,20 +1097,20 @@ manager.updateKeybind(
 
 // Show toast notification
 manager.showToast("Operation completed");
-// or with options
+// or with options (using constants for type safety)
 manager.showToast({
     message: "Settings saved",
-    type: "success", // 'success' | 'error' | 'info' | 'warning'
-    duration: 3000, // Duration in milliseconds
+    type: manager.toastType.SUCCESS,
+    duration: 3000,
 });
 
-// Show modal dialog
+// Show modal dialog (using constants)
 const result = await manager.showModal({
     title: "Confirm Action",
     message: "Are you sure you want to proceed?",
     buttons: [
-        { text: "Cancel", result: "cancel" },
-        { text: "Confirm", variant: "primary", result: "confirm" }
+        { text: "Cancel", variant: manager.buttonVariant.DEFAULT, result: "cancel" },
+        { text: "Confirm", variant: manager.buttonVariant.PRIMARY, result: "confirm" }
     ]
 });
 console.log(result); // 'cancel', 'confirm', or null
