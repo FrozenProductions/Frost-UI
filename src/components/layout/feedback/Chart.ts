@@ -1,4 +1,4 @@
-import type { ChartElement, ChartOptions } from "../../../types/index";
+import type { ChartElement, ChartOptions } from '../../../types/index';
 
 function createChart({
     name,
@@ -14,25 +14,25 @@ function createChart({
         data: s.data?.length === maxDataPoints ? s.data : Array(maxDataPoints).fill(0),
     }));
 
-    const container = document.createElement("div") as ChartElement;
-    container.className = "frost-chart";
+    const container = document.createElement('div') as ChartElement;
+    container.className = 'frost-chart';
 
-    const title: HTMLSpanElement = document.createElement("span");
-    title.className = "frost-chart-title";
+    const title: HTMLSpanElement = document.createElement('span');
+    title.className = 'frost-chart-title';
     title.textContent = name;
 
-    const canvas: HTMLCanvasElement = document.createElement("canvas");
+    const canvas: HTMLCanvasElement = document.createElement('canvas');
     canvas.width = width;
     canvas.height = height;
-    const ctx: CanvasRenderingContext2D | null = canvas.getContext("2d");
+    const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
 
     if (!ctx) return container;
 
-    ctx.lineCap = "round";
-    ctx.lineJoin = "round";
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
 
-    const tooltip: HTMLDivElement = document.createElement("div");
-    tooltip.className = "frost-chart-tooltip";
+    const tooltip: HTMLDivElement = document.createElement('div');
+    tooltip.className = 'frost-chart-tooltip';
     document.body.appendChild(tooltip);
 
     let hoverIndex = -1;
@@ -50,13 +50,15 @@ function createChart({
         const chartWidth: number = width - padding * 2;
         const chartHeight: number = height - padding * 2;
 
-        let yMin: number = minY ?? Math.min(...currentData.flatMap((s: { data: number[] }) => s.data));
-        let yMax: number = maxY ?? Math.max(...currentData.flatMap((s: { data: number[] }) => s.data));
+        let yMin: number =
+            minY ?? Math.min(...currentData.flatMap((s: { data: number[] }) => s.data));
+        let yMax: number =
+            maxY ?? Math.max(...currentData.flatMap((s: { data: number[] }) => s.data));
         const yRange: number = yMax - yMin;
         yMin -= yRange * 0.1;
         yMax += yRange * 0.1;
 
-        ctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
         ctx.lineWidth = 1;
 
         for (let i = 0; i <= 4; i++) {
@@ -75,7 +77,8 @@ function createChart({
             for (let i = 0; i < series.data.length; i++) {
                 const value: number = series.data[i];
                 const x: number = padding + (i * chartWidth) / (maxDataPoints - 1);
-                const y: number = padding + chartHeight - ((value - yMin) / (yMax - yMin)) * chartHeight;
+                const y: number =
+                    padding + chartHeight - ((value - yMin) / (yMax - yMin)) * chartHeight;
 
                 if (i === 0) {
                     ctx.moveTo(x, y);
@@ -89,7 +92,9 @@ function createChart({
             if (hoverIndex >= 0) {
                 const x: number = padding + (hoverIndex * chartWidth) / (maxDataPoints - 1);
                 const y: number =
-                    padding + chartHeight - ((series.data[hoverIndex] - yMin) / (yMax - yMin)) * chartHeight;
+                    padding +
+                    chartHeight -
+                    ((series.data[hoverIndex] - yMin) / (yMax - yMin)) * chartHeight;
 
                 ctx.fillStyle = series.color;
                 ctx.beginPath();
@@ -128,7 +133,7 @@ function createChart({
         }
     }
 
-    canvas.addEventListener("mousemove", (e) => {
+    canvas.addEventListener('mousemove', (e) => {
         const rect: DOMRect = canvas.getBoundingClientRect();
         const scaleX: number = canvas.width / rect.width;
         const x: number = (e.clientX - rect.left) * scaleX;
@@ -142,33 +147,33 @@ function createChart({
             const index: number = Math.round((clampedX / chartWidth) * (maxDataPoints - 1));
             hoverIndex = Math.min(Math.max(index, 0), maxDataPoints - 1);
 
-            tooltip.style.display = "block";
+            tooltip.style.display = 'block';
             tooltip.style.left = `${e.pageX}px`;
             tooltip.style.top = `${e.pageY}px`;
-            tooltip.classList.add("show");
+            tooltip.classList.add('show');
 
             tooltip.innerHTML = currentData
                 .map(
                     (s: { label: string; color: string; data: number[] }) => `
                     <div class="frost-chart-tooltip-row">
                         <span style="color: ${s.color}">${s.label}:</span>
-                        <span>${s.data[hoverIndex]?.toFixed(2) || "N/A"}</span>
+                        <span>${s.data[hoverIndex]?.toFixed(2) || 'N/A'}</span>
                     </div>
                 `
                 )
-                .join("");
+                .join('');
 
             drawChart();
         } else {
             hoverIndex = -1;
-            tooltip.classList.remove("show");
+            tooltip.classList.remove('show');
             drawChart();
         }
     });
 
-    canvas.addEventListener("mouseleave", () => {
+    canvas.addEventListener('mouseleave', () => {
         hoverIndex = -1;
-        tooltip.classList.remove("show");
+        tooltip.classList.remove('show');
         drawChart();
     });
 
@@ -191,10 +196,13 @@ function createChart({
     };
 
     container.getValue = () => {
-        return series.reduce((acc, s) => {
-            acc[s.label] = s.data;
-            return acc;
-        }, {} as { [key: string]: number[] });
+        return series.reduce(
+            (acc, s) => {
+                acc[s.label] = s.data;
+                return acc;
+            },
+            {} as { [key: string]: number[] }
+        );
     };
 
     container.appendChild(title);

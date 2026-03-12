@@ -7,8 +7,9 @@ module.exports = {
         rules: [
             {
                 test: /\.tsx?$/,
-                use: 'ts-loader',
+                use: 'builtin:swc-loader',
                 exclude: /node_modules/,
+                type: 'javascript/auto',
             },
             {
                 test: /\.css$/,
@@ -21,6 +22,10 @@ module.exports = {
                         }
                     }
                 ],
+            },
+            {
+                test: /\.svg$/,
+                type: 'asset/source',
             },
         ],
     },
@@ -37,4 +42,4 @@ module.exports = {
         },
         globalObject: 'this'
     },
-}; 
+};

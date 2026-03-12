@@ -1,4 +1,4 @@
-import type { DualSliderElement, DualSliderOptions } from "../../types/index";
+import type { DualSliderElement, DualSliderOptions } from '../../types/index';
 
 function createDualSlider({
     name,
@@ -9,48 +9,48 @@ function createDualSlider({
     step = 1,
     callback,
 }: DualSliderOptions): DualSliderElement {
-    const container = document.createElement("div") as DualSliderElement;
-    container.className = "frost-dual-slider";
+    const container = document.createElement('div') as DualSliderElement;
+    container.className = 'frost-dual-slider';
 
-    const label: HTMLSpanElement = document.createElement("span");
+    const label: HTMLSpanElement = document.createElement('span');
     label.textContent = name;
 
-    const controls: HTMLDivElement = document.createElement("div");
-    controls.className = "frost-dual-slider-controls";
+    const controls: HTMLDivElement = document.createElement('div');
+    controls.className = 'frost-dual-slider-controls';
 
-    const sliderContainer: HTMLDivElement = document.createElement("div");
-    sliderContainer.className = "frost-dual-slider-container";
+    const sliderContainer: HTMLDivElement = document.createElement('div');
+    sliderContainer.className = 'frost-dual-slider-container';
 
-    const track: HTMLDivElement = document.createElement("div");
-    track.className = "frost-dual-slider-track";
+    const track: HTMLDivElement = document.createElement('div');
+    track.className = 'frost-dual-slider-track';
 
-    const range: HTMLDivElement = document.createElement("div");
-    range.className = "frost-dual-slider-range";
+    const range: HTMLDivElement = document.createElement('div');
+    range.className = 'frost-dual-slider-range';
 
-    const startInput: HTMLInputElement = document.createElement("input");
-    startInput.type = "range";
+    const startInput: HTMLInputElement = document.createElement('input');
+    startInput.type = 'range';
     startInput.min = min.toString();
     startInput.max = max.toString();
     startInput.value = defaultStart.toString();
     startInput.step = step.toString();
-    startInput.className = "frost-dual-slider-start";
+    startInput.className = 'frost-dual-slider-start';
 
-    const endInput: HTMLInputElement = document.createElement("input");
-    endInput.type = "range";
+    const endInput: HTMLInputElement = document.createElement('input');
+    endInput.type = 'range';
     endInput.min = min.toString();
     endInput.max = max.toString();
     endInput.value = defaultEnd.toString();
     endInput.step = step.toString();
-    endInput.className = "frost-dual-slider-end";
+    endInput.className = 'frost-dual-slider-end';
 
-    const startValue: HTMLInputElement = document.createElement("input");
-    startValue.type = "text";
-    startValue.className = "frost-dual-slider-value";
+    const startValue: HTMLInputElement = document.createElement('input');
+    startValue.type = 'text';
+    startValue.className = 'frost-dual-slider-value';
     startValue.value = defaultStart.toString();
 
-    const endValue: HTMLInputElement = document.createElement("input");
-    endValue.type = "text";
-    endValue.className = "frost-dual-slider-value";
+    const endValue: HTMLInputElement = document.createElement('input');
+    endValue.type = 'text';
+    endValue.className = 'frost-dual-slider-value';
     endValue.value = defaultEnd.toString();
 
     const updateRange = () => {
@@ -75,38 +75,38 @@ function createDualSlider({
         if (callback) callback({ start: clampedStart, end: clampedEnd });
     };
 
-    startInput.addEventListener("input", () => {
+    startInput.addEventListener('input', () => {
         updateValues(Number(startInput.value), Number(endInput.value));
     });
 
-    endInput.addEventListener("input", () => {
+    endInput.addEventListener('input', () => {
         updateValues(Number(startInput.value), Number(endInput.value));
     });
 
-    startValue.addEventListener("change", () => {
+    startValue.addEventListener('change', () => {
         const newValue = Number.parseFloat(startValue.value);
         if (Number.isNaN(newValue)) {
-            startValue.classList.add("invalid");
-            setTimeout(() => startValue.classList.remove("invalid"), 400);
+            startValue.classList.add('invalid');
+            setTimeout(() => startValue.classList.remove('invalid'), 400);
             startValue.value = startInput.value;
             return;
         }
         updateValues(newValue, Number(endInput.value));
     });
 
-    endValue.addEventListener("change", () => {
+    endValue.addEventListener('change', () => {
         const newValue = Number.parseFloat(endValue.value);
         if (Number.isNaN(newValue)) {
-            endValue.classList.add("invalid");
-            setTimeout(() => endValue.classList.remove("invalid"), 400);
+            endValue.classList.add('invalid');
+            setTimeout(() => endValue.classList.remove('invalid'), 400);
             endValue.value = endInput.value;
             return;
         }
         updateValues(Number(startInput.value), newValue);
     });
 
-    startValue.addEventListener("focus", () => startValue.select());
-    endValue.addEventListener("focus", () => endValue.select());
+    startValue.addEventListener('focus', () => startValue.select());
+    endValue.addEventListener('focus', () => endValue.select());
 
     sliderContainer.appendChild(track);
     sliderContainer.appendChild(range);

@@ -1,29 +1,29 @@
-import icons from "../../../icons";
-import type { ToastElement, ToastOptions } from "../../../types/index";
+import icons from '../../../icons';
+import type { ToastElement, ToastOptions } from '../../../types/index';
 
 function createToast(options: ToastOptions): ToastElement {
-    const toast = document.createElement("div") as ToastElement;
-    const validTypes: string[] = ["success", "error", "info", "warning"];
-    const type = validTypes.includes(options.type || "") ? options.type || "info" : "undefined";
+    const toast = document.createElement('div') as ToastElement;
+    const validTypes: string[] = ['success', 'error', 'info', 'warning'];
+    const type = validTypes.includes(options.type || '') ? options.type || 'info' : 'info';
 
-    toast.className = `frost-toast ${type} ${options.variant || "default"}`;
+    toast.className = `frost-toast ${type} ${options.variant || 'default'}`;
 
-    const icon: HTMLSpanElement = document.createElement("span");
-    icon.className = "frost-toast-icon";
+    const icon: HTMLSpanElement = document.createElement('span');
+    icon.className = 'frost-toast-icon';
     icon.innerHTML = icons[type];
 
-    const content: HTMLDivElement = document.createElement("div");
-    content.className = "frost-toast-content";
+    const content: HTMLDivElement = document.createElement('div');
+    content.className = 'frost-toast-content';
 
-    const message: HTMLSpanElement = document.createElement("span");
-    message.className = "frost-toast-message";
+    const message: HTMLSpanElement = document.createElement('span');
+    message.className = 'frost-toast-message';
     message.textContent = options.message;
 
     content.appendChild(message);
 
-    if (options.variant === "action" && options.action) {
-        const actionBtn: HTMLButtonElement = document.createElement("button");
-        actionBtn.className = `frost-toast-action ${options.action.type || ""}`;
+    if (options.variant === 'action' && options.action) {
+        const actionBtn: HTMLButtonElement = document.createElement('button');
+        actionBtn.className = `frost-toast-action ${options.action.type || ''}`;
         actionBtn.textContent = options.action.text;
         actionBtn.onclick = (e: MouseEvent) => {
             e.stopPropagation();
@@ -33,8 +33,8 @@ function createToast(options: ToastOptions): ToastElement {
         content.appendChild(actionBtn);
     }
 
-    const closeBtn: HTMLButtonElement = document.createElement("button");
-    closeBtn.className = "frost-toast-close";
+    const closeBtn: HTMLButtonElement = document.createElement('button');
+    closeBtn.className = 'frost-toast-close';
     closeBtn.innerHTML = icons.close;
 
     toast.appendChild(icon);
@@ -44,7 +44,7 @@ function createToast(options: ToastOptions): ToastElement {
     let timeoutId: number;
 
     const close: () => void = () => {
-        toast.classList.add("hide");
+        toast.classList.add('hide');
         clearTimeout(timeoutId);
         setTimeout(() => {
             toast.remove();
@@ -52,16 +52,16 @@ function createToast(options: ToastOptions): ToastElement {
     };
 
     toast.close = close;
-    closeBtn.addEventListener("click", close);
+    closeBtn.addEventListener('click', close);
 
     if (options.duration !== 0) {
         timeoutId = window.setTimeout(close, options.duration || 3000);
 
-        toast.addEventListener("mouseenter", () => {
+        toast.addEventListener('mouseenter', () => {
             clearTimeout(timeoutId);
         });
 
-        toast.addEventListener("mouseleave", () => {
+        toast.addEventListener('mouseleave', () => {
             timeoutId = window.setTimeout(close, 1000);
         });
     }

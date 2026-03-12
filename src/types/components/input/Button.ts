@@ -3,7 +3,7 @@ interface ButtonElement extends HTMLDivElement {
     isEnabled: () => boolean;
 }
 
-type ButtonVariant = "default" | "primary" | "destructive";
+type ButtonVariant = 'default' | 'primary' | 'destructive';
 type ButtonCallback = () => void;
 
 export type { ButtonElement, ButtonVariant, ButtonCallback };

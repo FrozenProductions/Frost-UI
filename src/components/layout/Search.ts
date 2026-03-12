@@ -1,25 +1,25 @@
-import Menu from "../../Menu";
-import icons from "../../icons";
-import type { CategoryData, FrostTheme, SearchResult } from "../../types/index";
+import Menu from '../../Menu';
+import icons from '../../icons';
+import type { CategoryData, FrostTheme, SearchResult } from '../../types/index';
 
 export class Search {
-    private container: HTMLDivElement = document.createElement("div");
-    private searchWrapper: HTMLDivElement = document.createElement("div");
-    private searchInput: HTMLInputElement = document.createElement("input");
-    private shortcutHint: HTMLDivElement = document.createElement("div");
-    private resultsContainer: HTMLDivElement = document.createElement("div");
+    private container: HTMLDivElement = document.createElement('div');
+    private searchWrapper: HTMLDivElement = document.createElement('div');
+    private searchInput: HTMLInputElement = document.createElement('input');
+    private shortcutHint: HTMLDivElement = document.createElement('div');
+    private resultsContainer: HTMLDivElement = document.createElement('div');
     private isVisible = false;
     private menus: Map<string, Menu> = new Map();
     private searchResults: HTMLDivElement[] = [];
     private selectedIndex = -1;
     private activeElements: Set<HTMLElement> = new Set();
-    private currentTheme: FrostTheme = "dark";
-    private keybind = "k";
+    private currentTheme: FrostTheme = 'dark';
+    private keybind = 'k';
 
-    constructor(menuOrMenus: Menu | { [key: string]: Menu }, keybind = "k") {
+    constructor(menuOrMenus: Menu | { [key: string]: Menu }, keybind = 'k') {
         this.keybind = keybind.toLowerCase();
         if (menuOrMenus instanceof Menu) {
-            this.menus.set("Default", menuOrMenus);
+            this.menus.set('Default', menuOrMenus);
             this.setTheme(this.getThemeFromMenu(menuOrMenus));
         } else {
             for (const [name, menu] of Object.entries(menuOrMenus)) {
@@ -48,28 +48,28 @@ export class Search {
 
     private updateShortcutHint(): void {
         const isMacOS: boolean = isMac();
-        const modKey: string = isMacOS ? "⌘" : "Ctrl";
+        const modKey: string = isMacOS ? '⌘' : 'Ctrl';
         const key: string = this.keybind.length === 1 ? this.keybind.toUpperCase() : this.keybind;
         this.shortcutHint.textContent = `${modKey}+${key}`;
     }
 
     private getThemeFromMenu(menu: Menu): FrostTheme {
         const menuContainer: HTMLElement = menu.getContainer();
-        const themeClass: string | undefined = Array.from(menuContainer.classList).find((className) =>
-            className.startsWith("frost-theme-")
+        const themeClass: string | undefined = Array.from(menuContainer.classList).find(
+            (className) => className.startsWith('frost-theme-')
         );
-        return themeClass ? (themeClass.replace("frost-theme-", "") as FrostTheme) : "dark";
+        return themeClass ? (themeClass.replace('frost-theme-', '') as FrostTheme) : 'dark';
     }
 
     public setTheme(theme: FrostTheme): void {
-        const themeClasses: string[] = Array.from(this.container.classList).filter((className: string) =>
-            className.startsWith("frost-theme-")
+        const themeClasses: string[] = Array.from(this.container.classList).filter(
+            (className: string) => className.startsWith('frost-theme-')
         );
         for (const className of themeClasses) {
             this.container.classList.remove(className);
         }
 
-        if (theme !== "dark") {
+        if (theme !== 'dark') {
             this.container.classList.add(`frost-theme-${theme}`);
         }
         this.currentTheme = theme;
@@ -80,21 +80,21 @@ export class Search {
     }
 
     private createSearchUI() {
-        this.container.className = "frost-search-container";
-        if (this.currentTheme !== "dark") {
+        this.container.className = 'frost-search-container';
+        if (this.currentTheme !== 'dark') {
             this.container.classList.add(`frost-theme-${this.currentTheme}`);
         }
 
-        this.searchWrapper.className = "frost-search-input-wrapper";
+        this.searchWrapper.className = 'frost-search-input-wrapper';
 
-        this.searchInput.type = "text";
-        this.searchInput.className = "frost-search-input";
-        this.searchInput.placeholder = "Search menu...";
+        this.searchInput.type = 'text';
+        this.searchInput.className = 'frost-search-input';
+        this.searchInput.placeholder = 'Search menu...';
 
-        this.shortcutHint.className = "frost-search-shortcut";
+        this.shortcutHint.className = 'frost-search-shortcut';
         this.updateShortcutHint();
 
-        this.resultsContainer.className = "frost-search-results";
+        this.resultsContainer.className = 'frost-search-results';
 
         this.searchWrapper.appendChild(this.searchInput);
         this.searchWrapper.appendChild(this.shortcutHint);
@@ -105,25 +105,25 @@ export class Search {
     }
 
     private setupEventListeners() {
-        document.addEventListener("keydown", (e: KeyboardEvent) => {
+        document.addEventListener('keydown', (e: KeyboardEvent) => {
             if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === this.keybind) {
                 e.preventDefault();
                 this.toggle();
             }
             if (this.isVisible) {
                 switch (e.key) {
-                    case "Escape":
+                    case 'Escape':
                         this.hide();
                         break;
-                    case "ArrowDown":
+                    case 'ArrowDown':
                         e.preventDefault();
                         this.selectNext();
                         break;
-                    case "ArrowUp":
+                    case 'ArrowUp':
                         e.preventDefault();
                         this.selectPrevious();
                         break;
-                    case "Enter":
+                    case 'Enter':
                         e.preventDefault();
                         this.selectCurrent();
                         break;
@@ -131,11 +131,11 @@ export class Search {
             }
         });
 
-        this.searchInput.addEventListener("input", () => {
+        this.searchInput.addEventListener('input', () => {
             this.performSearch();
         });
 
-        document.addEventListener("click", (e: MouseEvent) => {
+        document.addEventListener('click', (e: MouseEvent) => {
             if (this.isVisible && !this.container.contains(e.target as Node)) {
                 this.hide();
             }
@@ -150,17 +150,18 @@ export class Search {
 
     private selectPrevious() {
         if (this.searchResults.length === 0) return;
-        this.selectedIndex = (this.selectedIndex - 1 + this.searchResults.length) % this.searchResults.length;
+        this.selectedIndex =
+            (this.selectedIndex - 1 + this.searchResults.length) % this.searchResults.length;
         this.updateSelection();
     }
 
     private updateSelection() {
         this.searchResults.forEach((result: HTMLDivElement, index: number) => {
             if (index === this.selectedIndex) {
-                result.classList.add("selected");
-                result.scrollIntoView({ block: "nearest" });
+                result.classList.add('selected');
+                result.scrollIntoView({ block: 'nearest' });
             } else {
-                result.classList.remove("selected");
+                result.classList.remove('selected');
             }
         });
     }
@@ -177,26 +178,30 @@ export class Search {
         this.clearHighlights();
 
         if (!query.trim()) {
-            this.resultsContainer.style.display = "none";
+            this.resultsContainer.style.display = 'none';
             return;
         }
 
-        this.resultsContainer.style.display = "block";
+        this.resultsContainer.style.display = 'block';
         const searchResults: SearchResult[] = this.searchMenuItems(query);
         this.displayResults(searchResults, query);
     }
 
     private clearHighlights() {
         for (const element of this.activeElements) {
-            element.classList.remove("frost-search-highlight");
+            element.classList.remove('frost-search-highlight');
         }
         this.activeElements.clear();
     }
 
     private openCategory(category: CategoryData): void {
-        const categoryContent = category.element.querySelector(".frost-category-content") as HTMLElement;
-        if (categoryContent && !categoryContent.classList.contains("open")) {
-            const categoryHeader = category.element.querySelector(".frost-category-header") as HTMLElement;
+        const categoryContent = category.element.querySelector(
+            '.frost-category-content'
+        ) as HTMLElement;
+        if (categoryContent && !categoryContent.classList.contains('open')) {
+            const categoryHeader = category.element.querySelector(
+                '.frost-category-header'
+            ) as HTMLElement;
             if (categoryHeader) {
                 categoryHeader.click();
             }
@@ -216,13 +221,13 @@ export class Search {
                         text: categoryName,
                         path: [],
                         element: category.element,
-                        type: "category",
+                        type: 'category',
                         category,
                         menu,
                         menuName,
                     });
 
-                    category.element.classList.add("frost-search-highlight");
+                    category.element.classList.add('frost-search-highlight');
                     this.activeElements.add(category.element);
                 }
 
@@ -233,13 +238,13 @@ export class Search {
                             text: itemName,
                             path: [categoryName],
                             element: element as HTMLElement,
-                            type: "item",
+                            type: 'item',
                             category,
                             menu,
                             menuName,
                         });
 
-                        (element as HTMLElement).classList.add("frost-search-highlight");
+                        (element as HTMLElement).classList.add('frost-search-highlight');
                         this.activeElements.add(element as HTMLElement);
                     }
                 }
@@ -264,10 +269,10 @@ export class Search {
     }
 
     private addGlowEffect(element: HTMLElement) {
-        element.classList.add("frost-search-selected");
+        element.classList.add('frost-search-selected');
 
         setTimeout(() => {
-            element.classList.remove("frost-search-selected");
+            element.classList.remove('frost-search-selected');
         }, 2000);
     }
 
@@ -275,7 +280,8 @@ export class Search {
         this.clearResults();
         this.selectedIndex = -1;
 
-        const existingEmpty: Element | null = this.resultsContainer.querySelector(".frost-search-empty");
+        const existingEmpty: Element | null =
+            this.resultsContainer.querySelector('.frost-search-empty');
         if (existingEmpty) {
             existingEmpty.remove();
         }
@@ -285,31 +291,31 @@ export class Search {
         }
 
         if (results.length === 0) {
-            const emptyState: HTMLDivElement = document.createElement("div");
-            emptyState.className = "frost-search-empty";
-            emptyState.textContent = "No results found";
+            const emptyState: HTMLDivElement = document.createElement('div');
+            emptyState.className = 'frost-search-empty';
+            emptyState.textContent = 'No results found';
             this.resultsContainer.appendChild(emptyState);
             return;
         }
 
         for (const result of results) {
-            const resultElement = document.createElement("div");
-            resultElement.className = "frost-search-result";
+            const resultElement = document.createElement('div');
+            resultElement.className = 'frost-search-result';
 
-            const typeIndicator = document.createElement("span");
-            typeIndicator.className = "type-indicator";
-            typeIndicator.innerHTML = result.type === "category" ? icons.category : icons.item;
+            const typeIndicator = document.createElement('span');
+            typeIndicator.className = 'type-indicator';
+            typeIndicator.innerHTML = result.type === 'category' ? icons.category : icons.item;
 
-            const contentWrapper = document.createElement("div");
-            contentWrapper.style.flex = "1";
+            const contentWrapper = document.createElement('div');
+            contentWrapper.style.flex = '1';
 
-            const itemName = document.createElement("div");
-            itemName.className = "item-name";
+            const itemName = document.createElement('div');
+            itemName.className = 'item-name';
             itemName.innerHTML = this.highlightText(result.text, query);
 
-            if (result.type === "category") {
-                const menuIndicator = document.createElement("span");
-                menuIndicator.className = "menu-indicator";
+            if (result.type === 'category') {
+                const menuIndicator = document.createElement('span');
+                menuIndicator.className = 'menu-indicator';
                 menuIndicator.textContent = ` - ${result.menuName}`;
                 itemName.appendChild(menuIndicator);
             }
@@ -318,27 +324,27 @@ export class Search {
             resultElement.appendChild(typeIndicator);
             resultElement.appendChild(contentWrapper);
 
-            resultElement.addEventListener("click", () => {
+            resultElement.addEventListener('click', () => {
                 this.hide();
 
                 if (!result.menu.isMenuOpen()) {
                     result.menu.toggle();
                 }
 
-                if (result.type === "category" && result.category) {
+                if (result.type === 'category' && result.category) {
                     this.openCategory(result.category);
                     this.addGlowEffect(result.category.element);
-                } else if (result.type === "item" && result.category) {
+                } else if (result.type === 'item' && result.category) {
                     this.openCategory(result.category);
                     setTimeout(() => {
                         const menuContainer = result.menu.getContainer();
                         if (menuContainer) {
                             menuContainer.scrollTo({
                                 top: result.element.offsetTop - menuContainer.offsetHeight / 2,
-                                behavior: "smooth",
+                                behavior: 'smooth',
                             });
                         }
-                        result.element.scrollIntoView({ behavior: "smooth", block: "center" });
+                        result.element.scrollIntoView({ behavior: 'smooth', block: 'center' });
                         result.element.focus();
                         this.addGlowEffect(result.element);
                     }, 150);
@@ -365,8 +371,8 @@ export class Search {
 
     public show() {
         this.isVisible = true;
-        this.container.classList.add("visible");
-        this.resultsContainer.style.display = "none";
+        this.container.classList.add('visible');
+        this.resultsContainer.style.display = 'none';
         setTimeout(() => {
             this.searchInput.focus();
         }, 50);
@@ -374,8 +380,8 @@ export class Search {
 
     public hide() {
         this.isVisible = false;
-        this.container.classList.remove("visible");
-        this.searchInput.value = "";
+        this.container.classList.remove('visible');
+        this.searchInput.value = '';
         this.clearResults();
         this.clearHighlights();
     }
@@ -390,5 +396,5 @@ export class Search {
 }
 
 function isMac() {
-    return navigator.platform.toUpperCase().indexOf("MAC") >= 0;
+    return navigator.platform.toUpperCase().indexOf('MAC') >= 0;
 }

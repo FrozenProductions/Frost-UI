@@ -1,29 +1,29 @@
+import successSvg from './svgs/success.svg';
+import errorSvg from './svgs/error.svg';
+import warningSvg from './svgs/warning.svg';
+import infoSvg from './svgs/info.svg';
+import closeSvg from './svgs/close.svg';
+import downArrowSvg from './svgs/arrow_down.svg';
+import upArrowSvg from './svgs/arrow_up.svg';
+import orderListSvg from './svgs/order-list.svg';
+import pageLeftSvg from './svgs/page-left-arrow.svg';
+import pageRightSvg from './svgs/page-right-arrow.svg';
+import categorySvg from './svgs/category.svg';
+import itemSvg from './svgs/item.svg';
+
 const icons = {
-    success: `<svg xmlns="http://www.w3.org/2000/svg" height="48" width="48" viewBox="0 0 48 48"><title>c check</title><g fill="#82e053" class="nc-icon-wrapper"><path fill="#82e053" d="M24,1C11.3,1,1,11.3,1,24s10.3,23,23,23s23-10.3,23-23S36.7,1,24,1z M36.7,16.7l-16,16 C20.5,32.9,20.3,33,20,33s-0.5-0.1-0.7-0.3l-8-8c-0.4-0.4-0.4-1,0-1.4s1-0.4,1.4,0l7.3,7.3l15.3-15.3c0.4-0.4,1-0.4,1.4,0 S37.1,16.3,36.7,16.7z"></path></g></svg>`,
-
-    error: `<svg xmlns="http://www.w3.org/2000/svg" height="48" width="48" viewBox="0 0 48 48"><title>c remove</title><g fill="#db3737" class="nc-icon-wrapper"><path fill="#db3737" d="M24,1C11.3,1,1,11.3,1,24s10.3,23,23,23s23-10.3,23-23S36.7,1,24,1z M32.7,31.3c0.4,0.4,0.4,1,0,1.4 C32.5,32.9,32.3,33,32,33s-0.5-0.1-0.7-0.3L24,25.4l-7.3,7.3C16.5,32.9,16.3,33,16,33s-0.5-0.1-0.7-0.3c-0.4-0.4-0.4-1,0-1.4 l7.3-7.3l-7.3-7.3c-0.4-0.4-0.4-1,0-1.4s1-0.4,1.4,0l7.3,7.3l7.3-7.3c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4L25.4,24L32.7,31.3z"></path></g></svg>`,
-
-    warning: `<svg xmlns="http://www.w3.org/2000/svg" height="48" width="48" viewBox="0 0 48 48"><title>c warning</title><g fill="#faeb19" class="nc-icon-wrapper"><path d="M24,1C11.297,1,1,11.297,1,24s10.297,23,23,23,23-10.297,23-23S36.703,1,24,1Zm-2,10c0-.552,.448-1,1-1h2c.552,0,1,.448,1,1V29c0,.552-.448,1-1,1h-2c-.552,0-1-.448-1-1V11Zm2,28c-1.381,0-2.5-1.119-2.5-2.5s1.119-2.5,2.5-2.5,2.5,1.119,2.5,2.5-1.119,2.5-2.5,2.5Z" fill="#faeb19"></path></g></svg>`,
-
-    info: `<svg xmlns="http://www.w3.org/2000/svg" height="48" width="48" viewBox="0 0 48 48"><title>c info</title><g fill="#7289da" class="nc-icon-wrapper"><path d="M24,1C11.297,1,1,11.297,1,24s10.297,23,23,23,23-10.297,23-23S36.703,1,24,1Zm2,36c0,.552-.448,1-1,1h-2c-.552,0-1-.448-1-1V19c0-.552,.448-1,1-1h2c.552,0,1,.448,1,1v18Zm-2-23c-1.381,0-2.5-1.119-2.5-2.5s1.119-2.5,2.5-2.5,2.5,1.119,2.5,2.5-1.119,2.5-2.5,2.5Z" fill="#7289da"></path></g></svg>`,
-
-    undefined: `<svg xmlns="http://www.w3.org/2000/svg" height="48" width="48" viewBox="0 0 48 48"><title>c question</title><g fill="#787878" class="nc-icon-wrapper"><path d="M24,1C11.297,1,1,11.297,1,24s10.297,23,23,23,23-10.297,23-23c-.014-12.697-10.303-22.986-23-23Zm-1,38c-1.381,0-2.5-1.119-2.5-2.5s1.119-2.5,2.5-2.5,2.5,1.119,2.5,2.5-1.119,2.5-2.5,2.5Zm5.089-14.841c-2.867,2.426-3.089,3.536-3.089,4.841v1c0,.552-.448,1-1,1h-2c-.552,0-1-.448-1-1v-1c0-2.977,1.221-5.116,4.505-7.895,.956-.809,3.937-3.668,2.173-6.521-1.144-1.851-5.372-2.126-8.869-.579l-.914,.404c-.505,.223-1.096-.005-1.319-.51l-.809-1.829c-.223-.505,.005-1.096,.51-1.319l.914-.404c4.851-2.146,11.376-1.935,13.889,2.135,2.29,3.704,1.144,8.18-2.991,11.678Z" fill="#787878"></path></g></svg>`,
-
-    close: `<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 24 24"><title>e remove</title><g stroke-linejoin="miter" fill="#F7F7F7" stroke-linecap="butt" class="nc-icon-wrapper"><line x1="19" y1="19" x2="5" y2="5" fill="none" stroke="#F7F7F7" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2" data-color="color-2"></line><line x1="19" y1="5" x2="5" y2="19" fill="none" stroke="#F7F7F7" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2"></line></g></svg>`,
-
-    down_arrow: `<svg xmlns="http://www.w3.org/2000/svg" height="12" width="12" viewBox="0 0 12 12"><title>chevron down</title><g fill="#ffffff" class="nc-icon-wrapper"><polyline points="1.75 4.25 6 8.5 10.25 4.25" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></polyline></g></svg>`,
-
-    up_arrow: `<svg xmlns="http://www.w3.org/2000/svg" height="12" width="12" viewBox="0 0 12 12"><title>chevron up</title><g fill="#ffffff" class="nc-icon-wrapper"><polyline points="10.25 7.75 6 3.5 1.75 7.75" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></polyline></g></svg>`,
-
-    order_list: `<svg xmlns="http://www.w3.org/2000/svg" height="12" width="12" viewBox="0 0 12 12" preserveAspectRatio="xMidYMid meet"><title>menu</title><g fill="#ffffff" class="nc-icon-wrapper" transform="translate(0,1.5)"><path fill="#ffffff" stroke-width="0" data-color="color-2" d="M0.5 4.5h11v1h-11z"></path><path stroke-width="0" fill="#ffffff" d="M0.5 1h11v1h-11z"></path><path stroke-width="0" fill="#ffffff" d="M0.5 8h11v1h-11z"></path></g></svg>`,
-
-    page_left: `<svg xmlns="http://www.w3.org/2000/svg" height="12" width="12" viewBox="0 0 12 12"><title>left arrow 3</title><g fill="#ffffff" class="nc-icon-wrapper"><path d="M8.47 12.05a0.38 0.38 0 0 0 0.54 0l0.38-0.38a0.38 0.38 0 0 0 0-0.54l-5.05-5.05 5.05-5.05a0.38 0.38 0 0 0 0-0.54l-0.38-0.38a0.38 0.38 0 0 0-0.54 0l-5.7 5.7a0.38 0.38 0 0 0 0 0.54z" fill="#ffffff"></path></g></svg>`,
-
-    page_right: `<svg xmlns="http://www.w3.org/2000/svg" height="12" width="12" viewBox="0 0 12 12"><title>right arrow 3</title><g fill="#ffffff" class="nc-icon-wrapper"><path d="M2.77 11.67l0.38 0.38a0.38 0.38 0 0 0 0.54 0l5.7-5.7a0.38 0.38 0 0 0 0-0.54l-5.7-5.7a0.38 0.38 0 0 0-0.54 0l-0.38 0.38a0.38 0.38 0 0 0 0 0.54l5.05 5.05-5.05 5.05a0.38 0.38 0 0 0 0 0.54z" fill="#ffffff"></path></g></svg>`,
-
-    category: `<svg xmlns="http://www.w3.org/2000/svg" height="12" width="12" viewBox="0 0 12 12"><title>book</title><g stroke-linejoin="miter" fill="#ffffff" stroke-linecap="butt" class="nc-icon-wrapper"><path fill="none" stroke="#ffffff" stroke-miterlimit="10" stroke-width="2" data-color="color-2" d="M6 3v7.5"></path><path d="M8.75 1.5c-1.5 0-2.75 0.65-2.75 1.5 0-0.85-1.25-1.5-2.75-1.5s-2.75 0.65-2.75 1.5v7.5c0-0.85 1.25-1.5 2.75-1.5s2.75 0.65 2.75 1.5c0-0.85 1.25-1.5 2.75-1.5s2.75 0.65 2.75 1.5v-7.5c0-0.85-1.25-1.5-2.75-1.5z" fill="none" stroke="#ffffff" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2"></path></g></svg>`,
-
-    item: `<svg xmlns="http://www.w3.org/2000/svg" height="12" width="12" viewBox="0 0 12 12"><title>bookmark</title><g stroke-linejoin="miter" fill="#ffffff" stroke-linecap="butt" class="nc-icon-wrapper"><path d="M10 11l-4-2.5-4 2.5v-9a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v9z" fill="none" stroke="#ffffff" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2"></path></g></svg>`,
+    success: successSvg,
+    error: errorSvg,
+    warning: warningSvg,
+    info: infoSvg,
+    close: closeSvg,
+    down_arrow: downArrowSvg,
+    up_arrow: upArrowSvg,
+    order_list: orderListSvg,
+    page_left: pageLeftSvg,
+    page_right: pageRightSvg,
+    category: categorySvg,
+    item: itemSvg,
 };
 
 export default icons;

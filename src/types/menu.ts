@@ -8,6 +8,6 @@ interface DragOffset {
     y: number;
 }
 
-type FrostTheme = "dark" | "midnight" | "nord" | string;
+type FrostTheme = 'dark' | 'midnight' | 'nord' | string;
 
 export type { Position, DragOffset, FrostTheme };

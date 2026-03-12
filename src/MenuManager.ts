@@ -1,6 +1,6 @@
-import FrostUI from "./Menu";
-import { type Search, createToast } from "./components/index";
-import type { CategoryData, ToastOptions, ToggleElement } from "./types/index";
+import FrostUI from './Menu';
+import { type Search, createToast } from './components/index';
+import type { CategoryData, ToastOptions, ToggleElement } from './types/index';
 
 class FrostManager {
     private menus: Map<string, FrostUI>;
@@ -15,12 +15,13 @@ class FrostManager {
         this.globalKeybinds = new Map();
 
         window.addEventListener(
-            "keydown",
+            'keydown',
             (e: KeyboardEvent) => {
-                if (document.activeElement?.tagName === "INPUT") return;
+                if (document.activeElement?.tagName === 'INPUT') return;
                 if (e.ctrlKey || e.metaKey || e.altKey || e.shiftKey) return;
 
-                const bindingInput: HTMLInputElement | null = document.querySelector(".frost-keybind.binding");
+                const bindingInput: HTMLInputElement | null =
+                    document.querySelector('.frost-keybind.binding');
                 if (bindingInput) return;
 
                 const action: (() => void) | undefined = this.globalKeybinds.get(e.code);
@@ -34,7 +35,12 @@ class FrostManager {
         );
     }
 
-    public addMenu(id: string, title: string, position?: { x: number; y: number }, toggleKey = "ShiftRight"): FrostUI {
+    public addMenu(
+        id: string,
+        title: string,
+        position?: { x: number; y: number },
+        toggleKey = 'ShiftRight'
+    ): FrostUI {
         const menu = new FrostUI(id, title, position, toggleKey);
         this.menus.set(id, menu);
         return menu;
@@ -55,7 +61,7 @@ class FrostManager {
         if (!categoryData) return;
 
         const toggle: ToggleElement | undefined = categoryData.items.get(name) as ToggleElement;
-        if (!toggle || !("toggleState" in toggle)) return;
+        if (!toggle || !('toggleState' in toggle)) return;
 
         const bindId = `${menuId}-${category}-${name}`;
         const oldKey: string | undefined = this.keybinds.get(bindId);
@@ -65,23 +71,26 @@ class FrostManager {
             this.keybinds.delete(bindId);
         }
 
-        if (key && key !== "None") {
+        if (key && key !== 'None') {
             this.keybinds.set(bindId, key);
-            this.globalKeybinds.set(key, (toggle as { toggleState: () => void }).toggleState.bind(toggle));
+            this.globalKeybinds.set(
+                key,
+                (toggle as { toggleState: () => void }).toggleState.bind(toggle)
+            );
         }
     }
 
     private initToastContainer(): void {
         if (!this.toastContainer) {
-            this.toastContainer = document.createElement("div");
-            this.toastContainer.className = "frost-toast-container";
+            this.toastContainer = document.createElement('div');
+            this.toastContainer.className = 'frost-toast-container';
             document.body.appendChild(this.toastContainer);
         }
     }
 
     public showToast(options: string | ToastOptions): void {
         this.initToastContainer();
-        const toastOptions = typeof options === "string" ? { message: options } : options;
+        const toastOptions = typeof options === 'string' ? { message: options } : options;
         const toast = createToast(toastOptions);
         this.toastContainer?.appendChild(toast);
     }
@@ -107,7 +116,7 @@ class FrostManager {
             if (id !== currentMenuId && menu.getToggleKey() === key) {
                 this.showToast({
                     message: `Key "${key}" is already used to toggle menu "${menu.getTitle()}"`,
-                    type: "error",
+                    type: 'error',
                     duration: 3000,
                 });
                 return false;
@@ -117,7 +126,7 @@ class FrostManager {
         if (this.globalKeybinds.has(key)) {
             this.showToast({
                 message: `Key "${key}" is already bound to another action`,
-                type: "error",
+                type: 'error',
                 duration: 3000,
             });
             return false;

@@ -1,12 +1,12 @@
 interface ToastOptions {
     message: string;
-    type?: "success" | "error" | "info" | "warning";
+    type?: 'success' | 'error' | 'info' | 'warning';
     duration?: number;
-    variant?: "default" | "action";
+    variant?: 'default' | 'action';
     action?: {
         text: string;
         onClick: () => void;
-        type?: "primary" | "destructive";
+        type?: 'primary' | 'destructive';
     };
 }
 

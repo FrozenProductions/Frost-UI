@@ -1,28 +1,35 @@
-import type { SliderElement, SliderOptions } from "../../types/index";
+import type { SliderElement, SliderOptions } from '../../types/index';
 
-function createSlider({ name, min, max, defaultValue, step = 1, callback }: SliderOptions): SliderElement {
-    const container = document.createElement("div") as SliderElement;
-    container.className = "frost-slider";
+function createSlider({
+    name,
+    min,
+    max,
+    defaultValue,
+    step = 1,
+    callback,
+}: SliderOptions): SliderElement {
+    const container = document.createElement('div') as SliderElement;
+    container.className = 'frost-slider';
 
-    const label: HTMLSpanElement = document.createElement("span");
+    const label: HTMLSpanElement = document.createElement('span');
     label.textContent = name;
 
-    const controls: HTMLDivElement = document.createElement("div");
-    controls.className = "frost-slider-controls";
+    const controls: HTMLDivElement = document.createElement('div');
+    controls.className = 'frost-slider-controls';
 
-    const input: HTMLInputElement = document.createElement("input");
-    input.type = "range";
+    const input: HTMLInputElement = document.createElement('input');
+    input.type = 'range';
     input.min = min.toString();
     input.max = max.toString();
     input.value = defaultValue.toString();
     input.step = step.toString();
 
     const percentage: number = ((defaultValue - min) / (max - min)) * 100;
-    input.style.setProperty("--slider-value", `${percentage}%`);
+    input.style.setProperty('--slider-value', `${percentage}%`);
 
-    const value: HTMLInputElement = document.createElement("input");
-    value.type = "text";
-    value.className = "frost-slider-value";
+    const value: HTMLInputElement = document.createElement('input');
+    value.type = 'text';
+    value.className = 'frost-slider-value';
     value.value = defaultValue.toString();
 
     const updateValue = (newValue: number): void => {
@@ -31,27 +38,27 @@ function createSlider({ name, min, max, defaultValue, step = 1, callback }: Slid
         value.value = clampedValue.toString();
 
         const percentage: number = ((clampedValue - min) / (max - min)) * 100;
-        input.style.setProperty("--slider-value", `${percentage}%`);
+        input.style.setProperty('--slider-value', `${percentage}%`);
 
         if (callback) callback(clampedValue);
     };
 
-    input.addEventListener("input", () => {
+    input.addEventListener('input', () => {
         updateValue(Number.parseFloat(input.value));
     });
 
-    value.addEventListener("change", () => {
+    value.addEventListener('change', () => {
         const newValue = Number.parseFloat(value.value);
         if (Number.isNaN(newValue)) {
-            value.classList.add("invalid");
-            setTimeout(() => value.classList.remove("invalid"), 400);
+            value.classList.add('invalid');
+            setTimeout(() => value.classList.remove('invalid'), 400);
             value.value = input.value;
             return;
         }
         updateValue(newValue);
     });
 
-    value.addEventListener("focus", () => value.select());
+    value.addEventListener('focus', () => value.select());
 
     controls.appendChild(input);
     controls.appendChild(value);

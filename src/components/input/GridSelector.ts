@@ -1,4 +1,4 @@
-import type { GridItem, GridSelectorCallback, GridSelectorElement } from "../../types/index";
+import type { GridItem, GridSelectorCallback, GridSelectorElement } from '../../types/index';
 
 function createGridSelector(
     name: string,
@@ -7,15 +7,15 @@ function createGridSelector(
     callback?: GridSelectorCallback,
     columns = 3
 ): GridSelectorElement {
-    const container = document.createElement("div") as GridSelectorElement;
-    container.className = "frost-grid-selector";
+    const container = document.createElement('div') as GridSelectorElement;
+    container.className = 'frost-grid-selector';
 
-    const label = document.createElement("div");
-    label.className = "frost-grid-label";
+    const label = document.createElement('div');
+    label.className = 'frost-grid-label';
     label.textContent = name;
 
-    const grid = document.createElement("div");
-    grid.className = "frost-grid-container";
+    const grid = document.createElement('div');
+    grid.className = 'frost-grid-container';
     grid.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
 
     const selected = new Set<string>(defaultSelected);
@@ -27,31 +27,31 @@ function createGridSelector(
     };
 
     for (const item of items) {
-        const gridItem = document.createElement("div") as GridSelectorElement;
-        gridItem.className = "frost-grid-item";
+        const gridItem = document.createElement('div') as GridSelectorElement;
+        gridItem.className = 'frost-grid-item';
         if (selected.has(item.id)) {
-            gridItem.classList.add("selected");
+            gridItem.classList.add('selected');
         }
 
         if (item.icon) {
-            const iconContainer: HTMLDivElement = document.createElement("div");
-            iconContainer.className = "frost-grid-icon";
+            const iconContainer: HTMLDivElement = document.createElement('div');
+            iconContainer.className = 'frost-grid-icon';
             iconContainer.innerHTML = item.icon;
             gridItem.appendChild(iconContainer);
         }
 
-        const itemLabel: HTMLSpanElement = document.createElement("span");
-        itemLabel.className = "frost-grid-item-label";
+        const itemLabel: HTMLSpanElement = document.createElement('span');
+        itemLabel.className = 'frost-grid-item-label';
         itemLabel.textContent = item.label;
         gridItem.appendChild(itemLabel);
 
-        gridItem.addEventListener("click", () => {
+        gridItem.addEventListener('click', () => {
             if (selected.has(item.id)) {
                 selected.delete(item.id);
-                gridItem.classList.remove("selected");
+                gridItem.classList.remove('selected');
             } else {
                 selected.add(item.id);
-                gridItem.classList.add("selected");
+                gridItem.classList.add('selected');
             }
             updateSelection();
         });
@@ -69,8 +69,8 @@ function createGridSelector(
             selected.add(value);
         }
 
-        grid.querySelectorAll(".frost-grid-item").forEach((item: Element, index: number) => {
-            item.classList.toggle("selected", selected.has(items[index].id));
+        grid.querySelectorAll('.frost-grid-item').forEach((item: Element, index: number) => {
+            item.classList.toggle('selected', selected.has(items[index].id));
         });
 
         updateSelection();

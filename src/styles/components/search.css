@@ -6,8 +6,7 @@
     width: min(600px, 90vw);
     background: var(--frost-bg-primary);
     border-radius: 16px;
-    box-shadow: 0 8px 32px var(--frost-shadow-color),
-                0 2px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 32px var(--frost-shadow-color), 0 2px 8px rgba(0, 0, 0, 0.2);
     z-index: 999999;
     opacity: 0;
     visibility: hidden;
@@ -200,4 +199,4 @@
     position: relative;
     z-index: 1;
     background-color: var(--frost-bg-secondary) !important;
-} 
+}
