@@ -1,6 +1,13 @@
 export type { ButtonCallback, ButtonElement, ButtonVariant } from './components/input/Button';
 export type { CategoryData } from './components/layout/Category';
 export type { ChartElement, ChartOptions } from './components/layout/feedback/Chart';
+export type {
+    ModalButton,
+    ModalCloseMethod,
+    ModalElement,
+    ModalOptions,
+    ModalResult,
+} from './components/layout/feedback/Modal';
 export type { ColorCallback, ColorInputElement } from './components/input/ColorInput';
 export type { DragOffset, FrostTheme, GridConfig, Position } from './menu';
 export type {

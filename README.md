@@ -27,6 +27,7 @@ Frost-UI is an elegant and lightweight UI library designed specifically for user
 
     -   Draggable Menus with Snap-to-Grid
     -   Toast Notifications
+    -   Modal Dialogs
     -   Toggle Switches
     -   Sliders
     -   Dual Sliders

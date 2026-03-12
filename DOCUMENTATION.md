@@ -22,6 +22,7 @@ A lightweight, customizable menu library for creating interactive user interface
     -   [Grid Selector](#grid-selector)
     -   [Charts](#charts)
     -   [Search Menu](#search-menu)
+    -   [Modal](#modal)
 -   [Themes](#themes)
 -   [Menu Manager](#menu-manager)
 
@@ -781,7 +782,177 @@ const search = new window.FrostSearch(
 search.setTheme(mainMenu.getTheme());
 ```
 
-[Continue with rest of components in order...]
+### Modal
+
+The Modal component provides centered dialog overlays for user confirmations, alerts, and custom interactions:
+
+```javascript
+// Basic modal with buttons
+const result = await frostManager.showModal({
+    title: 'Confirm Action',
+    message: 'Are you sure you want to proceed?',
+    buttons: [
+        { text: 'Cancel', variant: 'default', result: 'cancel' },
+        { text: 'Confirm', variant: 'primary', result: 'confirm' }
+    ]
+});
+console.log(result); // 'cancel', 'confirm', or null (if dismissed)
+
+// Info-only modal (no buttons)
+await frostManager.showModal({
+    title: 'Notice',
+    message: 'Click outside to close',
+    closeOn: ['backdrop']
+});
+```
+
+#### Modal Options
+
+| Property | Type | Default | Description |
+| -------- | ------ | ------- | ----------- |
+| `title` | `string` | *required* | Modal title text |
+| `message` | `string` | *required* | Modal content message |
+| `buttons` | `ModalButton[]` | `[]` | Array of button objects (0-2 buttons) |
+| `closeOn` | `ModalCloseMethod[]` | `['any']` | How modal can be closed |
+| `dim` | `boolean` | `true` | Enable backdrop darkening |
+| `blur` | `boolean` | `true` | Enable backdrop blur effect |
+| `theme` | `string` | *auto-detect* | Theme to apply (`'dark'`, `'midnight'`, `'nord'`, or custom) |
+
+#### Modal Button
+
+| Property | Type | Default | Description |
+| -------- | ------ | ------- | ----------- |
+| `text` | `string` | *required* | Button label |
+| `variant` | `'default'` \| `'primary'` \| `'destructive'` | `'default'` | Button style variant |
+| `result` | `string` | *button text* | Value returned when this button is clicked |
+
+#### Close Methods
+
+| Method | Description |
+| ------ | ----------- |
+| `'button'` | Only close via button click |
+| `'escape'` | Close on Escape key press |
+| `'backdrop'` | Close on backdrop click |
+| `'any'` | All of the above methods |
+
+#### Return Value
+
+The `showModal()` method returns a `Promise<string | null>`:
+- Returns the `result` value of the clicked button
+- Returns `null` if closed via Escape or backdrop click (when allowed)
+
+#### Features
+
+-   Promise-based API for async/await usage
+-   0-2 button support with customizable variants
+-   Flexible close behavior (button, escape, backdrop, or any combination)
+-   Optional backdrop dimming and blur effects
+-   Automatic theme detection or explicit theme setting
+-   Keyboard accessibility (Escape key)
+-   Smooth fade/slide animations
+
+#### Examples
+
+```javascript
+// Confirmation dialog
+const result = await frostManager.showModal({
+    title: 'Delete Item',
+    message: 'This action cannot be undone.',
+    buttons: [
+        { text: 'Cancel', result: 'cancel' },
+        { text: 'Delete', variant: 'destructive', result: 'delete' }
+    ]
+});
+if (result === 'delete') {
+    deleteItem();
+}
+
+// Force button choice (no escape/backdrop)
+const choice = await frostManager.showModal({
+    title: 'Required Choice',
+    message: 'You must select an option:',
+    buttons: [
+        { text: 'Option A', result: 'a' },
+        { text: 'Option B', result: 'b' }
+    ],
+    closeOn: ['button'] // Only buttons can close
+});
+// choice is guaranteed to be 'a' or 'b', never null
+
+// No visual effects
+await frostManager.showModal({
+    title: 'Subtle Notice',
+    message: 'No backdrop effects applied',
+    dim: false,
+    blur: false
+});
+
+// Explicit theme
+await frostManager.showModal({
+    title: 'Themed Modal',
+    message: 'Using midnight theme',
+    buttons: [{ text: 'Close', result: 'close' }],
+    theme: 'midnight'
+});
+
+// Close on specific methods only
+await frostManager.showModal({
+    title: 'Escape or Backdrop',
+    message: 'Close via Escape key or backdrop click',
+    closeOn: ['escape', 'backdrop']
+});
+
+// Single button
+const confirmed = await frostManager.showModal({
+    title: 'Welcome',
+    message: 'Press Continue to proceed',
+    buttons: [
+        { text: 'Continue', variant: 'primary', result: 'continue' }
+    ]
+});
+```
+
+#### Advanced Usage
+
+```javascript
+// Async confirmation with error handling
+try {
+    const result = await frostManager.showModal({
+        title: 'Save Changes',
+        message: 'Do you want to save your changes before exiting?',
+        buttons: [
+            { text: "Don't Save", variant: 'default', result: 'discard' },
+            { text: 'Save', variant: 'primary', result: 'save' }
+        ],
+        closeOn: ['button', 'escape'] // Allow escape to cancel
+    });
+
+    if (result === 'save') {
+        await saveChanges();
+    } else if (result === 'discard') {
+        // User chose to discard
+    } else {
+        // User pressed Escape - don't exit
+        return;
+    }
+
+    exitApplication();
+
+} catch (error) {
+    console.error('Modal error:', error);
+}
+
+// With custom theme per modal
+const themes = ['dark', 'midnight', 'nord'];
+for (const theme of themes) {
+    await frostManager.showModal({
+        title: `${theme.charAt(0).toUpperCase() + theme.slice(1)} Theme`,
+        message: `This modal uses the ${theme} theme`,
+        buttons: [{ text: 'Next', result: 'next' }],
+        theme: theme
+    });
+}
+```
 
 ## Themes
 
@@ -902,6 +1073,17 @@ manager.showToast({
     type: "success", // 'success' | 'error' | 'info' | 'warning'
     duration: 3000, // Duration in milliseconds
 });
+
+// Show modal dialog
+const result = await manager.showModal({
+    title: "Confirm Action",
+    message: "Are you sure you want to proceed?",
+    buttons: [
+        { text: "Cancel", result: "cancel" },
+        { text: "Confirm", variant: "primary", result: "confirm" }
+    ]
+});
+console.log(result); // 'cancel', 'confirm', or null
 ```
 
 ### Menu Instance Methods

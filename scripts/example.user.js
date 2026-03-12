@@ -362,59 +362,165 @@
                 },
             ],
         })
+        .addCategory('Modals')
         .addButton(
-            'World',
-            'Example',
-            () => {
-                window.frostManager.showToast({
-                    message: 'Success',
-                    type: 'success',
-                    duration: 0,
+            'Modals',
+            'Confirm Dialog',
+            async () => {
+                const result = await window.frostManager.showModal({
+                    title: 'Delete Item',
+                    message: 'Are you sure you want to delete this item? This action cannot be undone.',
+                    buttons: [
+                        { text: 'Cancel', variant: 'default', result: 'cancel' },
+                        { text: 'Delete', variant: 'destructive', result: 'delete' }
+                    ]
                 });
                 window.frostManager.showToast({
-                    message: 'Error',
-                    type: 'error',
-                    duration: 0,
-                });
-                window.frostManager.showToast({
-                    message: 'Warning',
-                    type: 'warning',
-                    duration: 0,
-                });
-                window.frostManager.showToast({
-                    message: 'Info',
-                    type: 'info',
-                    duration: 0,
+                    message: `Result: ${result}`,
+                    type: result === 'delete' ? 'success' : 'info',
+                    duration: 2000
                 });
             },
             'primary'
         )
         .addButton(
-            'World',
-            'Example',
-            () => {
+            'Modals',
+            'Critical Choice',
+            async () => {
+                const result = await window.frostManager.showModal({
+                    title: 'Critical Decision',
+                    message: 'You must choose an option to continue:',
+                    buttons: [
+                        { text: 'Option A', variant: 'default', result: 'a' },
+                        { text: 'Option B', variant: 'primary', result: 'b' }
+                    ],
+                    closeOn: ['button']
+                });
                 window.frostManager.showToast({
-                    message: 'Success',
+                    message: `Selected: ${result}`,
                     type: 'success',
-                    duration: 0,
+                    duration: 2000
+                });
+            }
+        )
+        .addButton(
+            'Modals',
+            'Info Only',
+            async () => {
+                await window.frostManager.showModal({
+                    title: 'Notice',
+                    message: 'Click anywhere outside this modal to close it.',
+                    closeOn: ['backdrop']
+                });
+            }
+        )
+        .addButton(
+            'Modals',
+            'Single Button',
+            async () => {
+                const result = await window.frostManager.showModal({
+                    title: 'Welcome',
+                    message: 'Press the button below to continue.',
+                    buttons: [
+                        { text: 'Continue', variant: 'primary', result: 'continue' }
+                    ]
                 });
                 window.frostManager.showToast({
-                    message: 'Error',
-                    type: 'error',
-                    duration: 0,
+                    message: `Result: ${result}`,
+                    type: 'success',
+                    duration: 2000
+                });
+            }
+        )
+        .addButton(
+            'Modals',
+            'Escape Close',
+            async () => {
+                const result = await window.frostManager.showModal({
+                    title: 'Press Escape',
+                    message: 'Close this modal by pressing the Escape key.',
+                    buttons: [
+                        { text: 'OK', variant: 'default', result: 'ok' }
+                    ],
+                    closeOn: ['escape', 'button']
                 });
                 window.frostManager.showToast({
-                    message: 'Warning',
-                    type: 'warning',
-                    duration: 0,
-                });
-                window.frostManager.showToast({
-                    message: 'Info',
+                    message: result ? `Button pressed: ${result}` : 'Closed via Escape',
                     type: 'info',
-                    duration: 0,
+                    duration: 2000
                 });
-            },
-            'destructive'
+            }
+        )
+        .addButton(
+            'Modals',
+            'No Dim',
+            async () => {
+                await window.frostManager.showModal({
+                    title: 'No Dim',
+                    message: 'This modal has no backdrop dimming.',
+                    buttons: [
+                        { text: 'Close', variant: 'default', result: 'close' }
+                    ],
+                    dim: false
+                });
+            }
+        )
+        .addButton(
+            'Modals',
+            'No Blur',
+            async () => {
+                await window.frostManager.showModal({
+                    title: 'No Blur',
+                    message: 'This modal has no backdrop blur.',
+                    buttons: [
+                        { text: 'Close', variant: 'default', result: 'close' }
+                    ],
+                    blur: false
+                });
+            }
+        )
+        .addButton(
+            'Modals',
+            'No Effects',
+            async () => {
+                await window.frostManager.showModal({
+                    title: 'No Effects',
+                    message: 'This modal has neither dim nor blur effects.',
+                    buttons: [
+                        { text: 'Close', variant: 'default', result: 'close' }
+                    ],
+                    dim: false,
+                    blur: false
+                });
+            }
+        )
+        .addButton(
+            'Modals',
+            'Midnight Theme',
+            async () => {
+                await window.frostManager.showModal({
+                    title: 'Midnight Theme',
+                    message: 'This modal uses the midnight theme.',
+                    buttons: [
+                        { text: 'Close', variant: 'default', result: 'close' }
+                    ],
+                    theme: 'midnight'
+                });
+            }
+        )
+        .addButton(
+            'Modals',
+            'Nord Theme',
+            async () => {
+                await window.frostManager.showModal({
+                    title: 'Nord Theme',
+                    message: 'This modal uses the nord theme.',
+                    buttons: [
+                        { text: 'Close', variant: 'default', result: 'close' }
+                    ],
+                    theme: 'nord'
+                });
+            }
         );
     let playerCount = 50;
     let mobCount = 30;

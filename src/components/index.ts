@@ -13,4 +13,5 @@ export { createToggle } from './input/Toggle';
 export { createCategory } from './layout/Category';
 export { Search } from './layout/Search';
 export { createChart } from './layout/feedback/Chart';
+export { createModal } from './layout/feedback/Modal';
 export { createToast } from './layout/feedback/Toast';

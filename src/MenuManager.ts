@@ -1,12 +1,13 @@
 import FrostUI from './Menu';
-import { type Search, createToast } from './components/index';
-import type { CategoryData, GridConfig, ToastOptions, ToggleElement } from './types/index';
+import { type Search, createModal, createToast } from './components/index';
+import type { CategoryData, GridConfig, ModalOptions, ModalResult, ToastOptions, ToggleElement } from './types/index';
 
 class FrostManager {
     private menus: Map<string, FrostUI>;
     private keybinds: Map<string, string>;
     private globalKeybinds: Map<string, () => void>;
     private toastContainer: HTMLDivElement | null = null;
+    private modalContainer: HTMLDivElement | null = null;
     private search: Search | null = null;
 
     constructor() {
@@ -94,6 +95,39 @@ class FrostManager {
         const toastOptions = typeof options === 'string' ? { message: options } : options;
         const toast = createToast(toastOptions);
         this.toastContainer?.appendChild(toast);
+    }
+
+    private initModalContainer(): void {
+        if (!this.modalContainer) {
+            this.modalContainer = document.createElement('div');
+            this.modalContainer.className = 'frost-modal-container';
+            document.body.appendChild(this.modalContainer);
+        }
+    }
+
+    public showModal(options: ModalOptions): Promise<ModalResult> {
+        this.initModalContainer();
+        const modal = createModal(options);
+
+        let themeClass: string | null = null;
+
+        if (options.theme) {
+            themeClass = options.theme === 'dark' ? null : `frost-theme-${options.theme}`;
+        } else {
+            const menuContainer = document.querySelector('.frost-menu');
+            if (menuContainer) {
+                themeClass = Array.from(menuContainer.classList).find((c: string) =>
+                    c.startsWith('frost-theme-')
+                ) as string | null;
+            }
+        }
+
+        if (themeClass) {
+            modal.classList.add(themeClass);
+        }
+
+        this.modalContainer?.appendChild(modal);
+        return (modal as any).promise;
     }
 
     public getMenus(): Map<string, FrostUI> {
