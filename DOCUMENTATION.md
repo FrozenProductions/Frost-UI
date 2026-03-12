@@ -25,6 +25,7 @@ A lightweight, customizable menu library for creating interactive user interface
     -   [Modal](#modal)
 -   [Themes](#themes)
 -   [Menu Manager](#menu-manager)
+-   [Configuration](#configuration)
 
 ## Installation
 
@@ -1183,3 +1184,92 @@ const search = new window.FrostSearch(
     "k"
 ); // Use Cmd/Ctrl+K to open search
 ```
+
+## Configuration
+
+Frost-UI supports global configuration options that control behavior across all menus:
+
+```javascript
+const manager = window.frostManager;
+
+// Get current configuration
+const config = manager.getConfig();
+console.log(config);
+// {
+//     dimOnMenuOpen: false,
+//     blurOnMenuOpen: false,
+//     rememberPositions: false
+// }
+
+// Update configuration (partial updates supported)
+manager.setConfig({
+    dimOnMenuOpen: true,
+    blurOnMenuOpen: true,
+    rememberPositions: true
+});
+```
+
+### Configuration Options
+
+| Option              | Type    | Default | Description                           |
+| ------------------- | ------- | ------- | ------------------------------------- |
+| `dimOnMenuOpen`     | boolean | `false` | Dim the background when any menu is open |
+| `blurOnMenuOpen`    | boolean | `false` | Blur the background when any menu is open |
+| `rememberPositions` | boolean | `false` | Save menu positions to localStorage |
+
+### Dim/Blur Backdrop
+
+When `dimOnMenuOpen` or `blurOnMenuOpen` is enabled, a backdrop effect appears whenever any menu is open:
+
+```javascript
+// Enable both dim and blur effects
+window.frostManager.setConfig({
+    dimOnMenuOpen: true,
+    blurOnMenuOpen: true
+});
+
+// Now opening any menu will show the backdrop effect
+menu.toggle();
+```
+
+The backdrop automatically shows when at least one menu is open and hides when all menus are closed.
+
+### Position Persistence
+
+When `rememberPositions` is enabled, menu positions are automatically saved to localStorage and restored on page load:
+
+```javascript
+// Enable position persistence
+window.frostManager.setConfig({
+    rememberPositions: true
+});
+
+// Move a menu by dragging it...
+// Position is automatically saved when drag ends
+
+// On page reload, the menu will appear at its last position
+```
+
+**Note:** Position persistence uses the `frost-menu-positions` key in localStorage. Each menu's position is stored by its unique ID.
+
+### Complete Example
+
+```javascript
+// Setup Frost-UI with custom configuration
+const manager = window.frostManager;
+
+// Configure global settings
+manager.setConfig({
+    dimOnMenuOpen: true,
+    blurOnMenuOpen: true,
+    rememberPositions: true
+});
+
+// Create menus - positions will be remembered
+const mainMenu = manager.addMenu("main", "Main Menu", { x: 100, y: 100 });
+const settingsMenu = manager.addMenu("settings", "Settings", { x: 400, y: 100 });
+
+// When user drags menus to new positions, they're saved automatically
+// On next page load, menus appear at their saved positions
+```
+

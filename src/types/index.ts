@@ -1,6 +1,8 @@
 export type { ButtonCallback, ButtonElement, ButtonVariant } from './components/input/Button';
 export type { CategoryData } from './components/layout/Category';
 export type { ChartElement, ChartOptions } from './components/layout/feedback/Chart';
+export type { FrostConfig, StoredMenuPositions } from './config';
+export { DEFAULT_FROST_CONFIG, STORAGE_KEY_POSITIONS, STORAGE_KEY_CONFIG } from './config';
 export type {
     ModalButton,
     ModalCloseMethod,

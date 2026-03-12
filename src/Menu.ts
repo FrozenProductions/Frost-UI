@@ -14,6 +14,7 @@ import {
     createSwitch,
     createToggle,
 } from './components/index';
+import { STORAGE_KEY_POSITIONS } from './types/config';
 import type {
     ButtonElement,
     ButtonVariant,
@@ -36,6 +37,7 @@ import type {
     SelectElement,
     SliderElement,
     SliderOptions,
+    StoredMenuPositions,
     SwitchElement,
     SwitchVariant,
     ToggleCallback,
@@ -64,7 +66,7 @@ class FrostUI {
     ) {
         this.id = id;
         this.title = title;
-        this.position = position;
+        this.position = this.loadSavedPosition() ?? position;
         this.toggleKey = toggleKey;
         this.gridConfig = gridConfig;
         this.isOpen = false;
@@ -146,6 +148,7 @@ class FrostUI {
             if (this.isDragging) {
                 this.isDragging = false;
                 this.hideGridOverlay();
+                this.savePosition();
             }
         });
     }
@@ -204,9 +207,15 @@ class FrostUI {
             this.container.style.display = 'block';
             this.container.classList.remove('hide');
             this.container.classList.add('show');
+            document.dispatchEvent(
+                new CustomEvent('frost-menu-open', { detail: { menuId: this.id } })
+            );
         } else {
             this.container.classList.remove('show');
             this.container.classList.add('hide');
+            document.dispatchEvent(
+                new CustomEvent('frost-menu-close', { detail: { menuId: this.id } })
+            );
             setTimeout(() => {
                 this.container.style.display = 'none';
             }, 200);
@@ -216,6 +225,30 @@ class FrostUI {
     private updatePosition(): void {
         this.container.style.left = `${this.position.x}px`;
         this.container.style.top = `${this.position.y}px`;
+    }
+
+    private loadSavedPosition(): Position | null {
+        try {
+            const stored = localStorage.getItem(STORAGE_KEY_POSITIONS);
+            if (stored) {
+                const positions: StoredMenuPositions = JSON.parse(stored);
+                return positions[this.id] || null;
+            }
+        } catch {
+            // Ignore
+        }
+        return null;
+    }
+
+    private savePosition(): void {
+        try {
+            const stored = localStorage.getItem(STORAGE_KEY_POSITIONS);
+            const positions: StoredMenuPositions = stored ? JSON.parse(stored) : {};
+            positions[this.id] = { x: this.position.x, y: this.position.y };
+            localStorage.setItem(STORAGE_KEY_POSITIONS, JSON.stringify(positions));
+        } catch {
+            // Ignore
+        }
     }
 
     public addCategory(name: string): this {

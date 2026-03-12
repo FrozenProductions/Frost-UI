@@ -1,6 +1,15 @@
 import FrostUI from './Menu';
 import { type Search, createModal, createToast } from './components/index';
-import type { CategoryData, GridConfig, ModalOptions, ModalResult, ToastOptions, ToggleElement } from './types/index';
+import { DEFAULT_FROST_CONFIG, STORAGE_KEY_CONFIG } from './types/config';
+import type {
+    CategoryData,
+    FrostConfig,
+    GridConfig,
+    ModalOptions,
+    ModalResult,
+    ToastOptions,
+    ToggleElement,
+} from './types/index';
 
 class FrostManagerConstants {
     static readonly themes = {
@@ -47,6 +56,9 @@ class FrostManager {
     private toastContainer: HTMLDivElement | null = null;
     private modalContainer: HTMLDivElement | null = null;
     private search: Search | null = null;
+    private backdrop: HTMLDivElement | null = null;
+    private openMenuCount = 0;
+    private config: FrostConfig;
 
     static readonly modal = FrostManagerModalConstants;
 
@@ -59,6 +71,7 @@ class FrostManager {
         this.menus = new Map();
         this.keybinds = new Map();
         this.globalKeybinds = new Map();
+        this.config = this.loadConfig();
 
         window.addEventListener(
             'keydown',
@@ -79,6 +92,77 @@ class FrostManager {
             },
             true
         );
+
+        this.setupBackdropListeners();
+    }
+
+    private loadConfig(): FrostConfig {
+        try {
+            const stored = localStorage.getItem(STORAGE_KEY_CONFIG);
+            if (stored) {
+                return { ...DEFAULT_FROST_CONFIG, ...JSON.parse(stored) };
+            }
+        } catch {
+            // Ignore
+        }
+        return { ...DEFAULT_FROST_CONFIG };
+    }
+
+    private saveConfig(): void {
+        try {
+            localStorage.setItem(STORAGE_KEY_CONFIG, JSON.stringify(this.config));
+        } catch {
+            // Ignore
+        }
+    }
+
+    public setConfig(partialConfig: Partial<FrostConfig>): void {
+        this.config = { ...this.config, ...partialConfig };
+        this.saveConfig();
+    }
+
+    public getConfig(): FrostConfig {
+        return { ...this.config };
+    }
+
+    private initBackdrop(): void {
+        if (!this.backdrop) {
+            this.backdrop = document.createElement('div');
+            this.backdrop.className = 'frost-backdrop';
+            document.body.appendChild(this.backdrop);
+        }
+    }
+
+    private setupBackdropListeners(): void {
+        document.addEventListener('frost-menu-open', () => {
+            this.openMenuCount++;
+            this.updateBackdrop();
+        });
+
+        document.addEventListener('frost-menu-close', () => {
+            this.openMenuCount = Math.max(0, this.openMenuCount - 1);
+            this.updateBackdrop();
+        });
+    }
+
+    private updateBackdrop(): void {
+        if (this.openMenuCount > 0 && (this.config.dimOnMenuOpen || this.config.blurOnMenuOpen)) {
+            this.initBackdrop();
+            if (this.backdrop) {
+                this.backdrop.classList.remove('dim', 'blur');
+                if (this.config.dimOnMenuOpen) {
+                    this.backdrop.classList.add('dim');
+                }
+                if (this.config.blurOnMenuOpen) {
+                    this.backdrop.classList.add('blur');
+                }
+                this.backdrop.classList.add('visible');
+            }
+        } else {
+            if (this.backdrop) {
+                this.backdrop.classList.remove('visible');
+            }
+        }
     }
 
     public addMenu(
