@@ -21,7 +21,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, var(--frost-accent-color), var(--frost-accent-hover));
+    background: var(--frost-accent-color);
     opacity: 0;
     transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -58,7 +58,7 @@
 }
 
 .frost-toggle-switch.active {
-    background: linear-gradient(135deg, var(--frost-accent-color), var(--frost-accent-hover));
+    background: var(--frost-accent-color);
     border-color: var(--frost-accent-color);
 }
 

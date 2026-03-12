@@ -504,7 +504,7 @@
                     buttons: [
                         { text: 'Close', variant: window.frostManager.buttonVariant.DEFAULT, result: 'close' }
                     ],
-                    theme: window.frostManager.modal.themes.MIDNIGHT
+                    theme: window.frostManager.themes.MIDNIGHT
                 });
             }
         )
@@ -518,7 +518,7 @@
                     buttons: [
                         { text: 'Close', variant: window.frostManager.buttonVariant.DEFAULT, result: 'close' }
                     ],
-                    theme: window.frostManager.modal.themes.NORD
+                    theme: window.frostManager.themes.NORD
                 });
             }
         );

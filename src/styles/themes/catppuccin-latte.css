@@ -1,0 +1,12 @@
+.frost-theme-catppuccin-latte {
+    --frost-bg-primary: rgba(239, 236, 239, 0.95);
+    --frost-bg-secondary: rgba(220, 217, 226, 0.7);
+    --frost-bg-tertiary: rgba(202, 199, 208, 0.5);
+    --frost-border-color: rgba(76, 79, 105, 0.15);
+    --frost-text-primary: rgba(76, 79, 105, 0.95);
+    --frost-text-secondary: rgba(108, 112, 134, 0.8);
+    --frost-accent-color: #8839ef;
+    --frost-accent-hover: #7132cc;
+    --frost-shadow-color: rgba(181, 118, 201, 0.15);
+    --frost-ripple-color: rgba(136, 57, 239, 0.4);
+}

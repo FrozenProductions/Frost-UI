@@ -205,9 +205,6 @@ menu.addSelect(
 | ------------------------------- | --------------------------------------- |
 | `getValue()`                    | Get the currently selected value        |
 | `setValue(value: string)`       | Programmatically set the selected value |
-| `setOptions(options: string[])` | Update the available options            |
-| `disable()`                     | Disable the select                      |
-| `enable()`                      | Enable the select                       |
 
 ### Color Input
 
@@ -238,8 +235,6 @@ menu.addColorInput(
 | ------------------------- | ------------------------------ |
 | `getValue()`              | Get the current color value    |
 | `setValue(color: string)` | Set the color programmatically |
-| `disable()`               | Disable the color input        |
-| `enable()`                | Enable the color input         |
 
 #### Advanced Usage
 
@@ -294,12 +289,6 @@ menu.addMultiSelect(
 | ------------------------------- | ------------------------------------ |
 | `getValues()`                   | Get array of selected values         |
 | `setValues(values: string[])`   | Set selected values programmatically |
-| `getOptions()`                  | Get available options                |
-| `setOptions(options: string[])` | Update available options             |
-| `selectAll()`                   | Select all options                   |
-| `deselectAll()`                 | Deselect all options                 |
-| `disable()`                     | Disable the multi-select             |
-| `enable()`                      | Enable the multi-select              |
 
 #### Advanced Usage
 
@@ -320,7 +309,6 @@ menu.addMultiSelect(
 
 // Programmatic control
 const multiSelect = menu.addMultiSelect("Combat", "Targets", options, []);
-multiSelect.selectAll();
 multiSelect.setValues(["Players", "Monsters"]);
 const currentSelection = multiSelect.getValues();
 ```
@@ -340,8 +328,8 @@ menu.addPageSelector(
         "Custom",
     ],
     0, // Default page index
-    (page) => {
-        console.log(`Switched to ${page} mode`);
+    (page, index) => {
+        console.log(`Switched to ${page} mode (index: ${index})`);
     }
 );
 ```
@@ -356,14 +344,10 @@ menu.addPageSelector(
 
 #### Methods
 
-| Method                   | Description             |
-| ------------------------ | ----------------------- |
-| `getCurrentPage()`       | Get current page index  |
-| `setPage(index: number)` | Switch to specific page |
-| `nextPage()`             | Go to next page         |
-| `previousPage()`         | Go to previous page     |
-| `disable()`              | Disable page selector   |
-| `enable()`               | Enable page selector    |
+| Method                    | Description                       |
+| ------------------------- | --------------------------------- |
+| `getValue()`              | Get current page index            |
+| `setValue(value: number)` | Switch to specific page by index  |
 
 #### Advanced Usage
 
@@ -381,9 +365,8 @@ const pageSelector = menu.addPageSelector(
 );
 
 // Programmatic control
-pageSelector.nextPage();
-pageSelector.setPage(2);
-const currentPage = pageSelector.getCurrentPage();
+pageSelector.setValue(2); // Switch to "Expert" page
+const currentPageIndex = pageSelector.getValue();
 ```
 
 ### Buttons
@@ -411,13 +394,10 @@ menu.addButton(
 
 #### Methods
 
-| Method                         | Description                    |
-| ------------------------------ | ------------------------------ |
-| `click()`                      | Programmatically trigger click |
-| `setLoading(loading: boolean)` | Set loading state              |
-| `setText(text: string)`        | Update button text             |
-| `disable()`                    | Disable button                 |
-| `enable()`                     | Enable button                  |
+| Method                           | Description                    |
+| -------------------------------- | ------------------------------ |
+| `setEnabled(enabled: boolean)`   | Enable or disable button       |
+| `isEnabled()`                    | Check if button is enabled     |
 
 #### Button Variants
 
@@ -470,13 +450,10 @@ menu.addOrderList(
 
 #### Methods
 
-| Method                                         | Description               |
-| ---------------------------------------------- | ------------------------- |
-| `getItems()`                                   | Get current items array   |
-| `setItems(items: string[])`                    | Update list items         |
-| `moveItem(fromIndex: number, toIndex: number)` | Move item to new position |
-| `disable()`                                    | Disable reordering        |
-| `enable()`                                     | Enable reordering         |
+| Method                                | Description                   |
+| ------------------------------------- | ----------------------------- |
+| `getValue()`                          | Get current items array       |
+| `setValue(items: string[])`           | Update list items             |
 
 #### Advanced Usage
 
@@ -492,9 +469,8 @@ const orderList = menu.addOrderList("Priority", "Task Priority", config.priority
 });
 
 // Programmatic control
-orderList.moveItem(0, 2);
-const currentOrder = orderList.getItems();
-orderList.setItems(["Critical", "High", "Medium", "Low"]);
+const currentOrder = orderList.getValue();
+orderList.setValue(["Critical", "High", "Medium", "Low"]);
 ```
 
 ### Dual Slider
@@ -527,14 +503,10 @@ menu.addDualSlider(
 
 #### Methods
 
-| Method                                  | Description              |
-| --------------------------------------- | ------------------------ |
-| `getValues()`                           | Get current range values |
-| `setValues(start: number, end: number)` | Set range values         |
-| `setMin(value: number)`                 | Update minimum value     |
-| `setMax(value: number)`                 | Update maximum value     |
-| `disable()`                             | Disable dual slider      |
-| `enable()`                              | Enable dual slider       |
+| Method                                           | Description              |
+| ------------------------------------------------ | ------------------------ |
+| `getValue()`                                      | Get current range values  |
+| `setValue({ start, end })`                        | Set range values         |
 
 #### Advanced Usage
 
@@ -554,10 +526,8 @@ const dualSlider = menu.addDualSlider(
 );
 
 // Programmatic control
-dualSlider.setValues(300, 700);
-const currentRange = dualSlider.getValues();
-dualSlider.setMin(100);
-dualSlider.setMax(2000);
+dualSlider.setValue({ start: 300, end: 700 });
+const currentRange = dualSlider.getValue();
 ```
 
 ### Grid Selector
@@ -598,12 +568,8 @@ menu.addGridSelector(
 
 | Method                        | Description           |
 | ----------------------------- | --------------------- |
-| `getSelected()`               | Get selected item IDs |
-| `setSelected(ids: string[])`  | Set selected items    |
-| `setItems(items: GridItem[])` | Update grid items     |
-| `setColumns(count: number)`   | Update column count   |
-| `disable()`                   | Disable grid selector |
-| `enable()`                    | Enable grid selector  |
+| `getValue()`                  | Get selected item IDs |
+| `setValue(ids: string[])`     | Set selected items    |
 
 #### Advanced Usage
 
@@ -624,9 +590,8 @@ const gridSelector = menu.addGridSelector(
 );
 
 // Programmatic control
-gridSelector.setSelected(["save", "load"]);
-const currentSelection = gridSelector.getSelected();
-gridSelector.setColumns(4);
+gridSelector.setValue(["save", "load"]);
+const currentSelection = gridSelector.getValue();
 ```
 
 ### Charts
@@ -676,10 +641,6 @@ menu.addChart(
 | `addDataPoint(seriesIndex: number, value: number)` | Add new data point  |
 | `clearData()`                                      | Clear all data      |
 | `getValue()`                                       | Get current data    |
-| `setMinY(value: number)`                           | Set minimum Y value |
-| `setMaxY(value: number)`                           | Set maximum Y value |
-| `disable()`                                        | Disable chart       |
-| `enable()`                                         | Enable chart        |
 
 #### Example with Real-time Updates
 
@@ -814,9 +775,17 @@ Frost-UI provides type constants for better autocomplete and type safety:
 
 ```javascript
 // Theme constants
-manager.modal.themes.DARK      // 'dark'
-manager.modal.themes.MIDNIGHT  // 'midnight'
-manager.modal.themes.NORD      // 'nord'
+manager.themes.DARK                    // 'dark'
+manager.themes.MIDNIGHT                // 'midnight'
+manager.themes.NORD                    // 'nord'
+manager.themes.DEEP                    // 'deep'
+manager.themes.OBSIDIAN                // 'obsidian'
+manager.themes.DUSK                    // 'dusk'
+manager.themes.CATPPUCCIN_MACCHIATO    // 'catppuccin-macchiato'
+manager.themes.CATPPUCCIN_LATTE        // 'catppuccin-latte'
+manager.themes.DRACULA                 // 'dracula'
+manager.themes.GRUVBOX                 // 'gruvbox'
+manager.themes.TOKYO_NIGHT             // 'tokyo-night'
 
 // Close method constants
 manager.modal.closeOn.BUTTON   // 'button'
@@ -846,7 +815,7 @@ manager.toastType.WARNING // 'warning'
 | `closeOn` | `ModalCloseMethod[]` | `[manager.modal.closeOn.ANY]` | How modal can be closed |
 | `dim` | `boolean` | `true` | Enable backdrop darkening |
 | `blur` | `boolean` | `true` | Enable backdrop blur effect |
-| `theme` | `string` | *auto-detect* | Theme to apply (use `manager.modal.themes.*`) |
+| `theme` | `string` | *auto-detect* | Theme to apply (use `manager.themes.*`) |
 
 #### Modal Button
 
@@ -922,7 +891,7 @@ await manager.showModal({
     title: 'Themed Modal',
     message: 'Using midnight theme',
     buttons: [{ text: 'Close', result: 'close' }],
-    theme: manager.modal.themes.MIDNIGHT
+    theme: manager.themes.MIDNIGHT
 });
 
 // Close on specific methods only
@@ -973,7 +942,7 @@ try {
 }
 
 // With custom theme per modal
-const themes = [manager.modal.themes.DARK, manager.modal.themes.MIDNIGHT, manager.modal.themes.NORD];
+const themes = [manager.themes.DARK, manager.themes.MIDNIGHT, manager.themes.NORD];
 for (const theme of themes) {
     await manager.showModal({
         title: `${theme.charAt(0).toUpperCase() + theme.slice(1)} Theme`,
@@ -988,20 +957,72 @@ for (const theme of themes) {
 
 Frost-UI comes with a built-in theme system and several preset themes:
 
+**Dark Themes:**
 -   Dark (default)
 -   Midnight
 -   Nord
--   Cyber
 -   Deep
 -   Obsidian
 -   Dusk
+-   Catppuccin Macchiato
+-   Dracula
+-   Gruvbox
+-   Tokyo Night
+
+**Light Themes:**
+-   Catppuccin Latte
 
 ```javascript
 const menuElement = document.querySelector(".frost-menu");
 menuElement.setTheme("Dark");
 menuElement.setTheme("Midnight");
 menuElement.setTheme("Nord");
+menuElement.setTheme("Deep");
+menuElement.setTheme("Obsidian");
+menuElement.setTheme("Dusk");
+menuElement.setTheme("Catppuccin-Macchiato");
+menuElement.setTheme("Catppuccin-Latte");
+menuElement.setTheme("Dracula");
+menuElement.setTheme("Gruvbox");
+menuElement.setTheme("Tokyo-Night");
 ```
+
+### Theme Constants
+
+For type-safe theme references, use the `FrostThemes` constant:
+
+```javascript
+import { FrostThemes } from 'frost-ui';
+
+menuElement.setTheme(FrostThemes.DARK);
+menuElement.setTheme(FrostThemes.MIDNIGHT);
+menuElement.setTheme(FrostThemes.NORD);
+menuElement.setTheme(FrostThemes.DEEP);
+menuElement.setTheme(FrostThemes.OBSIDIAN);
+menuElement.setTheme(FrostThemes.DUSK);
+menuElement.setTheme(FrostThemes.CATPPUCCIN_MACCHIATO);
+menuElement.setTheme(FrostThemes.CATPPUCCIN_LATTE);
+menuElement.setTheme(FrostThemes.DRACULA);
+menuElement.setTheme(FrostThemes.GRUVBOX);
+menuElement.setTheme(FrostThemes.TOKYO_NIGHT);
+```
+
+**Available constants:**
+
+*Dark Themes:*
+- `FrostThemes.DARK` - Default blue-accented dark theme
+- `FrostThemes.MIDNIGHT` - Purple-accented darker theme
+- `FrostThemes.NORD` - Nord-inspired arctic theme
+- `FrostThemes.DEEP` - Deep ocean blue/teal theme
+- `FrostThemes.OBSIDIAN` - Dark stone theme with green accents
+- `FrostThemes.DUSK` - Warm sunset orange/purple theme
+- `FrostThemes.CATPPUCCIN_MACCHIATO` - Soothing pastel dark theme with mauve accents (Catppuccin Macchiato)
+- `FrostThemes.DRACULA` - Popular dark theme with purple accents
+- `FrostThemes.GRUVBOX` - Warm retro dark theme with orange accents
+- `FrostThemes.TOKYO_NIGHT` - Clean dark theme with blue accents
+
+*Light Themes:*
+- `FrostThemes.CATPPUCCIN_LATTE` - Soothing pastel light theme with purple accents (Catppuccin Latte)
 
 ### Custom Themes
 

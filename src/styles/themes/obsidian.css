@@ -1,0 +1,12 @@
+.frost-theme-obsidian {
+    --frost-bg-primary: rgba(18, 18, 22, 0.95);
+    --frost-bg-secondary: rgba(22, 22, 28, 0.6);
+    --frost-bg-tertiary: rgba(28, 28, 35, 0.4);
+    --frost-border-color: rgba(255, 255, 255, 0.06);
+    --frost-text-primary: rgba(235, 235, 235, 0.9);
+    --frost-text-secondary: rgba(200, 200, 200, 0.7);
+    --frost-accent-color: #4ade80;
+    --frost-accent-hover: #22c55e;
+    --frost-shadow-color: rgba(0, 0, 0, 0.35);
+    --frost-ripple-color: rgba(74, 222, 128, 0.4);
+}

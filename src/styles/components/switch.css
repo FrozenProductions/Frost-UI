@@ -36,7 +36,7 @@
 }
 
 .frost-switch-track.active {
-    background: linear-gradient(135deg, var(--frost-accent-color), var(--frost-accent-hover));
+    background: var(--frost-accent-color);
     border-color: var(--frost-accent-color);
 }
 

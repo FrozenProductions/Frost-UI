@@ -1,0 +1,12 @@
+.frost-theme-catppuccin-macchiato {
+    --frost-bg-primary: rgba(36, 39, 58, 0.95);
+    --frost-bg-secondary: rgba(49, 50, 68, 0.6);
+    --frost-bg-tertiary: rgba(69, 71, 90, 0.4);
+    --frost-border-color: rgba(166, 173, 200, 0.1);
+    --frost-text-primary: rgba(202, 211, 245, 0.9);
+    --frost-text-secondary: rgba(166, 173, 200, 0.75);
+    --frost-accent-color: #c6a0f6;
+    --frost-accent-hover: #b493d6;
+    --frost-shadow-color: rgba(24, 25, 38, 0.3);
+    --frost-ripple-color: rgba(198, 160, 246, 0.5);
+}

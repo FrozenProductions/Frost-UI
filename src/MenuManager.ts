@@ -2,22 +2,21 @@ import FrostUI from './Menu';
 import { type Search, createModal, createToast } from './components/index';
 import type { CategoryData, GridConfig, ModalOptions, ModalResult, ToastOptions, ToggleElement } from './types/index';
 
-class FrostManagerModalConstants {
+class FrostManagerConstants {
     static readonly themes = {
         DARK: 'dark',
         MIDNIGHT: 'midnight',
         NORD: 'nord',
+        DEEP: 'deep',
+        OBSIDIAN: 'obsidian',
+        DUSK: 'dusk',
+        CATPPUCCIN_MACCHIATO: 'catppuccin-macchiato',
+        CATPPUCCIN_LATTE: 'catppuccin-latte',
+        DRACULA: 'dracula',
+        GRUVBOX: 'gruvbox',
+        TOKYO_NIGHT: 'tokyo-night',
     } as const;
 
-    static readonly closeOn = {
-        BUTTON: 'button',
-        ESCAPE: 'escape',
-        BACKDROP: 'backdrop',
-        ANY: 'any',
-    } as const;
-}
-
-class FrostManagerConstants {
     static readonly buttonVariant = {
         DEFAULT: 'default',
         PRIMARY: 'primary',
@@ -32,6 +31,15 @@ class FrostManagerConstants {
     } as const;
 }
 
+class FrostManagerModalConstants {
+    static readonly closeOn = {
+        BUTTON: 'button',
+        ESCAPE: 'escape',
+        BACKDROP: 'backdrop',
+        ANY: 'any',
+    } as const;
+}
+
 class FrostManager {
     private menus: Map<string, FrostUI>;
     private keybinds: Map<string, string>;
@@ -42,9 +50,10 @@ class FrostManager {
 
     static readonly modal = FrostManagerModalConstants;
 
-    readonly modal = FrostManagerModalConstants;
+    readonly themes = FrostManagerConstants.themes;
     readonly buttonVariant = FrostManagerConstants.buttonVariant;
     readonly toastType = FrostManagerConstants.toastType;
+    readonly modal = FrostManagerModalConstants;
 
     constructor() {
         this.menus = new Map();

@@ -10,6 +10,7 @@ export type {
 } from './components/layout/feedback/Modal';
 export type { ColorCallback, ColorInputElement } from './components/input/ColorInput';
 export type { DragOffset, FrostTheme, GridConfig, Position } from './menu';
+export { FrostThemes } from './menu';
 export type {
     DualSliderCallback,
     DualSliderElement,

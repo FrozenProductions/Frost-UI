@@ -1,0 +1,12 @@
+.frost-theme-dusk {
+    --frost-bg-primary: rgba(25, 20, 30, 0.95);
+    --frost-bg-secondary: rgba(30, 25, 35, 0.6);
+    --frost-bg-tertiary: rgba(35, 30, 40, 0.4);
+    --frost-border-color: rgba(255, 180, 120, 0.1);
+    --frost-text-primary: rgba(255, 230, 210, 0.9);
+    --frost-text-secondary: rgba(255, 200, 170, 0.7);
+    --frost-accent-color: #ff6b6b;
+    --frost-accent-hover: #ee5a5a;
+    --frost-shadow-color: rgba(255, 100, 80, 0.15);
+    --frost-ripple-color: rgba(255, 107, 107, 0.5);
+}

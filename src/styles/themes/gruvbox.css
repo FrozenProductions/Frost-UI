@@ -1,0 +1,12 @@
+.frost-theme-gruvbox {
+    --frost-bg-primary: rgba(40, 40, 40, 0.95);
+    --frost-bg-secondary: rgba(60, 56, 54, 0.6);
+    --frost-bg-tertiary: rgba(80, 73, 69, 0.4);
+    --frost-border-color: rgba(235, 219, 178, 0.1);
+    --frost-text-primary: rgba(235, 219, 178, 0.9);
+    --frost-text-secondary: rgba(213, 196, 161, 0.75);
+    --frost-accent-color: #fe8019;
+    --frost-accent-hover: #d65d0e;
+    --frost-shadow-color: rgba(0, 0, 0, 0.3);
+    --frost-ripple-color: rgba(254, 128, 25, 0.5);
+}

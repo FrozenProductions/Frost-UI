@@ -1,3 +1,5 @@
+import type { FrostTheme } from '../../../menu';
+
 interface ModalButton {
     text: string;
     variant?: 'default' | 'primary' | 'destructive';
@@ -13,7 +15,7 @@ interface ModalOptions {
     closeOn?: ModalCloseMethod[];
     dim?: boolean;
     blur?: boolean;
-    theme?: 'dark' | 'midnight' | 'nord' | string;
+    theme?: FrostTheme;
 }
 
 interface ModalElement extends HTMLDivElement {
