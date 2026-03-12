@@ -33,7 +33,7 @@
             targetMode: 'Single',
             priority: 'Distance',
             targetTypes: ['Players'],
-            targetPriority: ['Players', 'Monsters', 'Animals']
+            targetPriority: ['Players', 'Monsters', 'Animals'],
         },
         movement: {
             speed: false,
@@ -100,13 +100,11 @@
     );
 
     const search = new window.FrostSearch({
-        "Combat Menu": combatMenu,
-        "Movement Menu": movementMenu,
-        "Render Menu": renderMenu,
-        "World Menu": worldMenu
-    }, "k")
-
-    //search.setTheme("nord")
+        'Combat Menu': combatMenu,
+        'Movement Menu': movementMenu,
+        'Render Menu': renderMenu,
+        'World Menu': worldMenu,
+    });
 
     /*━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
      *  Combat Menu Setup
@@ -114,15 +112,10 @@
 
     combatMenu
         .addCategory('Combat')
-        .addToggle(
-            'Combat',
-            'KillAura',
-            (enabled, key) => {
-                config.combat.killAura = enabled;
-                saveConfig();
-            },
-            'KeyK'
-        )
+        .addToggle('Combat', 'KillAura', (enabled, key) => {
+            config.combat.killAura = enabled;
+            saveConfig();
+        })
         .addSlider('Combat', 'Reach', 3, 6, config.combat.reach, (value) => {
             config.combat.reach = value;
             saveConfig();
@@ -155,17 +148,9 @@
             config.combat.autoClicker.enabled = enabled;
             saveConfig();
         })
-        .addDualSlider(
-            "AutoClicker",
-            "CPS",
-            0,
-            20,
-            10,
-            15,
-            ({ start, end }) => {
-                console.log(`Price range: $${start} - $${end}`);
-            }
-        )
+        .addDualSlider('AutoClicker', 'CPS', 0, 20, 10, 15, ({ start, end }) => {
+            console.log(`Price range: $${start} - $${end}`);
+        })
         .addCategory('Target')
         .addRadioGroup(
             'Target',
@@ -196,7 +181,7 @@
                 config.combat.targetTypes = selected;
                 saveConfig();
             }
-        )
+        );
 
     /*━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
      *  Movement Menu Setup
@@ -235,20 +220,20 @@
             'Movement Abilities',
             [
                 {
-                    id: "flight",
+                    id: 'flight',
                     icon: `<svg viewBox="0 0 24 24"><path fill="currentColor" d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>`,
-                    label: "Flight"
+                    label: 'Flight',
                 },
                 {
-                    id: "bhop",
+                    id: 'bhop',
                     icon: `<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 24 24"><title>circle arrow up 2</title><g fill="#ffffff" class="nc-icon-wrapper"><path d="M12,0A12,12,0,1,0,24,12,12.013,12.013,0,0,0,12,0Zm4.451,11.717A.5.5,0,0,1,16,12H13v5a1,1,0,0,1-2,0V12H8a.5.5,0,0,1-.391-.812l4-5a.517.517,0,0,1,.782,0l4,5A.5.5,0,0,1,16.451,11.717Z" fill="#ffffff"></path></g></svg>`,
-                    label: "Bunny Hop"
+                    label: 'Bunny Hop',
                 },
                 {
-                    id: "longjump",
+                    id: 'longjump',
                     icon: `<svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 20 20"><title>arrow trend up</title><g fill="#ffffff" class="nc-icon-wrapper"><path d="m17,6l-7.293,7.293c-.391.391-1.024.391-1.414,0l-2.586-2.586c-.391-.391-1.024-.391-1.414,0l-2.293,2.293" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" data-color="color-2"></path><polyline points="17 13 17 6 10 6" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></polyline></g></svg>`,
-                    label: "Long Jump"
-                }
+                    label: 'Long Jump',
+                },
             ],
             config.movement.abilities,
             (selected) => {
@@ -358,19 +343,19 @@
             config.world.caveFinder = enabled;
             saveConfig();
         })
-        .addChart("World", "Entities", {
+        .addChart('World', 'Entities', {
             width: 260,
             height: 100,
             maxDataPoints: 100,
             series: [
                 {
-                    label: "Players",
-                    color: "#ff4757",
+                    label: 'Players',
+                    color: '#ff4757',
                 },
                 {
-                    label: "Mobs",
-                    color: "#2ed573",
-                }
+                    label: 'Mobs',
+                    color: '#2ed573',
+                },
             ],
         })
         .addButton(
@@ -395,11 +380,6 @@
                 window.frostManager.showToast({
                     message: 'Info',
                     type: 'info',
-                    duration: 0,
-                });
-                window.frostManager.showToast({
-                    message: 'Undefined',
-                    type: 'undefined',
                     duration: 0,
                 });
             },
@@ -429,20 +409,14 @@
                     type: 'info',
                     duration: 0,
                 });
-                window.frostManager.showToast({
-                    message: 'Undefined',
-                    type: 'undefined',
-                    duration: 0,
-                });
             },
             'destructive'
         );
-    // simulate data
     let playerCount = 50;
     let mobCount = 30;
 
     setInterval(() => {
-        const chart = worldMenu.getCategories().get("World")?.items.get("Entities");
+        const chart = worldMenu.getCategories().get('World')?.items.get('Entities');
         if (chart) {
             playerCount = Math.max(0, Math.min(100, playerCount + (Math.random() - 0.5) * 10));
             mobCount = Math.max(0, Math.min(100, mobCount + (Math.random() - 0.5) * 8));
