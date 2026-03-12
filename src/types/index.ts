@@ -2,7 +2,7 @@ export type { ButtonCallback, ButtonElement, ButtonVariant } from './components/
 export type { CategoryData } from './components/layout/Category';
 export type { ChartElement, ChartOptions } from './components/layout/feedback/Chart';
 export type { ColorCallback, ColorInputElement } from './components/input/ColorInput';
-export type { DragOffset, FrostTheme, Position } from './menu';
+export type { DragOffset, FrostTheme, GridConfig, Position } from './menu';
 export type {
     DualSliderCallback,
     DualSliderElement,

@@ -8,6 +8,12 @@ interface DragOffset {
     y: number;
 }
 
+interface GridConfig {
+    enabled: boolean;
+    gridSize: number;
+    showGrid: boolean;
+}
+
 type FrostTheme = 'dark' | 'midnight' | 'nord' | string;
 
-export type { Position, DragOffset, FrostTheme };
+export type { Position, DragOffset, FrostTheme, GridConfig };

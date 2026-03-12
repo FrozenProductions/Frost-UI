@@ -25,6 +25,7 @@ import type {
     DualSliderElement,
     DualSliderOptions,
     FrostTheme,
+    GridConfig,
     GridItem,
     GridSelectorElement,
     MultiSelectElement,
@@ -51,17 +52,21 @@ class FrostUI {
     private isDragging: boolean;
     private dragOffset: DragOffset;
     private container!: HTMLDivElement;
+    private gridConfig: GridConfig;
+    private gridOverlay: HTMLDivElement | null = null;
 
     constructor(
         id: string,
         title: string,
         position: Position = { x: 100, y: 100 },
-        toggleKey = 'ShiftRight'
+        toggleKey = 'ShiftRight',
+        gridConfig: GridConfig = { enabled: false, gridSize: 20, showGrid: true }
     ) {
         this.id = id;
         this.title = title;
         this.position = position;
         this.toggleKey = toggleKey;
+        this.gridConfig = gridConfig;
         this.isOpen = false;
         this.categories = new Map();
         this.isDragging = false;
@@ -115,23 +120,70 @@ class FrostUI {
             this.isDragging = true;
             this.dragOffset.x = mouseEvent.clientX - this.position.x;
             this.dragOffset.y = mouseEvent.clientY - this.position.y;
+
+            if (this.gridConfig.enabled && this.gridConfig.showGrid) {
+                this.showGridOverlay();
+            }
         }) as EventListener);
 
         document.addEventListener('mousemove', (e: MouseEvent) => {
             if (this.isDragging) {
-                this.position.x = e.clientX - this.dragOffset.x;
-                this.position.y = e.clientY - this.dragOffset.y;
+                let newX = e.clientX - this.dragOffset.x;
+                let newY = e.clientY - this.dragOffset.y;
+
+                if (this.gridConfig.enabled) {
+                    newX = Math.round(newX / this.gridConfig.gridSize) * this.gridConfig.gridSize;
+                    newY = Math.round(newY / this.gridConfig.gridSize) * this.gridConfig.gridSize;
+                }
+
+                this.position.x = newX;
+                this.position.y = newY;
                 this.updatePosition();
             }
         });
 
         document.addEventListener('mouseup', () => {
-            this.isDragging = false;
+            if (this.isDragging) {
+                this.isDragging = false;
+                this.hideGridOverlay();
+            }
         });
+    }
+
+    private showGridOverlay(): void {
+        if (this.gridOverlay) return;
+
+        this.gridOverlay = document.createElement('div');
+        this.gridOverlay.className = 'frost-grid-overlay';
+        this.gridOverlay.style.setProperty('--grid-size', `${this.gridConfig.gridSize}px`);
+        document.body.appendChild(this.gridOverlay);
+    }
+
+    private hideGridOverlay(): void {
+        if (this.gridOverlay) {
+            this.gridOverlay.remove();
+            this.gridOverlay = null;
+        }
     }
 
     public isMenuOpen(): boolean {
         return this.isOpen;
+    }
+
+    public getGridConfig(): GridConfig {
+        return { ...this.gridConfig };
+    }
+
+    public setGridConfig(config: Partial<GridConfig>): void {
+        this.gridConfig = { ...this.gridConfig, ...config };
+    }
+
+    public isGridEnabled(): boolean {
+        return this.gridConfig.enabled;
+    }
+
+    public setGridEnabled(enabled: boolean): void {
+        this.gridConfig.enabled = enabled;
     }
 
     public setToggleKey(key: string): void {

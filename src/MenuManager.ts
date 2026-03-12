@@ -1,6 +1,6 @@
 import FrostUI from './Menu';
 import { type Search, createToast } from './components/index';
-import type { CategoryData, ToastOptions, ToggleElement } from './types/index';
+import type { CategoryData, GridConfig, ToastOptions, ToggleElement } from './types/index';
 
 class FrostManager {
     private menus: Map<string, FrostUI>;
@@ -39,9 +39,10 @@ class FrostManager {
         id: string,
         title: string,
         position?: { x: number; y: number },
-        toggleKey = 'ShiftRight'
+        toggleKey = 'ShiftRight',
+        gridConfig?: GridConfig
     ): FrostUI {
-        const menu = new FrostUI(id, title, position, toggleKey);
+        const menu = new FrostUI(id, title, position, toggleKey, gridConfig);
         this.menus.set(id, menu);
         return menu;
     }

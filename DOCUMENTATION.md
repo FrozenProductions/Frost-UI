@@ -6,6 +6,7 @@ A lightweight, customizable menu library for creating interactive user interface
 
 -   [Installation](#installation)
 -   [Basic Usage](#basic-usage)
+    -   [Snap-to-Grid](#snap-to-grid)
 -   [Components](#components)
     -   [Categories](#categories)
     -   [Toggle-Switch](#toggle-switch)
@@ -43,6 +44,51 @@ const menu = window.frostManager.addMenu(
     { x: 100, y: 100 }, // Initial position (optional)
     "ShiftRight" // Toggle key (optional)
 );
+```
+
+### Snap-to-Grid
+
+Menus support snap-to-grid functionality for easier alignment and positioning. When enabled, the menu will snap to grid points while dragging and optionally show a visual grid overlay.
+
+```javascript
+const menu = window.frostManager.addMenu(
+    "uniqueId",
+    "Menu Title",
+    { x: 100, y: 100 },
+    "ShiftRight",
+    {
+        enabled: true,    // Enable snap-to-grid
+        gridSize: 20,     // Grid cell size in pixels
+        showGrid: true    // Show grid overlay while dragging
+    }
+);
+```
+
+#### Grid Configuration Options
+
+| Property | Type     | Default | Description                          |
+| -------- | -------- | ------- | ------------------------------------ |
+| `enabled`   | `boolean` | `false` | Enable snap-to-grid functionality    |
+| `gridSize`  | `number`  | `20`    | Size of grid cells in pixels         |
+| `showGrid`  | `boolean` | `true`  | Show grid overlay while dragging     |
+
+#### Grid Methods
+
+```javascript
+// Get current grid configuration
+const config = menu.getGridConfig();
+console.log(config); // { enabled: true, gridSize: 20, showGrid: true }
+
+// Update grid configuration
+menu.setGridConfig({ gridSize: 40 });
+menu.setGridConfig({ enabled: false, showGrid: false });
+
+// Check if grid is enabled
+const isEnabled = menu.isGridEnabled();
+
+// Enable/disable grid snapping
+menu.setGridEnabled(true);
+menu.setGridEnabled(false);
 ```
 
 ## Components
@@ -880,6 +926,12 @@ const container = menu.getContainer();
 
 // Get all categories
 const categories = menu.getCategories();
+
+// Grid configuration methods
+const gridConfig = menu.getGridConfig();     // Get grid config
+menu.setGridConfig({ gridSize: 40 });        // Update grid config
+menu.setGridEnabled(true);                   // Enable/disable grid
+const isGridEnabled = menu.isGridEnabled();  // Check if grid is enabled
 ```
 
 ### Multiple Menus Example

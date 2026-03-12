@@ -78,25 +78,29 @@
         'combat',
         'Combat Menu',
         { x: 100, y: 100 },
-        'ShiftRight'
+        'ShiftRight',
+        { enabled: true, gridSize: 20, showGrid: true }
     );
     const movementMenu = window.frostManager.addMenu(
         'movement',
         'Movement Menu',
         { x: 420, y: 100 },
-        'ShiftRight'
+        'ShiftRight',
+        { enabled: true, gridSize: 20, showGrid: true }
     );
     const renderMenu = window.frostManager.addMenu(
         'render',
         'Render Menu',
         { x: 740, y: 100 },
-        'ShiftRight'
+        'ShiftRight',
+        { enabled: true, gridSize: 20, showGrid: true }
     );
     const worldMenu = window.frostManager.addMenu(
         'world',
         'World Menu',
         { x: 740, y: 400 },
-        'ShiftRight'
+        'ShiftRight',
+        { enabled: true, gridSize: 20, showGrid: true }
     );
 
     const search = new window.FrostSearch({

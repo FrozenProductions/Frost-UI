@@ -25,7 +25,7 @@ Frost-UI is an elegant and lightweight UI library designed specifically for user
 
 -   **Core Elements**
 
-    -   Draggable Menus
+    -   Draggable Menus with Snap-to-Grid
     -   Toast Notifications
     -   Toggle Switches
     -   Sliders
@@ -67,7 +67,8 @@ const menu = window.frostManager.addMenu(
     "uniqueId", // Unique identifier for the menu
     "Menu Title", // Display title
     { x: 100, y: 100 }, // Initial position (optional)
-    "ShiftRight" // Toggle key (optional, defaults to 'ShiftRight')
+    "ShiftRight", // Toggle key (optional, defaults to 'ShiftRight')
+    { enabled: true, gridSize: 20, showGrid: true } // Snap-to-grid config (optional)
 );
 ```
 
