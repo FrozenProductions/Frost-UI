@@ -1,7 +1,7 @@
 import FrostUI from './Menu';
 import { type Search, createModal, createToast } from './components/index';
+import { buttonVariant, modalCloseOn, themes, toastType } from './constants';
 import { DEFAULT_FROST_CONFIG, STORAGE_KEY_CONFIG } from './types/config';
-import { themes, buttonVariant, toastType, modalCloseOn } from './constants';
 import type {
     CategoryData,
     FrostConfig,
@@ -78,8 +78,43 @@ class FrostManager {
     }
 
     public setConfig(partialConfig: Partial<FrostConfig>): void {
+        const oldTheme = this.config.theme;
         this.config = { ...this.config, ...partialConfig };
         this.saveConfig();
+
+        if (partialConfig.theme !== undefined && partialConfig.theme !== oldTheme) {
+            this.applyGlobalTheme();
+        }
+    }
+
+    private applyGlobalTheme(): void {
+        const theme = this.config.theme;
+        const themeClass = theme && theme !== 'dark' ? `frost-theme-${theme}` : null;
+
+        for (const menu of this.menus.values()) {
+            const container = menu.getContainer();
+            const existingThemes = Array.from(container.classList).filter((c) =>
+                c.startsWith('frost-theme-')
+            );
+            container.classList.remove(...existingThemes);
+            if (themeClass) {
+                container.classList.add(themeClass);
+            }
+        }
+
+        if (this.search) {
+            this.search.setTheme(theme || 'dark');
+        }
+
+        if (this.toastContainer) {
+            const existingThemes = Array.from(this.toastContainer.classList).filter((c) =>
+                c.startsWith('frost-theme-')
+            );
+            this.toastContainer.classList.remove(...existingThemes);
+            if (themeClass) {
+                this.toastContainer.classList.add(themeClass);
+            }
+        }
     }
 
     public getConfig(): FrostConfig {
@@ -135,6 +170,15 @@ class FrostManager {
     ): FrostUI {
         const menu = new FrostUI(id, title, position, toggleKey, gridConfig);
         this.menus.set(id, menu);
+
+        if (this.config.theme) {
+            const themeClass =
+                this.config.theme === 'dark' ? null : `frost-theme-${this.config.theme}`;
+            if (themeClass) {
+                menu.getContainer().classList.add(themeClass);
+            }
+        }
+
         return menu;
     }
 
@@ -183,7 +227,7 @@ class FrostManager {
     public showToast(options: string | ToastOptions): void {
         this.initToastContainer();
         const toastOptions = typeof options === 'string' ? { message: options } : options;
-        const toast = createToast(toastOptions);
+        const toast = createToast(toastOptions, this.config.theme);
         this.toastContainer?.appendChild(toast);
     }
 
@@ -201,7 +245,9 @@ class FrostManager {
 
         let themeClass: string | null = null;
 
-        if (options.theme) {
+        if (this.config.theme) {
+            themeClass = this.config.theme === 'dark' ? null : `frost-theme-${this.config.theme}`;
+        } else if (options.theme) {
             themeClass = options.theme === 'dark' ? null : `frost-theme-${options.theme}`;
         } else {
             const menuContainer = document.querySelector('.frost-menu');
@@ -230,6 +276,10 @@ class FrostManager {
 
     public setSearch(search: Search): void {
         this.search = search;
+
+        if (this.config.theme) {
+            search.setTheme(this.config.theme);
+        }
     }
 
     public hasKeybind(key: string): boolean {

@@ -26,6 +26,7 @@ A lightweight, customizable menu library for creating interactive user interface
 -   [Themes](#themes)
 -   [Menu Manager](#menu-manager)
 -   [Configuration](#configuration)
+    -   [Global Theme](#global-theme)
 
 ## Installation
 
@@ -1212,14 +1213,16 @@ console.log(config);
 // {
 //     dimOnMenuOpen: false,
 //     blurOnMenuOpen: false,
-//     rememberPositions: false
+//     rememberPositions: false,
+//     theme: undefined
 // }
 
 // Update configuration (partial updates supported)
 manager.setConfig({
     dimOnMenuOpen: true,
     blurOnMenuOpen: true,
-    rememberPositions: true
+    rememberPositions: true,
+    theme: 'nord'
 });
 ```
 
@@ -1230,6 +1233,7 @@ manager.setConfig({
 | `dimOnMenuOpen`     | boolean | `false` | Dim the background when any menu is open |
 | `blurOnMenuOpen`    | boolean | `false` | Blur the background when any menu is open |
 | `rememberPositions` | boolean | `false` | Save menu positions to localStorage |
+| `theme`             | string  | `undefined` | Global theme override (see [Global Theme](#global-theme)) |
 
 ### Dim/Blur Backdrop
 
@@ -1265,6 +1269,47 @@ window.frostManager.setConfig({
 ```
 
 **Note:** Position persistence uses the `frost-menu-positions` key in localStorage. Each menu's position is stored by its unique ID.
+
+### Global Theme
+
+The `theme` configuration option allows you to set a global theme that overrides all individual component themes:
+
+```javascript
+// Set a global theme - applies to all menus, modals, search, and toasts
+window.frostManager.setConfig({
+    theme: 'nord'
+});
+```
+
+When a global theme is set:
+- All existing menus immediately update to the new theme
+- All new modals use the global theme
+- The search menu uses the global theme
+- All toast notifications use the global theme
+- Individual `setTheme()` calls on components are ignored
+- The setting persists across page reloads
+
+```javascript
+// Create menus with individual themes
+const menu1 = window.frostManager.addMenu("menu1", "Menu 1");
+const menu2 = window.frostManager.addMenu("menu2", "Menu 2");
+
+menu1.setTheme('tokyo-night');
+menu2.setTheme('midnight');
+
+// Set global theme - overrides both menus
+window.frostManager.setConfig({ theme: 'nord' });
+// Both menu1 and menu2 now use 'nord' theme
+
+// Individual theme changes are ignored when global theme is active
+menu1.setTheme('dracula'); // No effect - global theme takes precedence
+
+// Clear global theme to restore individual themes
+window.frostManager.setConfig({ theme: undefined });
+// Menus revert to their individual themes (tokyo-night and midnight)
+```
+
+**Note:** Global theme uses the `frost-config` key in localStorage and is automatically restored on page load.
 
 ### Complete Example
 

@@ -62,6 +62,13 @@ export class Search {
     }
 
     public setTheme(theme: FrostTheme): void {
+        if (window.frostManager) {
+            const globalConfig = window.frostManager.getConfig();
+            if (globalConfig.theme) {
+                theme = globalConfig.theme;
+            }
+        }
+
         const themeClasses: string[] = Array.from(this.container.classList).filter(
             (className: string) => className.startsWith('frost-theme-')
         );

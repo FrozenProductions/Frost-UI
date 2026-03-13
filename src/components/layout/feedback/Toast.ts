@@ -1,12 +1,16 @@
 import icons from '../../../icons';
-import type { ToastElement, ToastOptions } from '../../../types/index';
+import type { FrostTheme, ToastElement, ToastOptions } from '../../../types/index';
 
-function createToast(options: ToastOptions): ToastElement {
+function createToast(options: ToastOptions, theme?: FrostTheme): ToastElement {
     const toast = document.createElement('div') as ToastElement;
     const validTypes: string[] = ['success', 'error', 'info', 'warning'];
     const type = validTypes.includes(options.type || '') ? options.type || 'info' : 'info';
 
     toast.className = `frost-toast ${type} ${options.variant || 'default'}`;
+
+    if (theme && theme !== 'dark') {
+        toast.classList.add(`frost-theme-${theme}`);
+    }
 
     const icon: HTMLSpanElement = document.createElement('span');
     icon.className = 'frost-toast-icon';

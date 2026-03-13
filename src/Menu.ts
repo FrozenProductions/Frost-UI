@@ -579,6 +579,13 @@ class FrostUI {
     public setTheme(theme: FrostTheme): this {
         if (!this.container) return this;
 
+        if (window.frostManager) {
+            const globalConfig = window.frostManager.getConfig();
+            if (globalConfig.theme) {
+                return this;
+            }
+        }
+
         const themeClasses: string[] = Array.from(this.container.classList).filter(
             (className: string) => className.startsWith('frost-theme-')
         );

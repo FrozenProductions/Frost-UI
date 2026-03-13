@@ -55,6 +55,7 @@ Frost-UI is an elegant and lightweight UI library designed specifically for user
 - Automatic Configuration Saving
 - Keyboard Shortcut Support
 - Intelligent DOM Cleanup
+- Global Theme Override
 
 ## 🚀 Getting Started
 
@@ -82,6 +83,7 @@ const menu = window.frostManager.addMenu(
 - **Smart Keybinds**: Automatic keybind conflict resolution
 - **Event System**: Comprehensive callback support
 - **Clean Design**: Automatic resource management
+- **Global Theme**: Set a theme that applies to all components at once
 
 ## 📚 Resources
 

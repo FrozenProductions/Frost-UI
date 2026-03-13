@@ -1,7 +1,10 @@
+import type { FrostTheme } from './menu';
+
 interface FrostConfig {
     dimOnMenuOpen: boolean;
     blurOnMenuOpen: boolean;
     rememberPositions: boolean;
+    theme?: FrostTheme;
 }
 
 interface StoredMenuPositions {
