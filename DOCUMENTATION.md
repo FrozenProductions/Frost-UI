@@ -676,10 +676,10 @@ The Search component provides a macOS Spotlight-like search interface for findin
 ```javascript
 // Basic usage with single menu
 const menu = new FrostUI("myMenu", "My Menu");
-const search = new window.FrostSearch(menu);
+const search = new window.frostSearch(menu);
 
 // With multiple menus
-const search = new window.FrostSearch(
+const search = new window.frostSearch(
     {
         "Main Menu": mainMenu,
         Settings: settingsMenu,
@@ -691,12 +691,26 @@ const search = new window.FrostSearch(
 #### Features
 
 -   Real-time search through categories and items
+-   Shows parent category name for each item
+-   Displays component type badge (Toggle, Slider, Grid Selector, etc.)
 -   Keyboard navigation (up/down/enter)
 -   Visual highlighting of matches
 -   Smooth scrolling to selected items
 -   Theme synchronization with menus
 -   Multiple menu support
 -   Customizable keyboard shortcut
+
+#### Search Result Display
+
+Search results show enhanced information:
+
+- **Categories**: `Category Name - Menu Name`
+- **Items**: `Item Name (Parent Category) [Component Type]`
+
+For example:
+- `Movement Abilities (Movement) [Grid Selector]`
+- `Enabled (AutoClicker) [Toggle]`
+- `Reach (Combat) [Slider]`
 
 #### Methods
 
@@ -732,7 +746,7 @@ mainMenu.addCategory("General").addToggle("General", "Dark Mode").addSlider("Gen
 settingsMenu.addCategory("Preferences").addColorInput("Preferences", "Theme Color", "#ffffff");
 
 // Create search with custom keybind
-const search = new window.FrostSearch(
+const search = new window.frostSearch(
     {
         "Main Menu": mainMenu,
         Settings: settingsMenu,
@@ -1176,7 +1190,7 @@ const mainMenu = manager.addMenu("main", "Main Menu", { x: 100, y: 100 });
 const settingsMenu = manager.addMenu("settings", "Settings", { x: 400, y: 100 });
 
 // Create search that works with both menus
-const search = new window.FrostSearch(
+const search = new window.frostSearch(
     {
         "Main Menu": mainMenu,
         Settings: settingsMenu,

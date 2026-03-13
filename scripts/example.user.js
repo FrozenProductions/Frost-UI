@@ -103,7 +103,7 @@
         { enabled: true, gridSize: 20, showGrid: true }
     );
 
-    const search = new window.FrostSearch({
+    const search = new window.frostSearch({
         'Combat Menu': combatMenu,
         'Movement Menu': movementMenu,
         'Render Menu': renderMenu,

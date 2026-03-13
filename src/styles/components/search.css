@@ -128,6 +128,26 @@
     white-space: nowrap;
 }
 
+.frost-search-result .category-indicator {
+    color: var(--frost-text-secondary);
+    opacity: 0.6;
+    font-weight: normal;
+    margin-left: 6px;
+    white-space: nowrap;
+}
+
+.frost-search-result .component-type-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 6px;
+    background: var(--frost-bg-tertiary);
+    color: var(--frost-text-secondary);
+    font-size: 0.75em;
+    margin-left: 8px;
+    text-transform: capitalize;
+    font-weight: 500;
+}
+
 .frost-search-result .highlight {
     color: var(--frost-accent-color);
     font-weight: 600;

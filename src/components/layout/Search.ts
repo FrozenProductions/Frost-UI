@@ -208,6 +208,42 @@ export class Search {
         }
     }
 
+    private detectComponentType(element: HTMLElement): SearchResult['componentType'] {
+        if (element.classList.contains('frost-toggle')) return 'toggle';
+        if (element.classList.contains('frost-switch-container')) return 'switch';
+        if (element.classList.contains('frost-slider')) return 'slider';
+        if (element.classList.contains('frost-dual-slider')) return 'dualSlider';
+        if (element.classList.contains('frost-radio-group')) return 'radioGroup';
+        if (element.classList.contains('frost-select-container')) return 'select';
+        if (element.classList.contains('frost-color-input')) return 'colorInput';
+        if (element.classList.contains('frost-multi-select-container')) return 'multiSelect';
+        if (element.classList.contains('frost-page-selector')) return 'pageSelector';
+        if (element.classList.contains('frost-button-container')) return 'button';
+        if (element.classList.contains('frost-order-list')) return 'orderList';
+        if (element.classList.contains('frost-chart')) return 'chart';
+        if (element.classList.contains('frost-grid-selector')) return 'gridSelector';
+        return undefined;
+    }
+
+    private formatComponentType(type: string): string {
+        return type
+            .replace(/([A-Z])/g, ' $1')
+            .replace(/^./, (str) => str.toUpperCase())
+            .trim();
+    }
+
+    private getCategoryNameFromElement(element: HTMLElement): string | undefined {
+        let current: HTMLElement | null = element;
+        while (current && !current.classList.contains('frost-menu')) {
+            if (current.classList.contains('frost-category')) {
+                const titleElement = current.querySelector('.frost-category-title');
+                return titleElement?.textContent || undefined;
+            }
+            current = current.parentElement;
+        }
+        return undefined;
+    }
+
     private searchMenuItems(query: string): SearchResult[] {
         const results: SearchResult[] = [];
         const lowerQuery: string = query.toLowerCase();
@@ -239,6 +275,7 @@ export class Search {
                             path: [categoryName],
                             element: element as HTMLElement,
                             type: 'item',
+                            componentType: this.detectComponentType(element as HTMLElement),
                             category,
                             menu,
                             menuName,
@@ -318,9 +355,27 @@ export class Search {
                 menuIndicator.className = 'menu-indicator';
                 menuIndicator.textContent = ` - ${result.menuName}`;
                 itemName.appendChild(menuIndicator);
+            } else if (result.type === 'item') {
+                let categoryName = result.path.length > 0 ? result.path[0] : undefined;
+                if (!categoryName || categoryName === 'undefined') {
+                    categoryName = this.getCategoryNameFromElement(result.element);
+                }
+                if (categoryName && categoryName !== 'undefined') {
+                    const categoryIndicator = document.createElement('span');
+                    categoryIndicator.className = 'category-indicator';
+                    categoryIndicator.textContent = ` (${categoryName})`;
+                    itemName.appendChild(categoryIndicator);
+                }
             }
 
             contentWrapper.appendChild(itemName);
+
+            if (result.type === 'item' && result.componentType) {
+                const typeBadge = document.createElement('span');
+                typeBadge.className = 'component-type-badge';
+                typeBadge.textContent = this.formatComponentType(result.componentType);
+                contentWrapper.appendChild(typeBadge);
+            }
             resultElement.appendChild(typeIndicator);
             resultElement.appendChild(contentWrapper);
 

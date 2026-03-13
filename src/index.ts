@@ -7,13 +7,13 @@ declare global {
     interface Window {
         FrostUI: typeof FrostUI;
         frostManager: typeof frostManager;
-        FrostSearch: typeof Search;
+        frostSearch: typeof Search;
     }
 }
 
 window.FrostUI = FrostUI;
 window.frostManager = frostManager;
-window.FrostSearch = Search;
+window.frostSearch = Search;
 
 export { FrostUI, frostManager, Search };
 

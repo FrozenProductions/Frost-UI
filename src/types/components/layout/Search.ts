@@ -6,6 +6,7 @@ interface SearchResult {
     path: string[];
     element: HTMLElement;
     type: 'category' | 'item';
+    componentType?: 'toggle' | 'switch' | 'slider' | 'dualSlider' | 'radioGroup' | 'select' | 'colorInput' | 'multiSelect' | 'pageSelector' | 'button' | 'orderList' | 'chart' | 'gridSelector';
     category?: CategoryData;
     menu: Menu;
     menuName: string;
